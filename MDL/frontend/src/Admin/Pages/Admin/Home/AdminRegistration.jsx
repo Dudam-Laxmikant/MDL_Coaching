@@ -1,0 +1,91 @@
+import React, { useState } from "react";
+import { FaUser, FaEnvelope, FaLock, FaPhone, FaCamera, FaUniversity, FaCalendar } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+const AdminRegistration = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    dob: "",
+    email: "",
+    password: "",
+    mobileNumber: "",
+    passPhoto: null,
+    bankDetails: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "file" ? files[0] : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data Submitted: ", formData);
+  };
+
+  return (
+    <div className="bg-black min-h-screen flex items-center justify-center p-4">
+      <div className="max-w-4xl w-full p-6 bg-[#454649] shadow-xl rounded-lg text-white">
+        <h2 className="text-3xl font-extrabold mb-6 text-center">Admin Registration</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { name: "firstName", placeholder: "First Name", icon: <FaUser /> },
+            { name: "middleName", placeholder: "Middle Name", icon: <FaUser /> },
+            { name: "lastName", placeholder: "Last Name", icon: <FaUser /> },
+            { name: "dob", type: "date", icon: <FaCalendar /> },
+            { name: "email", type: "email", placeholder: "Email", icon: <FaEnvelope /> },
+            { name: "password", type: "password", placeholder: "Password", icon: <FaLock /> },
+            { name: "mobileNumber", type: "tel", placeholder: "Mobile Number", icon: <FaPhone /> },
+            { name: "bankDetails", placeholder: "Bank Details", icon: <FaUniversity /> },
+          ].map(({ name, type = "text", placeholder, icon }) => (
+            <div key={name} className="flex items-center border-2 border-white p-3 rounded-lg bg-[#454649]">
+              <span className="text-white mr-3 text-xl">{icon}</span>
+              <input
+                className="w-full bg-transparent placeholder-gray-400 text-white outline-none focus:text-white autofill:bg-transparent border-none"
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                onChange={handleChange}
+                required
+                autoComplete="off"
+                style={{ backgroundColor: "transparent" }}
+              />
+            </div>
+          ))}
+          <div className="col-span-1 md:col-span-2 flex items-center border-2 border-white p-3 rounded-lg bg-[#454649]">
+            <FaCamera className="text-white mr-3 text-xl" />
+            <input
+              className="w-full text-white outline-none border-none"
+              name="passPhoto"
+              type="file"
+              accept="image/*"
+              onChange={handleChange}
+              required
+              style={{ backgroundColor: "transparent" }}
+            />
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <button type="submit" className="bg-yellow-400 text-black w-full p-3 rounded-lg font-bold hover:bg-yellow-300 transition">
+              Register
+            </button>
+          </div>
+        </form>
+        <div className="text-center mt-4">
+          <p className="text-white">
+            Already have an account? {" "}
+            <Link to="/adminlogin" className="text-yellow-400 font-bold hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminRegistration;
