@@ -34,7 +34,9 @@ function Header() {
         '/notes': 'Notice',
         '/feedback': 'FeedBack',
         '/profile': 'Profile',
-        '/adminlogout': 'Logout'
+        '/adminlogout': 'Logout',
+        '/timetable':"Time tables",
+        '/addadmin':"Add Admin"
     };
 
     return (
