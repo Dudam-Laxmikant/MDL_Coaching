@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
-
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function ShowProfile() {
     return (
@@ -49,12 +49,13 @@ function ShowProfile() {
                                 </div>
                             </div>
                         </div> <br />
-                        <Link to={'/showallteacherlist'} className="ml-4 px-6 py-3 bg-gray-600 text-white rounded hover:bg-gray-700 shadow" >
-                            Go Back
-                        </Link>
+                        
 
                     </div>
                 </div>
+                <Link to="/showclassTeacher/showallteacherlist" className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+                          <AiOutlineArrowLeft size={24} />
+                        </Link>
                 <Footer />
             </div>
         </>

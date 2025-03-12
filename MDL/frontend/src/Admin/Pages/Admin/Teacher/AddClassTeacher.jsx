@@ -1,0 +1,95 @@
+import React, { useState } from 'react';
+import Header from '../Home/Header';
+import Footer from '../Home/Footer';
+import { FaPlus, FaIdBadge, FaUser } from 'react-icons/fa';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+export const AddClassTeacher = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleAddClick = () => {
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen w-full bg-[#454649] relative">
+      {/* Header */}
+      <Header />
+
+      {/* Main Content */}
+      <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] justify-center items-center w-full ">
+        <div className="w-full max-w-5xl bg-[#454649] p-4 sm:p-6 overflow-x-auto mt-10 ">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-yellow-400 mb-4 w-full">Add Class Teacher</h2>
+          
+          {/* Input Fields */}
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-6">
+            <div className="relative w-full sm:w-1/3">
+              <FaIdBadge className="absolute left-3 top-3 text-gray-500" />
+              <input 
+                type="text" 
+                placeholder="Teacher ID" 
+                className="p-2 pl-10 border border-gray-300 rounded-md w-full"
+              />
+            </div>
+            <div className="relative w-full sm:w-1/3">
+              <FaUser className="absolute left-3 top-3 text-gray-500" />
+              <input 
+                type="text" 
+                placeholder="Teacher Full Name" 
+                className="p-2 pl-10 border border-gray-300 rounded-md w-full"
+              />
+            </div>
+            <button 
+              onClick={handleAddClick}
+              className="bg-green-600 text-white p-2 rounded-lg flex items-center gap-2 hover:bg-green-700 transition-all duration-200"
+            >
+              <FaPlus /> Add
+            </button>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-300 shadow-md text-xs sm:text-sm md:text-base">
+              <thead>
+                <tr className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                  <th className="border border-gray-300 p-2 sm:p-3">Teacher ID</th>
+                  <th className="border border-gray-300 p-2 sm:p-3">Teacher Full Name</th>
+                  <th className="border border-gray-300 p-2 sm:p-3">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-blue-100 hover:bg-blue-200 transition-all duration-200">
+                  <td className="border border-gray-300 p-2 sm:p-3 text-center font-semibold">12345</td>
+                  <td className="border border-gray-300 p-2 sm:p-3 truncate max-w-full overflow-hidden font-medium">
+                    John Doe
+                  </td>
+                  <td className="border border-gray-300 p-2 sm:p-3 text-center">
+                    <button 
+                      onClick={handleAddClick}
+                      className="bg-green-600 text-white p-1 sm:p-2 md:px-3 md:py-2 rounded-lg hover:bg-green-700 transition-all duration-200"
+                      aria-label="Add Teacher"
+                    >
+                      <FaPlus />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Success Popup in Center */}
+      {showPopup && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg font-bold">
+          Added Successfully!
+        </div>
+      )}
+        <Link to="/showclassTeacher" className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+          <AiOutlineArrowLeft size={24} />
+        </Link>
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};

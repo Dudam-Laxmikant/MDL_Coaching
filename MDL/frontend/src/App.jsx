@@ -70,6 +70,7 @@ import Profile from "./Admin/Pages/Admin/AdminProfile/Profile";
 import RoleSelection from "./RoleSelection";
 import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
 import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
+import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
 
 const App = () => {
   return (
@@ -92,6 +93,7 @@ const App = () => {
             <Route path="/addclasses" element={<AddClasses />} />
             <Route path="/addclasses/class" element={<Classes />} />
             <Route path="/addclasses/showclasses" element={<ShowClasses />} />
+            <Route path="/showclassTeacher/addclassteacher" element={<AddClassTeacher/>}/>
 
             {/* student */}
             
@@ -106,7 +108,7 @@ const App = () => {
             {/* Teacher */}
             <Route path="/showclassTeacher" element={<ShowClassTeacher />} />
             <Route path="/showclassTeacher/showallteacherlist" element={<ShowAllTeachersList />} />
-            <Route path="/showclassTeacher/showallteacherlist/updateteacherdetails" element={<UpdateTeacherDetails />} />
+            <Route path="/showclassTeacher/showallteacherlist/updatetecherdetails" element={<UpdateTeacherDetails />} />
             <Route path="/showclassTeacher/showallteacherlist/showprofile" element={<ShowProfile />} />
             <Route path="/showclassTeacher/showallteacherlist/salarydetails" element={<SalaryDetails/>}/>
             <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />

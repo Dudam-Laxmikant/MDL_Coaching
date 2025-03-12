@@ -235,7 +235,9 @@ function AddTeacher() {
             </form>
           </div>
         </div>
-
+<Link to="/showclassTeacher/showallteacherlist" className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+          <AiOutlineArrowLeft size={24} />
+        </Link>
         <Footer />
       </div>
     </>
