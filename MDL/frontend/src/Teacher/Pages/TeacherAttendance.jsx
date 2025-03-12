@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const classes = ["Class 1", "Class 2", "Class 3"];
 const subjects = ["Math", "Science", "English", "History"];
@@ -90,7 +91,9 @@ const TeacherAttendance = () => {
             </table>
             <div className="flex justify-between mt-4 sm:mt-6">
               <button onClick={upload} className="bg-blue-500 text-white px-3 sm:px-4 py-1 sm:py-2 rounded-lg">Submit</button>
+              <Link to={'/techerUpdateAttendence'}>
               <button onClick={updateAttendance} className="bg-orange-500 text-white px-3 sm:px-4 py-1 sm:py-2 rounded-lg">Update Attendance</button>
+              </Link>
             </div>
           </div>
         </div>

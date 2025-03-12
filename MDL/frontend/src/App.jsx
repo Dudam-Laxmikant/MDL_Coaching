@@ -13,13 +13,13 @@ import TeacherClass from "./Teacher/Pages/TeacherClass";
 import TeacherNotes from "./Teacher/Pages/TeacherNotes";
 import TeacherNotice from "./Teacher/Pages/TeacherNotice";
 import TeacherLogin from "./Teacher/TeacherLogin";
-import TeacherRegistration from "./Teacher/TeacherRegistration";
+// import TeacherRegistration from "./Teacher/TeacherRegistration";
 import TeacherTimeSchedule from "./Teacher/Pages/TeacherTimeSchedule";
 
 // Student
 
 import { StudentPayment } from "./Student/Pages/StudentPayment";
-import StudentRegistration from "./Student/StudentRegistration";
+// import StudentRegistration from "./Student/StudentRegistration";
 import StudentLogin from "./Student/StudentLogin";
 import { StudentMenu } from "./Student/StudentMenu";
 import StudentDashboard from "./Student/Pages/StudentDashboard";
@@ -71,6 +71,7 @@ import RoleSelection from "./RoleSelection";
 import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
 import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
 import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
+import { TeacherUpdateAttendence } from "./Teacher/Pages/TeacherUpdateAttendence";
 
 const App = () => {
   return (
@@ -127,7 +128,7 @@ const App = () => {
 
         {/* teacher */}
           <Route path="/teacherLogin" element={<TeacherLogin />} />
-          <Route path="/teacherRegistration" element={<TeacherRegistration />}/>
+          {/* <Route path="/teacherRegistration" element={<TeacherRegistration />}/> */}
           <Route path="/teacherDashboard" element={<TeacherDashboard />} />
           <Route path="/teacherClass" element={<TeacherClass />} />
           <Route path="/teacherNotes" element={<TeacherNotes />} />
@@ -137,12 +138,13 @@ const App = () => {
           <Route path="/teacherProfile" element={<TeacherProfile />} />
           <Route path="/teacherNotice" element={<TeacherNotice />} />
           <Route path="/teacherSalary" element={<TeacherSalary />} />
+          <Route path="/techerUpdateAttendence" element={<TeacherUpdateAttendence/>}/>
 
         {/* student */}
           <Route path="/studentMenu/studentDashboard" element={<StudentDashboard />} />
           <Route path="/studentLogin" element={<StudentLogin />} />
           <Route path="/studentMenu" element={<StudentMenu />} />
-          <Route path="/studentRegistration" element={<StudentRegistration />} />
+          {/* <Route path="/studentRegistration" element={<StudentRegistration />} /> */}
           <Route path="/studentMenu/studentPayment" element={<StudentPayment />} />
           <Route path="/studentMenu/studentDashboard/studentGeneralRegister" element={<StudentGeneralRegister />} />
           <Route path="/studentMenu/studentDashboard/studentClassDetails" element={<StudentClassDetails />} />

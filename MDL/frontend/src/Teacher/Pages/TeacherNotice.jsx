@@ -10,7 +10,7 @@ const TeacherNotice = () => {
 
   const [notices, setNotices] = useState([
       { id: 1, date: todayDate, text: "Meeting at 10 AM in Room 301." },
-    { id: 2, date: "2025-03-02", text: "Submit assignments before 5 PM." },
+    { id: 2, date: "2025-03-02", text: "Submit assignm ents before 5 PM." },
     { id: 3, date: "2025-03-01", text: "Holiday notice for March 1st." },
   ]);
 
