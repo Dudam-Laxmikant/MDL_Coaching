@@ -67,7 +67,8 @@ function AdminHome() {
                 <Header />
 
                 {/* Main Content */}
-                <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649]">
+                <div className="flex flex-1 p-4 sm:p-6 md:p-10">
+                {/* bg-[#454649] */}
                     <div className="w-full bg-transparent p-6  mt-10">
                         {/* <h1 className="text-2xl font-bold text-white mb-6 text-center">Dashboard</h1> */}
 
