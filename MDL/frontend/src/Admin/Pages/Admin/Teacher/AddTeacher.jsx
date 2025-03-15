@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
+import { Lock } from "lucide-react";
 import {
   User,
   Mail,
@@ -8,33 +9,35 @@ import {
   Phone,
   MapPin,
   FileText,
-  PlusCircle,
   Book,
   Heart,
 } from "lucide-react";
 import Footer from "../Home/Footer";
 import Header from "../Home/Header";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-
+import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+import { toast,ToastContainer } from "react-toastify";
 function AddTeacher() {
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    teacherId: "",
-    surname: "",
-    lastName: "",
+    t_id: "",
+    s_name: "",
     name: "",
-    email: "",
-    mobile: "",
-    dob: "",
+    lname: "",
     gender: "",
-    maritalStatus: "",
-    address: "",
-    qualification: "",
+    status: "",
+    email: "",
+    mobilenumber: "",
+    dob: "",
+    qulification: "",
     course: "",
     subject: "",
-    aadharNumber: "",
+    password: "",
+    address: "",
+    adharnumber: "",
     photo: null,
-    qualificationCertificate: null,
-    aadharCard: null,
   });
 
   const handleChange = (e) => {
@@ -45,30 +48,73 @@ function AddTeacher() {
     });
   };
 
-  function submit(e) {
+  // function submit(e) {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   alert("Teacher Added Successfully");
+  // }
+  const submit = async (e) => {
     e.preventDefault();
-    alert("Teacher Added Successfully");
-  }
+
+    try {
+      const url = "http://localhost:8080/teacher/addteacher";
+
+      const response = await axios.post(url,formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+        console.log("this is the response data::: " + response.data);
+        const { message, success, error } = await response.data;
+
+        if (success) {
+          toast.success(message, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+          setTimeout(() => {
+            navigate("/showclassTeacher/showallteacherlist");
+          }, 1000);
+        } else if (error) {
+          console.log(error);
+          const details = error?.details[0].message;
+          toast.error(details, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        } else {
+          toast.error(message, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        }
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
+  };
 
   function resetForm() {
     setFormData({
-      teacherId: "",
-      surname: "",
-      lastName: "",
+      t_id: "",
+      s_name: "",
       name: "",
-      email: "",
-      mobile: "",
-      dob: "",
+      lname: "",
       gender: "",
-      maritalStatus: "",
-      address: "",
-      qualification: "",
+      status: "",
+      email: "",
+      mobilenumber: "",
+      dob: "",
+      qulification: "",
       course: "",
       subject: "",
-      aadharNumber: "",
+      password: "",
+      address: "",
+      adharnumber: "",
       photo: null,
-      qualificationCertificate: null,
-      aadharCard: null,
     });
   }
 
@@ -88,10 +134,10 @@ function AddTeacher() {
               onSubmit={submit}
             >
               {[
-                { label: "Teacher ID", name: "teacherId", icon: <User /> },
-                { label: "Surname", name: "surname", icon: <User /> },
+                { label: "Teacher ID", name: "t_id", icon: <User /> },
+                { label: "Surname", name: "s_name", icon: <User /> },
                 { label: "Name", name: "name", icon: <User /> },
-                { label: "Last Name", name: "lastName", icon: <User /> },
+                { label: "Last Name", name: "lname", icon: <User /> },
                 {
                   label: "Gender",
                   name: "gender",
@@ -101,7 +147,7 @@ function AddTeacher() {
                 },
                 {
                   label: "Marital Status",
-                  name: "maritalStatus",
+                  name: "status",
                   icon: <Heart />,
                   type: "select",
                   options: ["Married", "Unmarried"],
@@ -112,9 +158,10 @@ function AddTeacher() {
                   type: "email",
                   icon: <Mail />,
                 },
+
                 {
                   label: "Mobile Number",
-                  name: "mobile",
+                  name: "mobilenumber",
                   type: "number",
                   icon: <Phone />,
                 },
@@ -126,7 +173,7 @@ function AddTeacher() {
                 },
                 {
                   label: "Qualification",
-                  name: "qualification",
+                  name: "qulification",
                   icon: <FileText />,
                 },
                 { label: "Course", name: "course", icon: <FileText /> },
@@ -175,6 +222,32 @@ function AddTeacher() {
                   )}
                 </div>
               ))}
+              <div className="relative">
+                <label className="flex items-center gap-2 mb-2 font-medium">
+                  <span className="w-6 h-6 text-yellow-400">
+                    <Lock />
+                  </span>
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter Password"
+                    className="w-full p-3 border rounded bg-gray-700 text-white focus:ring focus:ring-yellow-300"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-3 text-gray-400"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff /> : <Eye />}
+                  </button>
+                </div>
+              </div>
 
               <div className="md:col-span-2">
                 <label className="flex items-center gap-2 mb-2 font-medium">
@@ -195,7 +268,7 @@ function AddTeacher() {
                 </label>
                 <input
                   type="text"
-                  name="aadharNumber"
+                  name="adharnumber"
                   placeholder="Enter Aadhar Number"
                   className="w-full p-3 border rounded bg-gray-700 text-white focus:ring focus:ring-yellow-300"
                   onChange={handleChange}
@@ -219,7 +292,8 @@ function AddTeacher() {
 
               <div className="md:col-span-2 flex flex-col sm:flex-row items-center gap-6 mt-8">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={submit}
                   className="px-8 py-3 w-full bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
                 >
                   Submit
@@ -235,10 +309,14 @@ function AddTeacher() {
             </form>
           </div>
         </div>
-<Link to="/showclassTeacher/showallteacherlist" className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+        <Link
+          to="/showclassTeacher/showallteacherlist"
+          className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300"
+        >
           <AiOutlineArrowLeft size={24} />
         </Link>
         <Footer />
+        <ToastContainer/>
       </div>
     </>
   );

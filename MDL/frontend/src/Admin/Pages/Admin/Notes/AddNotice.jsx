@@ -6,34 +6,79 @@ import 'react-quill/dist/quill.snow.css';
 import Swal from 'sweetalert2';
 
 export const AddNotice = () => {
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
-    const [content, setContent] = useState('');
-    const [signatureName, setSignatureName] = useState('');
-    const [signatureDesignation, setSignatureDesignation] = useState('');
+    const [fordata, setforData] = useState({
+        title: '',
+        date: '',
+        description: '',
+        name: ''
+    });
+    
 
-    const handleSubmit = () => {
-        Swal.fire({
-            title: 'Select Option',
-            input: 'select',
-            inputOptions: {
-                Student: 'Student',
-                Teacher: 'Teacher',
-                Mix: 'Both'
+    // const handleSubmit = () => {
+    //     Swal.fire({
+    //         title: 'Select Option',
+    //         input: 'select',
+    //         inputOptions: { 
+    //             Student: 'Student',
+    //             Teacher: 'Teacher',
+    //             Mix: 'Both'
+    //         },
+    //         inputPlaceholder: 'Select one',
+    //         showCancelButton: true,
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Swal.fire({
+    //                 title: 'Notice Added!',
+    //                 text: `Your notice has been successfully added for ${result.value}.`,
+    //                 icon: 'success',
+    //                 confirmButtonText: 'OK'
+    //             });
+    //         }
+    //     });
+    // };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const url = "http://localhost:8080/notice";
+    
+          const response = await axios.post(url,fordata, {
+            headers: {
+              "Content-Type": "form-data",
             },
-            inputPlaceholder: 'Select one',
-            showCancelButton: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Notice Added!',
-                    text: `Your notice has been successfully added for ${result.value}.`,
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-    };
+          });
+    
+            console.log("this is the response data::: " + response.data);
+            const { message, success, error } = await response.data;
+    
+            // if (success) {
+            //   toast.success(message, {
+            //     position: "top-center",
+            //     autoClose: 2000,
+            //   });
+            //   setTimeout(() => {
+            //     navigate("/showclassTeacher/showallteacherlist");
+            //   }, 1000);
+            // } else if (error) {
+            //   console.log(error);
+            //   const details = error?.details[0].message;
+            //   toast.error(details, {
+            //     position: "top-center",
+            //     autoClose: 2000,
+            //   });
+            // } else {
+            //   toast.error(message, {
+            //     position: "top-center",
+            //     autoClose: 2000,
+            //   });
+            // }
+        } catch (error) {
+          toast.error(error, {
+            position: "top-center",
+            autoClose: 2000,
+          });
+        }
+      };
 
     return (
         <div className="flex flex-col min-h-screen bg-[#454649]">
@@ -46,6 +91,7 @@ export const AddNotice = () => {
                             type="text" 
                             className="text-3xl font-bold text-indigo-700 border-gray-300 outline-none w-full text-center" 
                             placeholder="Enter Title" 
+                            name="title"
                             value={title} 
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -56,6 +102,7 @@ export const AddNotice = () => {
                             type="date" 
                             className="text-gray-600 border-b border-gray-300 outline-none" 
                             value={date} 
+                            name="date"
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </div>
@@ -75,12 +122,14 @@ export const AddNotice = () => {
                             className="text-lg font-semibold text-gray-800 border-b border-gray-300 outline-none" 
                             placeholder="Principal's Name" 
                             value={signatureName} 
+                            name="name"
                             onChange={(e) => setSignatureName(e.target.value)}
                         />
                         <input 
                             type="text" 
                             className="text-gray-700 font-medium border-b border-gray-300 outline-none mt-2" 
                             placeholder="Designation" 
+                            name="description"
                             value={signatureDesignation} 
                             onChange={(e) => setSignatureDesignation(e.target.value)}
                         />

@@ -9,32 +9,38 @@ import {
   FaCalendarAlt,
   FaPlus,
   FaHome,
+  FaLock,
   FaChalkboardTeacher,
   FaEnvelope,
   FaVenusMars,
-  
 } from "react-icons/fa";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
 import Swal from "sweetalert2";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function StudentForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    studentId: "",
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    fathersName: "",
+    s_id: "",
+    fname: "",
+    mname: "",
+    lname: "",
+    email: "",
+    password: "",
     dob: "",
-    aadharNumber: "",
-    address: "",
+    adharnumber: "",
     city: "",
     country: "",
-    feeAmount: "",
-    studentClass: "",
-    aadharPhoto: null,
-    passportPhoto: null,
+    adress: "",
+    fee: "",
+    gender: "",
+    passphoto: "",
+    s_class: "",
   });
 
   const handleChange = (e) => {
@@ -45,32 +51,74 @@ function StudentForm() {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    Swal.fire({
-      title: "Success!",
-      text: "Student added successfully",
-      icon: "success",
-      confirmButtonText: "OK",
-    });
+    console.log(formData);
+
+    try {
+      const url = "http://localhost:8080/student/signup";
+
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("this is the response data::: " + response.data);
+      const { message, success, error } = await response.data;
+
+      if (success) {
+        toast.success(message, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+        // Swal.fire({
+        //   title: "Success!",
+        //   text: "Student added successfully",
+        //   icon: "success",
+        //   confirmButtonText: "OK",
+        // });
+        setTimeout(() => {
+          navigate("/addstudents");
+        }, 1000);
+      } else if (error) {
+        console.log(error);
+        const details = error?.details[0].message;
+        toast.error(details, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      } else {
+        toast.error(message, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
   };
 
   const handleReset = () => {
     setFormData({
-      studentId: "",
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      fathersName: "",
+      s_id: "",
+      fname: "",
+      mname: "",
+      lname: "",
+      email: "",
+      password: "",
       dob: "",
-      aadharNumber: "",
-      address: "",
+      adharnumber: "",
       city: "",
       country: "",
-      feeAmount: "",
-      studentClass: "",
-      aadharPhoto: null,
-      passportPhoto: null,
+      adress: "",
+      fee: "",
+      gender: "",
+      passphoto: "",
+      s_class: "",
     });
   };
 
@@ -90,28 +138,28 @@ function StudentForm() {
             {[
               {
                 label: "Student ID",
-                name: "studentId",
+                name: "s_id",
                 icon: <FaIdCard />,
                 type: "number",
                 placeholder: "Enter Student ID",
               },
               {
                 label: "First Name",
-                name: "firstName",
+                name: "fname",
                 icon: <FaUser />,
                 type: "text",
                 placeholder: "Enter First Name",
               },
               {
                 label: "Middle Name",
-                name: "middleName",
+                name: "mname",
                 icon: <FaUser />,
                 type: "text",
                 placeholder: "Enter Middle Name",
               },
               {
                 label: "Last Name",
-                name: "lastName",
+                name: "lname",
                 icon: <FaUser />,
                 type: "text",
                 placeholder: "Enter Last Name",
@@ -119,9 +167,16 @@ function StudentForm() {
               {
                 label: "Email",
                 name: "email",
-                icon: <FaEnvelope />, 
+                icon: <FaEnvelope />,
                 type: "email",
                 placeholder: "Enter Email",
+              },
+              {
+                label: "Password",
+                name: "password",
+                icon: <FaLock />,
+                type: "password",
+                placeholder: "Enter Password",
               },
               {
                 label: "Date of Birth",
@@ -132,7 +187,7 @@ function StudentForm() {
               },
               {
                 label: "Aadhar Number",
-                name: "aadharNumber",
+                name: "adharnumber",
                 icon: <FaIdCard />,
                 type: "number",
                 placeholder: "Enter Aadhar Number",
@@ -179,7 +234,7 @@ function StudentForm() {
                   <FaHome />
                 </span>
                 <textarea
-                  name="address"
+                  name="adress"
                   value={formData.address}
                   onChange={handleChange}
                   placeholder="Enter Address"
@@ -200,7 +255,7 @@ function StudentForm() {
                   </span>
                   <input
                     type="text"
-                    name="feeAmount"
+                    name="fee"
                     value={formData.feeAmount}
                     onChange={handleChange}
                     placeholder="Enter Fee Amount"
@@ -216,7 +271,7 @@ function StudentForm() {
                     <FaChalkboardTeacher />
                   </span>
                   <select
-                    name="studentClass"
+                    name="s_class"
                     value={formData.studentClass}
                     onChange={handleChange}
                     className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
@@ -231,29 +286,26 @@ function StudentForm() {
               </div>
             </div>
             <div className="flex flex-col">
-                            <label className="text-gray-300 font-medium mb-1">Gender</label>
-                            <div className="relative flex items-center">
-                                <span className="absolute left-3 text-gray-400"><FaVenusMars /></span>
-                                <select name="gender" value={formData.gender} onChange={handleChange} className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-blue-500 transition" required>
-                                    <option value="">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-            <div className="flex flex-col">
-              <label className="text-gray-300 font-medium mb-1">
-                Aadhar Photo
-              </label>
-              <input
-                type="file"
-                name="aadharPhoto"
-                onChange={handleFileChange}
-                className="w-full p-3 border border-gray-600 rounded-lg bg-gray-900 text-white file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded-lg file:border-none file:cursor-pointer hover:file:bg-blue-600 transition"
-                required
-              />
+              <label className="text-gray-300 font-medium mb-1">Gender</label>
+              <div className="relative flex items-center">
+                <span className="absolute left-3 text-gray-400">
+                  <FaVenusMars />
+                </span>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-blue-500 transition"
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
             </div>
+
             <div className="flex flex-col">
               <label className="text-gray-300 font-medium mb-1">
                 Pass Photo
@@ -261,7 +313,7 @@ function StudentForm() {
 
               <input
                 type="file"
-                name="passportPhoto"
+                name="passphoto"
                 onChange={handleFileChange}
                 className="w-full p-3 border border-gray-600 rounded-lg bg-gray-900 text-white file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded-lg file:border-none file:cursor-pointer hover:file:bg-blue-600 transition"
                 required
@@ -286,7 +338,10 @@ function StudentForm() {
         </div>
       </div>
 
-      <button className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition flex items-center gap-2">
+      <button
+        type="submit"
+        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition flex items-center gap-2"
+      >
         <FaPlus className="w-5 h-5" />
         Add Student
       </button>
@@ -297,6 +352,7 @@ function StudentForm() {
         <AiOutlineArrowLeft size={24} />
       </Link>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

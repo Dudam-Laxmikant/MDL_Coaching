@@ -110,7 +110,7 @@ const App = () => {
             <Route path="/showclassTeacher" element={<ShowClassTeacher />} />
             <Route path="/showclassTeacher/showallteacherlist" element={<ShowAllTeachersList />} />
             <Route path="/showclassTeacher/showallteacherlist/updatetecherdetails" element={<UpdateTeacherDetails />} />
-            <Route path="/showclassTeacher/showallteacherlist/showprofile" element={<ShowProfile />} />
+            <Route path="/showclassTeacher/showallteacherlist/showprofile/:teacherId" element={<ShowProfile />} />
             <Route path="/showclassTeacher/showallteacherlist/salarydetails" element={<SalaryDetails/>}/>
             <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />
             <Route path="/showclassTeacher/showteacherslist" element={<ShowTeachersList />} />
