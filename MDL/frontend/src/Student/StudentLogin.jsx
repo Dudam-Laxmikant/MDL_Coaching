@@ -1,110 +1,22 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import { motion } from "framer-motion";
-// import { FaUser, FaLock } from "react-icons/fa";
-
-// function StudentLogin() {
-//   const [formData, setFormData] = useState({ name: "", password: "" });
-//   const [errors, setErrors] = useState({});
-
-//   const validateForm = () => {
-//     let formErrors = {};
-//     if (!formData.name) formErrors.name = "Name is required.";
-//     if (!formData.password) formErrors.password = "Password is required.";
-//     else if (formData.password.length < 6)
-//       formErrors.password = "Password must be at least 6 characters long.";
-//     setErrors(formErrors);
-//     return Object.keys(formErrors).length === 0;
-//   };
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (validateForm()) {
-//       console.log("Form submitted successfully!");
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 p-4">
-//       <motion.div
-//         initial={{ opacity: 0, scale: 0.8 }}
-//         animate={{ opacity: 1, scale: 1 }}
-//         transition={{ duration: 0.5 }}
-//         className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md"
-//       >
-//         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">Login</h1>
-//         <form onSubmit={handleSubmit} className="space-y-6">
-//           <div>
-//             <label className="block text-gray-700 font-medium mb-2">Name</label>
-//             <div className="flex items-center border border-gray-300 rounded-md p-3 focus-within:ring-4 focus-within:ring-purple-500 transition">
-//               <FaUser className="text-gray-500 mr-3" />
-//               <input
-//                 type="text"
-//                 name="name"
-//                 value={formData.name}
-//                 onChange={handleChange}
-//                 placeholder="Enter Name"
-//                 className="w-full outline-none"
-//               />
-//             </div>
-//             {errors.name && <p className="text-red-500 text-sm mt-2">{errors.name}</p>}
-//           </div>
-//           <div>
-//             <label className="block text-gray-700 font-medium mb-2">Password</label>
-//             <div className="flex items-center border border-gray-300 rounded-md p-3 focus-within:ring-4 focus-within:ring-purple-500 transition">
-//               <FaLock className="text-gray-500 mr-3" />
-//               <input
-//                 type="password"
-//                 name="password"
-//                 value={formData.password}
-//                 onChange={handleChange}
-//                 placeholder="Enter Password"
-//                 className="w-full outline-none"
-//               />
-//             </div>
-//             {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
-//           </div>
-//           <Link to="/studentMenu">
-//             <motion.button
-//               type="submit"
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               className="w-full mt-5 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-md hover:from-pink-600 hover:to-red-500 transition shadow-lg"
-//             >
-//               Login
-//             </motion.button>
-//           </Link>
-//           <p className="text-center text-gray-600">
-//             Don't have an account?{' '}
-//             <Link to="" className="text-purple-600 hover:underline">
-//               Register
-//             </Link>
-//           </p>
-//         </form>
-//       </motion.div>
-//     </div>
-//   );
-// }
-
-// export default StudentLogin;
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaUser, FaLock, FaIdCard } from "react-icons/fa";
+import { FaUser, FaLock, FaIdCard, FaEnvelope } from "react-icons/fa";
+import { toast ,ToastContainer} from "react-toastify";
 
 function StudentLogin() {
-  const [formData, setFormData] = useState({ studentId: "", name: "", password: "" });
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ 
+    s_id: "", 
+    email: "", 
+    password: "" 
+  });
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     let formErrors = {};
-    if (!formData.studentId) formErrors.studentId = "Student ID is required.";
-    if (!formData.name) formErrors.name = "Name is required.";
+    if (!formData.s_id) formErrors.s_id = "Student ID is required.";
+    if (!formData.email) formErrors.email = "Email is required.";
     if (!formData.password) formErrors.password = "Password is required.";
     else if (formData.password.length < 6)
       formErrors.password = "Password must be at least 6 characters long.";
@@ -117,10 +29,59 @@ function StudentLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     console.log("Form submitted successfully!");
+  //   }
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Form submitted successfully!");
+    const { s_id,email, password } = formData;
+
+    try {
+      const url = "http://localhost:8080/student/login";
+      const response = await fetch(url,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      const { message, success, jwttoken,name,email, _id, error } = result;
+      // console.log("The logged user data :: " + result);
+      console.log(formData);
+      if (success) {
+        toast.success(message, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+        localStorage.setItem("email", result.email);
+        localStorage.setItem("token", jwttoken);
+        localStorage.setItem("name", name);
+        localStorage.setItem("s_id", _id);
+        setTimeout(() => {
+          navigate("/studentMenu");
+        }, 1000);
+      } else if (error) {
+        const details = error?.details[0].message;
+        toast.error(details, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      } else if (!success) {
+        toast.error(message, {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -133,36 +94,36 @@ function StudentLogin() {
         className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md"
       >
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">Login</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form className="space-y-6">
           <div>
             <label className="block text-gray-700 font-medium mb-2">Student ID</label>
             <div className="flex items-center border border-gray-300 rounded-md p-3 focus-within:ring-4 focus-within:ring-purple-500 transition">
               <FaIdCard className="text-gray-500 mr-3" />
               <input
                 type="text"
-                name="studentId"
-                value={formData.studentId}
+                name="s_id"
+                value={formData.s_id || ""}
                 onChange={handleChange}
                 placeholder="Enter Student ID"
                 className="w-full outline-none"
               />
             </div>
-            {errors.studentId && <p className="text-red-500 text-sm mt-2">{errors.studentId}</p>}
+            {errors.s_id && <p className="text-red-500 text-sm mt-2">{errors.s_id}</p>}
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Name</label>
+            <label className="block text-gray-700 font-medium mb-2">Email</label>
             <div className="flex items-center border border-gray-300 rounded-md p-3 focus-within:ring-4 focus-within:ring-purple-500 transition">
-              <FaUser className="text-gray-500 mr-3" />
+              <FaEnvelope className="text-gray-500 mr-3" />
               <input
-                type="text"
-                name="name"
-                value={formData.name}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter Name"
+                placeholder="Enter Email"
                 className="w-full outline-none"
               />
             </div>
-            {errors.name && <p className="text-red-500 text-sm mt-2">{errors.name}</p>}
+            {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-2">Password</label>
@@ -179,22 +140,24 @@ function StudentLogin() {
             </div>
             {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password}</p>}
           </div>
-          <Link to="/studentMenu">
+          {/* <Link to="/studentMenu"> */}
             <motion.button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-full mt-5 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-md hover:from-pink-600 hover:to-red-500 transition shadow-lg"
             >
               Login
             </motion.button>
-          </Link>
+          {/* </Link> */}
           <p className="text-center text-gray-600">
             Don't have an account?{' '}
             <Link to="" className="text-purple-600 hover:underline">
               Register
             </Link>
           </p>
+      <ToastContainer />
         </form>
       </motion.div>
     </div>

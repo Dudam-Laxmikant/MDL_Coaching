@@ -12,7 +12,9 @@ const { signup } = require("./Controllers/AdminController.js");
 const { Studentsignup } = require("./Controllers/StudentController.js");
 const Teacherroute = require("./Routes/Teacherroute.js");
 const { Teacherform } = require("./Controllers/TeacherController.js");
-const Subjectroute = require("./Routes/Subjectroute.js")
+const Subjectroute = require("./Routes/Subjectroute.js");
+const Noticerouter = require("./Routes/Noticeroute.js");
+
 require("dotenv").config()
 
 require("./Models/db")
@@ -36,7 +38,9 @@ app.post("/student/signup", upload.single("passphoto"), Studentsignup)
 app.post("/admin/signup",upload.single("image"), signup)
 app.post("/teacher/addteacher",upload.single("photo"), Teacherform)
 app.use("/teacher", Teacherroute)
-
+app.use("/student",Studentroute)
+app.use("/notice",Noticerouter)
+app.use("/class",Classroute)
 // app.use("/student", Studentroute)
 app.get("/", (req, res) => {
     res.send("welcome users")

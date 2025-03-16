@@ -85,4 +85,5 @@ const Addsubject = async (req, res) => {
     }
 };
 
+
 module.exports = { Addsubject };

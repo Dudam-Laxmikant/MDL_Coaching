@@ -121,7 +121,6 @@ const FindTeacherById = async (req, res) => {
     }
 }
 
-
 async function Getallteacher(req, res) {
     try {
 
@@ -140,4 +139,45 @@ async function Getallteacher(req, res) {
         });
     }
 }
-module.exports = { Teacherform, Getallteacher, deleteTeacherById, FindTeacherById } 
+
+const login = async (req, res) => {
+    try {
+        const { t_id, email} = req.body;
+        const userid = await TeacherModel.findOne({t_id})
+        if (!userid) {
+            return res.status(200)
+                .json({ message: "TeacherID is not exist", success: false })
+        }
+        const useremail = await TeacherModel.findOne({ t_id,email})
+        if (!useremail) {
+            return res.status(200)
+                .json({ message: "Email is not exist", success: false })
+        }
+        const result = await bcrypt.compare(password, useremail.password)
+        if (!result) {
+            return res.status(200)
+                .json({ message: "Auth failed password is wrong", success: false })
+        }
+        // const resultid = (t_id, user.t_id)
+        // if (!resultid) {
+        //     return res.status(200)
+        //         .json({ message: "Auth failed TeacherID is wrong", success: false })
+        // }
+
+        const jwttoken = jwt.sign(
+            { email: useremail.email, _id: useremail._id },
+            process.env.JWT_TOKEN
+        )
+        
+        // const fullname = user.fname + " " + user.mname + " " + user.lname
+
+        res.status(201)
+            .json({ message: "login successfully", success: true, jwttoken,t_id, email })
+
+
+    } catch (error) {
+        res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
+module.exports = { Teacherform, Getallteacher, deleteTeacherById, FindTeacherById, login } 

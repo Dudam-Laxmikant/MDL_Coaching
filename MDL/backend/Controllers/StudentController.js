@@ -66,5 +66,39 @@ const Studentsignup = async (req, res) => {
         });
     }
 }
+const StudentLogin = async (req, res) => {
+    try {
+        const { s_id, email} = req.body;
+        const userid = await StudentModel.findOne({s_id})
+        if (!userid) {
+            return res.status(200)
+                .json({ message: "StudentID is not exist", success: false })
+        }
+        const useremail = await StudentModel.findOne({ s_id,email})
+        if (!useremail) {
+            return res.status(200)
+                .json({ message: "Email is not exist", success: false })
+        }
+        // const result = await bcrypt.compare(password, useremail.password)
+        // if (!result) {
+        //     return res.status(200)
+        //         .json({ message: "Auth failed password is wrong", success: false })
+        // }
+        
+        const jwttoken = jwt.sign(
+            { email: useremail.email, _id: useremail._id },
+            process.env.JWT_TOKEN
+        )
+        
+        // const fullname = user.fname + " " + user.mname + " " + user.lname
 
-module.exports = { Studentsignup } 
+        res.status(201)
+            .json({ message: "login successfully", success: true, jwttoken,s_id, email })
+
+
+    } catch (error) {
+        res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
+module.exports = { Studentsignup ,StudentLogin} 

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const AdminModel =require("../Models/admin.js")
 const signup = async (req, res) => {
 
-    console.log("body: ", req.body)
+            
     console.log("file:",req.file);
     
     try {
