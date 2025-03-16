@@ -14,7 +14,8 @@ const Teacherroute = require("./Routes/Teacherroute.js");
 const { Teacherform } = require("./Controllers/TeacherController.js");
 const Subjectroute = require("./Routes/Subjectroute.js");
 const Noticerouter = require("./Routes/Noticeroute.js");
-
+const Timetablerouter = require("./Routes/Timetablerouter.js");
+const { addTimetable } = require("./Controllers/TimetableController.js");
 require("dotenv").config()
 
 require("./Models/db")
@@ -35,11 +36,13 @@ app.use("/images", express.static("./public/images"));
 app.use("/admin", Adminroute)
 app.use("/subject", Subjectroute)
 app.post("/student/signup", upload.single("passphoto"), Studentsignup)
-app.post("/admin/signup",upload.single("image"), signup)
-app.post("/teacher/addteacher",upload.single("photo"), Teacherform)
+app.post("/admin/signup", upload.single("image"), signup)
+app.post("/teacher/addteacher", upload.single("photo"), Teacherform)
+app.post("/timetable", upload.single("image"), addTimetable)
 app.use("/teacher", Teacherroute)
-app.use("/student",Studentroute)
-app.use("/notice",Noticerouter)
+app.use("/student", Studentroute)
+app.use("/notice", Noticerouter)
+// app.use("/timetable",Timetablerouter)
 // app.use("/class",Classroute)
 // app.use("/student", Studentroute)
 app.get("/", (req, res) => {

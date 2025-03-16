@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Link ,useNavigate} from 'react-router-dom';
-import { ToastContainer,toast } from 'react-toastify';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const TeacherLogin = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ 
-    t_id: '', 
-    email: '', 
-    password: '' });
+  const [formData, setFormData] = useState({
+    t_id: "",
+    email: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,11 +16,11 @@ const TeacherLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { t_id,email, password } = formData;
+    const { t_id, email, password } = formData;
 
     try {
       const url = "http://localhost:8080/teacher/login";
-      const response = await fetch(url,{
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +29,7 @@ const TeacherLogin = () => {
       });
 
       const result = await response.json();
-      const { message, success, jwttoken,name, email, _id, error } = result;
+      const { message, success, jwttoken, name, data, error } = result;
       // console.log("The logged user data :: " + result);
       console.log(formData);
       if (success) {
@@ -38,8 +39,12 @@ const TeacherLogin = () => {
         });
         localStorage.setItem("email", result.email);
         localStorage.setItem("token", jwttoken);
-        localStorage.setItem("name", name);
-        localStorage.setItem("t_id", _id);
+        localStorage.setItem(
+          "name",
+          data.s_name + " " + data.name + " " + data.lname
+        );
+        localStorage.setItem("t_id", data._id);
+        localStorage.setItem("photo", data.photo);
         setTimeout(() => {
           navigate("/teacherDashboard");
         }, 1000);
@@ -66,11 +71,17 @@ const TeacherLogin = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 p-4">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl transform transition duration-300 hover:shadow-xl">
-        <h2 className="text-4xl font-extrabold text-gray-900 text-center">Login</h2>
-        <p className="text-center text-gray-600 mb-6">Welcome back! Please sign in.</p>
+        <h2 className="text-4xl font-extrabold text-gray-900 text-center">
+          Login
+        </h2>
+        <p className="text-center text-gray-600 mb-6">
+          Welcome back! Please sign in.
+        </p>
         <form className="space-y-5">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-1">Teacher ID</label>
+            <label className="block text-gray-700 text-sm font-semibold mb-1">
+              Teacher ID
+            </label>
             <input
               type="text"
               name="t_id"
@@ -81,7 +92,9 @@ const TeacherLogin = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-1">Email Address</label>
+            <label className="block text-gray-700 text-sm font-semibold mb-1">
+              Email Address
+            </label>
             <input
               type="email"
               name="email"
@@ -92,7 +105,9 @@ const TeacherLogin = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-1">Password</label>
+            <label className="block text-gray-700 text-sm font-semibold mb-1">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -102,16 +117,22 @@ const TeacherLogin = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:outline-none shadow-lg"
             />
           </div>
-          
-          <button type="button" onClick={handleSubmit} className="block w-full text-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-2 rounded-lg shadow-md hover:from-pink-600 hover:to-purple-600 transition duration-300">
-          {/* <Link to="/teacherDashboard"> */}
+
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="block w-full text-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-2 rounded-lg shadow-md hover:from-pink-600 hover:to-purple-600 transition duration-300"
+          >
+            {/* <Link to="/teacherDashboard"> */}
             Sign In
-          {/* </Link> */}
+            {/* </Link> */}
           </button>
         </form>
         <p className="text-sm text-center text-gray-700 mt-4">
-          Don't have an account?{' '}
-          <Link to="" className="text-pink-500 font-semibold hover:underline">Sign up</Link>
+          Don't have an account?{" "}
+          <Link to="" className="text-pink-500 font-semibold hover:underline">
+            Sign up
+          </Link>
         </p>
       </div>
       <ToastContainer />

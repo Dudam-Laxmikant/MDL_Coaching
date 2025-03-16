@@ -142,18 +142,19 @@ async function Getallteacher(req, res) {
 
 const login = async (req, res) => {
     try {
-        const { t_id, email} = req.body;
-        const userid = await TeacherModel.findOne({t_id})
+        const { t_id, email, password } = req.body;
+        const userid = await TeacherModel.findOne({ t_id })
         if (!userid) {
             return res.status(200)
                 .json({ message: "TeacherID is not exist", success: false })
         }
-        const useremail = await TeacherModel.findOne({ t_id,email})
+        const useremail = await TeacherModel.findOne({ t_id, email })
         if (!useremail) {
             return res.status(200)
                 .json({ message: "Email is not exist", success: false })
         }
         const result = await bcrypt.compare(password, useremail.password)
+        console.log(result)
         if (!result) {
             return res.status(200)
                 .json({ message: "Auth failed password is wrong", success: false })
@@ -168,11 +169,11 @@ const login = async (req, res) => {
             { email: useremail.email, _id: useremail._id },
             process.env.JWT_TOKEN
         )
-        
+
         // const fullname = user.fname + " " + user.mname + " " + user.lname
 
         res.status(201)
-            .json({ message: "login successfully", success: true, jwttoken,t_id, email })
+            .json({ message: "login successfully", success: true, data: useremail, jwttoken, t_id, email })
 
 
     } catch (error) {
