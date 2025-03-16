@@ -40,7 +40,7 @@ app.post("/teacher/addteacher",upload.single("photo"), Teacherform)
 app.use("/teacher", Teacherroute)
 app.use("/student",Studentroute)
 app.use("/notice",Noticerouter)
-app.use("/class",Classroute)
+// app.use("/class",Classroute)
 // app.use("/student", Studentroute)
 app.get("/", (req, res) => {
     res.send("welcome users")
