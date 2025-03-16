@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../Footer";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const TeacherTimeSchedule = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState("Monday");
+  const [table, settable] = useState("")
   const timetable = {
     Monday: [
       { subject: "Math", time: "9:00 AM - 10:00 AM", className: "bg-red-400" },
@@ -42,19 +44,31 @@ const TeacherTimeSchedule = () => {
       { subject: "Self Study", time: "10:00 AM - 12:00 PM", className: "bg-teal-300" },
     ],
   };
-  function upload(event){ 
+  function upload(event) {
     event.preventDefault();
     Swal.fire({
-    title: "Uploaded Successfully",
-    icon: "success",
-    draggable: true
-  });
-}
+      title: "Uploaded Successfully",
+      icon: "success",
+      draggable: true
+    });
+  }
+
+  const getlatestTimetable = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/timetable/latest")
+      settable(response.data.data.filename)
+    } catch (error) {
+      console.log("error for latest time table found", error)
+    }
+  }
+  useEffect(() => {
+    getlatestTimetable()
+  }, [])
   return (
     <div className="flex flex-col ">
       <Header />
       <div className="flex flex-1 h-screen">
-        <button 
+        <button
           className="sm:hidden p-2 bg-gray-700 text-white fixed top-4 left-4 z-50 rounded-lg"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
@@ -64,7 +78,10 @@ const TeacherTimeSchedule = () => {
         <div className="flex-1 flex flex-col h-screen items-center bg-gradient-to-r from-purple-300 via-pink-300 to-yellow-300 p-6 sm:p-10 overflow-auto">
           <div className="p-4 sm:p-6 flex flex-col items-center w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl h-auto">
             <h1 className="text-black text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 animate-bounce">Timetable</h1>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+            <div className="w-full">
+              <img src={table ? `http://localhost:8080/images/${table}` : "https://www.shutterstock.com/image-vector/timetable-error-color-line-icon-600w-1923052244.jpg"} alt="" />
+            </div>
+            {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
               {Object.keys(timetable).map((day) => (
                 <button
                   key={day}
@@ -92,7 +109,7 @@ const TeacherTimeSchedule = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
