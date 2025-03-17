@@ -121,12 +121,21 @@ export const UpdateNotice = () => {
             <br />
             {/* Notes Content */}
             {/* Rich Text Editor for Notes */}
-            <ReactQuill
+            {/* <ReactQuill
               className="bg-white"
               theme="snow"
               value={notice.description}
               onChange={(e) =>
                 setnotice({ ...notice, description: e.target.value })
+              }
+              placeholder="Write the notice content here..."
+            /> */}
+            <ReactQuill
+              className="bg-white"
+              theme="snow"
+              value={notice.description}
+              onChange={(e) =>
+                setnotice({ ...notice, description: e })
               }
               placeholder="Write the notice content here..."
             />

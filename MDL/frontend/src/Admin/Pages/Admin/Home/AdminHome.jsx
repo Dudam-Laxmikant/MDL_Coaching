@@ -140,12 +140,12 @@ function AdminHome() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col bg-[#454649] min-h-screen">
         {/* Header */}
         <Header />
 
         {/* Main Content */}
-        <div className="flex flex-1 p-4 sm:p-6 md:p-10">
+        <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649]">
           {/* bg-[#454649] */}
           <div className="w-full bg-transparent p-6  mt-10">
             {/* <h1 className="text-2xl font-bold text-white mb-6 text-center">Dashboard</h1> */}
