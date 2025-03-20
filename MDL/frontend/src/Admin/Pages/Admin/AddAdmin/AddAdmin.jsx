@@ -25,7 +25,7 @@ export const AddAdmin = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] text-white">
+            <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] text-white min-h-screen">
                 <div className="w-full bg-transparent p-6 mt-10">
                     <button 
                         className="px-4 py-2 bg-blue-500 text-white rounded-lg"

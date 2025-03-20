@@ -102,7 +102,7 @@ export const AddSubjects = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-1 bg-[#454649] p-6 sm:p-10 md:p-24">
+      <div className="flex flex-1 bg-[#454649] p-6 sm:p-10 md:p-24 min-h-screen">
         <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl border border-gray-200">
           <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
             Manage Subjects

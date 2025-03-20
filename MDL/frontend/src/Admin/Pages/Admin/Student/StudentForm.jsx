@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   FaUser,
@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 
 function StudentForm() {
   const navigate = useNavigate();
+  const [classes, setClasses] = useState([]);
   const [formData, setFormData] = useState({
     s_id: "",
     fname: "",
@@ -39,22 +40,58 @@ function StudentForm() {
     adress: "",
     fee: "",
     gender: "",
-    passphoto: "",
+    passphoto: null,
     s_class: "",
+    s_classId: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const handleClassChange = (event) => {
+    const selectedValue = JSON.parse(event.target.value); 
+    console.log(selectedValue)// Convert string back to object
+    setFormData((prevState) => ({
+      ...prevState,
+      s_class: selectedValue.name, // Save class name
+      s_classId: selectedValue.id, // Save class ID separately
+    }));
+  };
+  useEffect(() => {
+    getclasses();
+  }, []);
 
+  const getclasses = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/class/getclasses");
+      console.log(res.data);
+      setClasses(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const handleFileChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+  // };
   const handleFileChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    const { name, value, type, files } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "file" ? files[0] : value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-
+    if (formData.s_class === "") {
+      toast.error("Please select a class", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      return;
+    }
     try {
       const url = "http://localhost:8080/student/signup";
 
@@ -117,15 +154,16 @@ function StudentForm() {
       adress: "",
       fee: "",
       gender: "",
-      passphoto: "",
+      passphoto: null,
       s_class: "",
+      s_classId: "",
     });
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#454649] text-white">
       <Header />
-      <div className="flex flex-1 p-6">
+      <div className="flex flex-1 p-6 min-h-screen">
         <div className="flex-1 bg-gray-800 p-10 mt-20 rounded-lg shadow-lg max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-6 text-yellow-400 text-center py-4 rounded-lg bg-gray-700">
             Student Details
@@ -235,7 +273,7 @@ function StudentForm() {
                 </span>
                 <textarea
                   name="adress"
-                  value={formData.address}
+                  value={formData.adress}
                   onChange={handleChange}
                   placeholder="Enter Address"
                   className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
@@ -256,7 +294,7 @@ function StudentForm() {
                   <input
                     type="text"
                     name="fee"
-                    value={formData.feeAmount}
+                    value={formData.fee}
                     onChange={handleChange}
                     placeholder="Enter Fee Amount"
                     className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
@@ -272,15 +310,22 @@ function StudentForm() {
                   </span>
                   <select
                     name="s_class"
-                    value={formData.studentClass}
-                    onChange={handleChange}
+                    onChange={handleClassChange}
                     className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                     required
                   >
                     <option value="">Select Class</option>
-                    <option value="Class 1">Class 1</option>
-                    <option value="Class 2">Class 2</option>
-                    <option value="Class 3">Class 3</option>
+                    {classes.map((cls, index) => (
+                      <option
+                        value={JSON.stringify({
+                          id: cls._id,
+                          name: cls.classname,
+                        })}
+                        key={index}
+                      >
+                        {cls.classname}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -314,6 +359,7 @@ function StudentForm() {
               <input
                 type="file"
                 name="passphoto"
+                accept="image/*"
                 onChange={handleFileChange}
                 className="w-full p-3 border border-gray-600 rounded-lg bg-gray-900 text-white file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded-lg file:border-none file:cursor-pointer hover:file:bg-blue-600 transition"
                 required

@@ -55,7 +55,7 @@ export const ViewNotes = () => {
 
       {/* Main Content */}
       {notice.name ? (
-        <div className="flex flex-1 p-4 sm:p-10 md:p-16 lg:p-20 w-full mt-10">
+        <div className="flex flex-1 p-4 sm:p-10 md:p-16 lg:p-20 w-full mt-4 min-h-screen">
           <div className="w-full max-w-4xl mx-auto bg-white p-12 rounded-lg shadow-lg border border-yellow-800">
             {/* Title and Date */}
             <div className="mb-6 flex flex-col items-center">

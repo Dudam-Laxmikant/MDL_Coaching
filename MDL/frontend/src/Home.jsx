@@ -160,7 +160,7 @@ function Home() {
           <Link to="#" className="hover:text-blue-500 transition"><Linkedin size={30} /></Link>
         </div>
       </footer> */}
-      <footer className="bg-black text-white py-10 mt-32">
+      <footer className="bg-black text-white py-10 w-full mt-32">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           {/* About Section */}
           <div>

@@ -102,7 +102,7 @@ export const Timetable = () => {
         <div className="flex flex-col min-h-screen">
             <Header />
 
-            <div className="flex flex-col md:flex-row flex-1 p-4 sm:p-6 md:p-10 bg-[#454649]">
+            <div className="flex flex-col md:flex-row flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] min-h-screen">
                 <div className="w-full md:w-1/2 bg-transparent p-6 mt-10">
                     <h1 className="text-white text-2xl mb-4">Upload Timetable</h1>
 

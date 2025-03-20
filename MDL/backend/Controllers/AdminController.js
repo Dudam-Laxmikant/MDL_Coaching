@@ -81,9 +81,27 @@ const login = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
+async function adminprofile(req, res) {
+    try {
+        const {id} = req.params
+        // Check if the user already exists
+        const user = await AdminModel.findById(id);
+        res.status(200).json({
+            message: "Admin fetched successfully",
+            success: true,
+            data: user
+        })
 
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
 
 module.exports = { 
     signup,
-    login
+    login,
+    adminprofile
 }

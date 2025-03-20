@@ -23,7 +23,7 @@ function LogOut() {
                 <Header />
 
                 {/* Main Content */}
-                <div className="flex flex-1">
+                <div className="flex flex-1 min-h-screen">
                     {/* Sidebar */}
                     
                     <div className="flex-1 bg-[#454649] p-5 sm:p-7 md:p-14">

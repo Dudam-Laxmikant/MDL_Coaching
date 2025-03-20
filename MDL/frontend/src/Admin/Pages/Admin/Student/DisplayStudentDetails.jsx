@@ -11,7 +11,7 @@ function DisplayStudentDetails() {
             <Header />
 
             {/* Main Content */}
-            <div className="flex flex-1 items-center justify-center p-6">
+            <div className="flex flex-1 items-center justify-center p-6 min-h-screen">
                 <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full">
                     <h1 className="text-3xl font-bold text-center mb-6 text-black">Student I-Card</h1>
 

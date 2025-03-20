@@ -92,12 +92,28 @@
 // };
 
 // export default StudentGeneralRegister;
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { User, Calendar, Phone, Mail, MapPin, CreditCard, BookOpen, Globe, DollarSign } from 'lucide-react';
 import Header from '../Header';
 import Footer from '../Footer';
-
+import axios from "axios";  
 const StudentGeneralRegister = () => {
+
+
+  useEffect(() => {
+    profile();
+  },[])
+  const [students, setstudents] = useState([]);
+  const profile = async () => {
+    try {
+      const studentid = localStorage.getItem("studentid")
+      const res = await axios.get(`http://localhost:8080/student/getstudentdetails/${studentid}`)
+      console.log(res.data)
+      setstudents(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="flex flex-col h-screen">
       {/* Fixed Header */}
@@ -118,59 +134,61 @@ const StudentGeneralRegister = () => {
               <tbody>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><User className="mr-2" /> Student ID</td>
-                  <td className="p-3 border border-gray-300">1</td>
+                  <td className="p-3 border border-gray-300">{students.s_id}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><User className="mr-2" /> First Name</td>
-                  <td className="p-3 border border-gray-300">Mayur</td>
+                  <td className="p-3 border border-gray-300">{students.fname}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><User className="mr-2" /> Middle Name</td>
-                  <td className="p-3 border border-gray-300">Dulabhai</td>
+                  <td className="p-3 border border-gray-300">{students.mname}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><User className="mr-2" /> Last Name</td>
-                  <td className="p-3 border border-gray-300">Makavana</td>
+                  <td className="p-3 border border-gray-300">{students.lname}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><User className="mr-2" /> Gender</td>
-                  <td className="p-3 border border-gray-300">Male</td>
+                  <td className="p-3 border border-gray-300">{students.gender}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><Phone className="mr-2" /> Mobile Number</td>
-                  <td className="p-3 border border-gray-300">8980783998</td>
+                  <td className="p-3 border border-gray-300"></td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><Calendar className="mr-2" /> Date of Birth</td>
-                  <td className="p-3 border border-gray-300">22/Jun/2004</td>
+                  <td className="p-3 border border-gray-300">{students.dob}</td>
                 </tr>
-                <tr className="even:bg-gray-100 odd:bg-white">
-                  <td className="p-3 font-medium border border-gray-300 flex items-center"><Globe className="mr-2" /> Country</td>
-                  <td className="p-3 border border-gray-300">India</td>
-                </tr>
+                
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><Mail className="mr-2" /> Student Email</td>
-                  <td className="p-3 border border-gray-300">mayurmakvana123@gmail.com</td>
+                  <td className="p-3 border border-gray-300">{students.email}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><MapPin className="mr-2" /> Address</td>
-                  <td className="p-3 border border-gray-300">B-123, Sitanagar, Punagam, Surat</td>
+                  <td className="p-3 border border-gray-300">{students.adress}</td>
+                </tr>
+                <tr className="even:bg-gray-100 odd:bg-white">
+                  <td className="p-3 font-medium border border-gray-300 flex items-center"><Globe className="mr-2" /> Country</td>
+                  <td className="p-3 border border-gray-300">{students.country}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><MapPin className="mr-2" /> City</td>
-                  <td className="p-3 border border-gray-300">Surat</td>
+                  <td className="p-3 border border-gray-300">{students.city}</td>
                 </tr>
+
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><CreditCard className="mr-2" /> Aadhar Card No</td>
-                  <td className="p-3 border border-gray-300">1234 5678 9101</td>
+                  <td className="p-3 border border-gray-300">{students.adharnumber}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><DollarSign className="mr-2" /> Fee Amount</td>
-                  <td className="p-3 border border-gray-300">$9101</td>
+                  <td className="p-3 border border-gray-300">$ {students.fee}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><BookOpen className="mr-2" /> Class</td>
-                  <td className="p-3 border border-gray-300">First</td>
+                  <td className="p-3 border border-gray-300">{students.s_class}</td>
                 </tr>
               </tbody>
             </table>

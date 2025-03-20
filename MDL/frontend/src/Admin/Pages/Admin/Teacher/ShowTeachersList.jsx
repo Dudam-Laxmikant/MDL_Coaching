@@ -58,7 +58,7 @@ function ShowTeachersList() {
       <div className="flex flex-col min-h-screen">
         <Header />
 
-        <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-20">
+        <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-20 min-h-screen">
           <div className="max-w-4xl mx-auto bg-gray-700 p-6 rounded-lg shadow-md w-full">
             <h1 className="text-3xl font-semibold text-yellow-500 mb-6">Teacher's List</h1>
 

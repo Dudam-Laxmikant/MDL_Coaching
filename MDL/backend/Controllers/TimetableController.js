@@ -45,10 +45,29 @@ const gettimetable = async (req, res) => {
         });
     }
 }
+// const getlatestTimetable = async (req, res) => {
+//     try {
+//         const timetable = await TimeTableModel.find({})
+//             .sort({ createdAt: -1 })
+//             .limit(1);
+
+//         res.status(200).json({
+//             message: "Latest Time Table Found",
+//             success: true,
+//             data: timetable.length > 0 ? timetable[0] : null
+//         });
+//     } catch (error) {
+//         res.status(500).json({
+//             message: "Server error: " + error,
+//             success: false
+//         });
+//     }
+// }
+
 const getlatestTimetable = async (req, res) => {
     try {
         const timetable = await TimeTableModel.find({})
-            .sort({ createdAt: -1 })
+            .sort({ _id: -1 }) // Sort by ObjectId (latest first)
             .limit(1);
 
         res.status(200).json({
@@ -58,11 +77,12 @@ const getlatestTimetable = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            message: "Server error: " + error,
+            message: "Server error: " + error.message,
             success: false
         });
     }
-}
+};
+
 const DeleteByTable = async (req, res) => {
     const { id } = req.params
     try {

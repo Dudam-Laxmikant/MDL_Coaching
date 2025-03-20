@@ -50,6 +50,11 @@ const Studentschema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    s_classId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Class",  // Ye Class model ka reference he
+        required: true
+    },
     s_class: {
         type: String,
         required: true

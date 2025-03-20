@@ -43,7 +43,7 @@ function SalaryDetails() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-10 mt-1">
+      <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-10 mt-1 min-h-screen">
         <div className="w-full mt-20 max-w-4xl mx-auto  p-6 overflow-x-auto mb-10">
           <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Teacher Salary Details</h1>
           <div className="mb-6 border-b pb-4">

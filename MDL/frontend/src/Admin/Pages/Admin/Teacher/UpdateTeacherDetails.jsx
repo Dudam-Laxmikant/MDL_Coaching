@@ -97,7 +97,7 @@ function UpdateTeacherDetails() {
     <>
       <div className="flex flex-col min-h-screen bg-gradient-to-r bg-[#454649]">
         <Header />
-        <div className="flex flex-1 p-6 sm:p-10 bg-[#454649] ">
+        <div className="flex flex-1 p-6 sm:p-10 bg-[#454649] min-h-screen">
           <div className="w-full max-w-4xl mx-auto mt-12 bg-transparent p-8">
             <h1 className="text-4xl font-bold text-yellow-400 mb-6 text-center">
               Update Teacher Details

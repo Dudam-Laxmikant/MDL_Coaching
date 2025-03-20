@@ -21,7 +21,7 @@ function Feedback() {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <div className="flex flex-1 bg-[#454649] p-4 sm:p-6 md:p-10">
+            <div className="flex flex-1 bg-[#454649] p-4 sm:p-6 md:p-6 min-h-screen">
                 <div className="w-full bg-white p-6 mt-20 rounded-lg shadow-lg max-w-4xl mx-auto">
                     <h2 className="text-2xl font-bold mb-4">Submit Your Feedback</h2>
                     <form onSubmit={handleSubmit} className="mb-6">

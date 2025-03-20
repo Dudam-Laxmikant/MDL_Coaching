@@ -6,9 +6,10 @@ const cors = require("cors");
 
 const Adminroute = require("./Routes/Adminroute")
 const Studentroute = require("./Routes/Studentroute")
+const Classroute =  require("./Routes/Classroute.js")
 
 const upload = require("./Middlewares/upload.js")
-const { signup } = require("./Controllers/AdminController.js");
+const { signup, adminprofile } = require("./Controllers/AdminController.js");
 const { Studentsignup } = require("./Controllers/StudentController.js");
 const Teacherroute = require("./Routes/Teacherroute.js");
 const { Teacherform } = require("./Controllers/TeacherController.js");
@@ -34,17 +35,18 @@ app.use("/images", express.static("./public/images"));
 
 
 app.use("/admin", Adminroute)
+// app.post("/admin",adminprofile)
 app.use("/subject", Subjectroute)
 app.post("/student/signup", upload.single("passphoto"), Studentsignup)
-app.post("/admin/signup", upload.single("image"), signup)
+app.post("/admin/signup", upload.single("image"), signup)       
 app.post("/teacher/addteacher", upload.single("photo"), Teacherform)
 app.post("/timetable/addTimetable", upload.single("table"), addTimetable)
 app.use("/teacher", Teacherroute)
 app.use("/student", Studentroute)
 app.use("/notice", Noticerouter)
 app.use("/timetable",Timetablerouter)
-// app.use("/class",Classroute)
-// app.use("/student", Studentroute)
+app.use("/class",Classroute)
+
 app.get("/", (req, res) => {
     res.send("welcome users")
 })

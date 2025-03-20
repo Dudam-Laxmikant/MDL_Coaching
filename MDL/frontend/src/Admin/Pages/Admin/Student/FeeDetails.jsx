@@ -28,7 +28,7 @@ export const FeeDetails = () => {
     return (
         <div className="flex flex-col min-h-screen bg-[#454649] text-gray-200 mt-10">
             <Header />
-            <div className="flex-1 p-6 md:p-10">
+            <div className="flex-1 p-6 md:p-10 min-h-screen">
                 <div className="max-w-4xl mx-auto bg-gray-800 p-6 md:p-8 rounded-lg shadow-lg border border-gray-700">
                     <h2 className="text-2xl md:text-3xl font-bold text-center text-yellow-600 mb-6">Fee Details</h2>
                     <div className="bg-gray-900 p-4 md:p-6 rounded-lg shadow-md">

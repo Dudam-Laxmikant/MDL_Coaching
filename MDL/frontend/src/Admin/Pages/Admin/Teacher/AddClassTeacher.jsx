@@ -18,7 +18,7 @@ export const AddClassTeacher = () => {
       <Header />
 
       {/* Main Content */}
-      <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] justify-center items-center w-full ">
+      <div className="flex flex-1 p-4 sm:p-6 md:p-10 bg-[#454649] justify-center w-full min-h-screen">
         <div className="w-full max-w-5xl bg-[#454649] p-4 sm:p-6 overflow-x-auto mt-10 ">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-center text-yellow-400 mb-4 w-full">Add Class Teacher</h2>
           

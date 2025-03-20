@@ -134,7 +134,7 @@ export const AddNotice = () => {
     <div className="flex flex-col min-h-screen bg-[#454649]">
       <Header />
 
-      <div className="flex flex-1 p-4 sm:p-10 md:p-16 lg:p-20 w-full bg-[#454649] mt-10">
+      <div className="flex flex-1 p-4 sm:p-10 md:p-16 lg:p-20 w-full bg-[#454649] mt-4 min-h-screen">
         <div className="w-full max-w-4xl mx-auto bg-white p-12 rounded-lg shadow-lg border border-gray-200">
           <div className="mb-6 flex flex-col items-center">
             <input

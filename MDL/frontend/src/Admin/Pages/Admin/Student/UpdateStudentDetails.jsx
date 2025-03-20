@@ -303,7 +303,7 @@ function UpdateStudentDetails() {
   return (
     <div className="flex flex-col min-h-screen bg-[#454649] text-white">
       <Header />
-      <div className="flex flex-1 p-6 mt-20">
+      <div className="flex flex-1 p-6 mt-14 min-h-screen">
         <div className="flex-1 bg-gray-800 p-10 rounded-lg shadow-lg max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
             Update Student Details

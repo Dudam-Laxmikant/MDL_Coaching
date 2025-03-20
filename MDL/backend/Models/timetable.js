@@ -13,7 +13,7 @@ const Timetableschema = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+}, { timestamps: true })
 
 const TimeTableModel = mongoose.model("TimeTable", Timetableschema)
 

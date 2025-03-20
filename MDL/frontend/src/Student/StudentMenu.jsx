@@ -1,13 +1,13 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import img from "./Images/img1.png";
-import profile from "./Images/profile.png";
-import wallet from "./Images/wallet.png";
+// import img from "./Images/img1.png";
+import p from "./Images/p.png";
+import wallet from "./Images/profile.png";
 import home from "./Images/home.png";
 import Footer from "./Footer";
 import { FaUserCircle, FaUser, FaSignOutAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export const StudentMenu = ({ profileImage }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -28,6 +28,23 @@ export const StudentMenu = ({ profileImage }) => {
         navigate("/"); // Redirect to home after logout
       }
     });
+  };
+
+  useEffect(() => {
+    profile();
+  }, []);
+  const [students, setstudents] = useState([]);
+  const profile = async () => {
+    try {
+      const studentid = localStorage.getItem("studentid");
+      const res = await axios.get(
+        `http://localhost:8080/student/getstudentdetails/${studentid}`
+      );
+      console.log(res.data);
+      setstudents(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -65,7 +82,10 @@ export const StudentMenu = ({ profileImage }) => {
           {/* Dropdown Menu */}
           {dropdownOpen && (
             <div className="absolute top-full right-0 mt-2 w-40 bg-white text-black rounded-lg shadow-md">
-              <Link to="/studentMenu/studentProfile" className="flex items-center px-4 py-2 hover:bg-gray-200">
+              <Link
+                to="/studentMenu/studentProfile"
+                className="flex items-center px-4 py-2 hover:bg-gray-200"
+              >
                 <FaUser className="mr-2" /> Profile
               </Link>
               <button
@@ -85,7 +105,8 @@ export const StudentMenu = ({ profileImage }) => {
           <div className="mb-6">
             <div className="flex justify-center mb-4">
               <img
-                src={img}
+                // src={img}
+                src={`http://localhost:8080/images/${students.passphoto}`}
                 alt="profile"
                 className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover transition duration-500 transform hover:scale-110"
               />
@@ -94,16 +115,28 @@ export const StudentMenu = ({ profileImage }) => {
               <label className="block text-lg sm:text-xl font-semibold text-gray-800">
                 Makvana Mayur Dulabhai
               </label>
-              <label className="block text-sm text-gray-600">Ninth</label>
-              <label className="block text-sm text-gray-600">Div-A</label>
+              <label className="block text-sm text-gray-600"><b>id:</b> <strong>{students.s_id}</strong> </label>
+              <label className="block text-sm text-gray-600"><b>class:</b>{students.s_class}</label>
             </div>
           </div>
 
           <div className="space-y-4">
             {[
-              { to: "/studentMenu/studentDashboard", label: "Student Dashboard", imgSrc: home },
-              { to: "/studentMenu/studentPayment", label: "Quick Payment", imgSrc: wallet },
-              { to: "/studentMenu/studentDigitalI_card", label: "Digital ID Card", imgSrc: profile },
+              {
+                to: "/studentMenu/studentDashboard",
+                label: "Student Dashboard",
+                imgSrc: home,
+              },
+              {
+                to: "/studentMenu/studentPayment",
+                label: "Quick Payment",
+                imgSrc: wallet,
+              },
+              {
+                to: "/studentMenu/studentDigitalI_card",
+                label: "Digital ID Card",
+                imgSrc: p,
+              },
             ].map((item, index) => (
               <Link
                 key={index}

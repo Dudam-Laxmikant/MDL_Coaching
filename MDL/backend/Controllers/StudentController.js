@@ -19,7 +19,8 @@ const Studentsignup = async (req, res) => {
         adress,
         fee,
         gender,
-        s_class } = req.body
+        s_class,
+        s_classId } = req.body
 
     try {
         const { filename } = req.file
@@ -48,8 +49,9 @@ const Studentsignup = async (req, res) => {
             adress,
             fee,
             gender,
-            passphoto:filename,
-            s_class
+            passphoto: filename,
+            s_class,
+            s_classId
         });
         console.log("New Student: ", newUser)
 
@@ -68,13 +70,13 @@ const Studentsignup = async (req, res) => {
 }
 const StudentLogin = async (req, res) => {
     try {
-        const { s_id, email} = req.body;
-        const userid = await StudentModel.findOne({s_id})
+        const { s_id, email } = req.body;
+        const userid = await StudentModel.findOne({ s_id })
         if (!userid) {
             return res.status(200)
                 .json({ message: "StudentID is not exist", success: false })
         }
-        const useremail = await StudentModel.findOne({ s_id,email})
+        const useremail = await StudentModel.findOne({ s_id, email })
         if (!useremail) {
             return res.status(200)
                 .json({ message: "Email is not exist", success: false })
@@ -84,16 +86,16 @@ const StudentLogin = async (req, res) => {
         //     return res.status(200)
         //         .json({ message: "Auth failed password is wrong", success: false })
         // }
-        
+
         const jwttoken = jwt.sign(
             { email: useremail.email, _id: useremail._id },
             process.env.JWT_TOKEN
         )
-        
-        // const fullname = user.fname + " " + user.mname + " " + user.lname
+
+        const fullname = useremail.fname + " " + useremail.mname + " " + useremail.lname
 
         res.status(201)
-            .json({ message: "login successfully", success: true, jwttoken,s_id, email })
+            .json({ message: "login successfully", success: true, jwttoken, s_id, email, _id: ueremail._id, name: fullname })
 
 
     } catch (error) {
@@ -101,4 +103,34 @@ const StudentLogin = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
-module.exports = { Studentsignup ,StudentLogin} 
+
+const getStudents = async (req, res) => {
+    const { id } = req.params
+    console.log(id)
+    try {
+        const students = await StudentModel.find({ s_classId: id })
+        res.status(200).json({ students })
+    } catch (error) {
+        res.status(500).json({ message: "Server error" + error, success: false })
+    }
+}
+async function studentprofile(req, res) {
+    try {
+        const { id } = req.params
+        console.log(id)
+        // Check if the user already exists
+        const student = await StudentModel.findById(id);
+        res.status(200).json({
+            message: "Student fetched successfully",
+            success: true,
+            data: student
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
+module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile } 

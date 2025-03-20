@@ -51,7 +51,7 @@ function ShowProfile() {
         <Header />
 
         {/* Main Content */}
-        <div className="flex flex-1">
+        <div className="flex flex-1 min-h-screen">
           {/* Sidebar */}
           {/* <Sidebar /> */}
           {teacher.name ? (

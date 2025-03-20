@@ -25,7 +25,7 @@ function ShowClasses() {
     return (
         <div className="flex flex-col min-h-screen bg-[#454649] text-gray-200 relative">
             <Header />
-            <div className="flex flex-1 p-6 md:p-10">
+            <div className="flex flex-1 p-6 md:p-10 min-h-screen">
                 <div className="flex-1 p-5 w-full mt-14">
                     <h2 className="text-xl font-bold mb-6 text-yellow-400">Class Details</h2>
                     <div className="overflow-x-auto">
