@@ -23,18 +23,32 @@ function StudentDetails() {
     console.log(classId);
   }, [classId]);
 
+  // const getStudents = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `http://localhost:8080/student/getstudents/${classId}`
+  //     );
+  //     console.log(res.data);
+  //     setStudents(res.data.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const getStudents = async () => {
     try {
       const res = await axios.get(
         `http://localhost:8080/student/getstudents/${classId}`
       );
       console.log(res.data);
-      setStudents(res.data.data);
+      
+      setStudents(res.data?.students || []); // Ensure students is always an array
     } catch (error) {
       console.log(error);
+      setStudents([]); // Prevent undefined errors by setting an empty array
     }
   };
-
+  
   const handleDeleteClick = (student) => {
     setSelectedStudent(student);
     setShowPopup(true);
@@ -146,56 +160,9 @@ function StudentDetails() {
                     </td>
                   </tr>
                 ))}
-                {/* <tr className="hover:bg-gray-700 text-center">
-                  <td className="p-3 border border-gray-700">1</td>
-                  <td className="p-3 border border-gray-700">
-                    Dudam Laxmikant Shankar
-                  </td>
-                  <td className="p-3 border border-gray-700">
-                    ₹ 15,000 / ₹ 25,000
-                  </td>
-                  <td className="p-3 border border-gray-700">
-                    <Link
-                      to={
-                        "/addstudents/showstudentdetails/studentdetails/feedetails"
-                      }
-                      className="text-yellow-500 hover:text-yellow-600 transition"
-                    >
-                      <MdOutlinePayments className="text-2xl" />
-                    </Link>
-                  </td>
-                  <td className="p-3 border border-gray-700">
-                    <Link
-                      to={
-                        "/addstudents/showstudentdetails/studentdetails/updatestudentdetails"
-                      }
-                      className="text-blue-500 hover:text-blue-600 transition"
-                    >
-                      <AiOutlineEdit className="text-2xl" />
-                    </Link>
-                  </td>
-                  <td className="p-3 border border-gray-700">
-                    <button
-                      onClick={() =>
-                        handleDeleteClick("Dudam Laxmikant Shankar")
-                      }
-                      className="text-red-500 hover:text-red-600 transition"
-                    >
-                      <AiOutlineDelete className="text-2xl" />
-                    </button>
-                  </td>
-                  <td className="p-3 border border-gray-700">
-                    <Link
-                      to={
-                        "/addstudents/showstudentdetails/studentdetails/displaystudentdetails"
-                      }
-                      className="text-green-500 hover:text-green-600 transition"
-                    >
-                      <AiOutlineEye className="text-2xl" />
-                    </Link>
-                  </td>
-                </tr> */}
+             
               </tbody>
+              
             </table>
           </div>
         </div>

@@ -26,7 +26,7 @@ function Profile() {
       <Header />
 
       {/* Main Content */}
-      <div className="flex flex-1 justify-center items-center p-6 mt-20">
+      <div className="flex flex-1 justify-center items-center p-6 mt-5 min-h-screen">
         <div className="w-full max-w-4xl bg-white p-8 sm:p-12 rounded-xl shadow-xl">
           {/* Profile Header */}
           <div className="flex flex-col items-center text-center">

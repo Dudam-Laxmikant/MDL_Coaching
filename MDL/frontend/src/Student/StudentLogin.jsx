@@ -29,12 +29,6 @@ function StudentLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     console.log("Form submitted successfully!");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { s_id, email, password } = formData;

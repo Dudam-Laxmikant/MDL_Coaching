@@ -36,13 +36,13 @@ const StudentTimetable = () => {
       <Header />
 
       {/* Scrollable Main Content */}
-      <div className="flex-grow overflow-auto flex items-center justify-center p-4">
+      <div className="flex-grow flex items-center justify-center p-4 mt-20">
         {/* <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6"> */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-6">
+          className="w-full max-w-6xl bg-white shadow-lg rounded-lg min-h-screen">
           <h2 className="text-2xl font-bold text-center mb-6 text-white bg-blue-600 p-3 rounded-lg">Coaching Timetable</h2>
           <div className="overflow-x-auto flex justify-center">
             {/* <motion.table

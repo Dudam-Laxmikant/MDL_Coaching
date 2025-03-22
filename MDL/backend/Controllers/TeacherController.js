@@ -123,10 +123,10 @@ const FindTeacherById = async (req, res) => {
 
 async function Getallteacher(req, res) {
     try {
-
-        // Check if the user already exists
+       // Check if the user already exists
         const user = await TeacherModel.find({});
-        res.status(200).json({
+   
+      res.status(200).json({
             message: "Teacher fetched successfully",
             success: true,
             data: user

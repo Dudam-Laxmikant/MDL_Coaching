@@ -109,12 +109,7 @@ function StudentForm() {
           position: "top-center",
           autoClose: 2000,
         });
-        // Swal.fire({
-        //   title: "Success!",
-        //   text: "Student added successfully",
-        //   icon: "success",
-        //   confirmButtonText: "OK",
-        // });
+       
         setTimeout(() => {
           navigate("/addstudents");
         }, 1000);

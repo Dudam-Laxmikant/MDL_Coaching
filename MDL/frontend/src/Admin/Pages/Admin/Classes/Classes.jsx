@@ -104,50 +104,6 @@ function Classes() {
   const [inputValue, setInputValue] = useState("");
   console.log(inputValue);
 
-//   const handleClick = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const url = "http://localhost:8080/class/addclass";
-
-//       const response = await axios.post(url,{"className":inputValue}, {
-//         headers: {
-//           "Content-Type": "aplication/json",
-//         },
-//       });
-//       console.log(response);
-
-//     //   console.log("this is the response data::: " + response.data);
-//       const { message, success, error } = await response.data;
-
-//               if (success) {
-//                 toast.success(message, {
-//                   position: "top-center",
-//                   autoClose: 2000,
-//                 });
-//                 setTimeout(() => {
-//                   navigate("/showclassTeacher/showallteacherlist");
-//                 }, 1000);
-//               } else if (error) {
-//                 console.log(error);
-//                 const details = error?.details[0].message;
-//                 toast.error(details, {
-//                   position: "top-center",
-//                   autoClose: 2000,
-//                 });
-//               } else {
-//                 toast.error(message, {
-//                   position: "top-center",
-//                   autoClose: 2000,
-//                 });
-//               }
-//     } catch (error) {
-//       toast.error(error, {
-//         position: "top-center",
-//         autoClose: 2000,
-//       });
-//     }
-//   };
 const handleClick = async (e) => {
     e.preventDefault();
 

@@ -72,6 +72,7 @@ import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
 import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
 import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
 import { TeacherUpdateAttendence } from "./Teacher/Pages/TeacherUpdateAttendence";
+import StudentNotice from "./Student/Pages/StudentNotice";
 
 const App = () => {
   return (
@@ -148,6 +149,7 @@ const App = () => {
           <Route path="/studentMenu/studentPayment" element={<StudentPayment />} />
           <Route path="/studentMenu/studentDashboard/studentGeneralRegister" element={<StudentGeneralRegister />} />
           <Route path="/studentMenu/studentDashboard/studentClassDetails" element={<StudentClassDetails />} />
+          <Route path="/studentMenu/studentDashboard/studentNotice" element={<StudentNotice/>} />
           <Route path="/studentMenu/studentDashboard/studentTimetable" element={<StudentTimetable />} />
           <Route path="/studentMenu/studentDashboard/studentFees" element={<StudentFees />} />
           <Route path="/studentMenu/studentDashboard/studentAttendance" element={<StudentAttendance />} />

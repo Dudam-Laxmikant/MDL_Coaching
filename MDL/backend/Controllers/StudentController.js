@@ -95,7 +95,7 @@ const StudentLogin = async (req, res) => {
         const fullname = useremail.fname + " " + useremail.mname + " " + useremail.lname
 
         res.status(201)
-            .json({ message: "login successfully", success: true, jwttoken, s_id, email, _id: ueremail._id, name: fullname })
+            .json({ message: "login successfully", success: true, jwttoken, s_id, email, _id: useremail._id, name: fullname })
 
 
     } catch (error) {

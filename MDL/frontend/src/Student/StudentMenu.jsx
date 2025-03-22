@@ -100,7 +100,7 @@ export const StudentMenu = ({ profileImage }) => {
       </header>
 
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-center flex-grow ">
+      <div className="flex flex-col items-center justify-center flex-grow min-h-screen mt-10">
         <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-sm sm:max-w-md md:max-w-lg text-center transition duration-500 transform hover:scale-105">
           <div className="mb-6">
             <div className="flex justify-center mb-4">

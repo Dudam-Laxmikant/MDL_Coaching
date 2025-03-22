@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
 import { AiFillDelete, AiOutlineArrowLeft } from "react-icons/ai";
 import Swal from "sweetalert2";
-
 function ShowClasses() {
+    
+    
     function deleteClass() {
         Swal.fire({
             title: "Are you sure?",
@@ -39,7 +40,7 @@ function ShowClasses() {
                             </thead>
                             <tbody>
                                 <tr className="bg-gray-600 text-white">
-                                    <td className="border border-gray-500 px-4 py-2">Eighth</td>
+                                    <td className="border border-gray-500 px-4 py-2">fg</td>
                                     <td className="border border-gray-500 px-4 py-2">50</td>
                                     <td className="border border-gray-500 px-4 py-2 flex">
                                         <AiFillDelete className="text-red-500 hover:text-red-700 cursor-pointer transition" size={24} onClick={deleteClass} />

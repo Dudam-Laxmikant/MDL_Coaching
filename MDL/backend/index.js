@@ -7,7 +7,7 @@ const cors = require("cors");
 const Adminroute = require("./Routes/Adminroute")
 const Studentroute = require("./Routes/Studentroute")
 const Classroute =  require("./Routes/Classroute.js")
-
+const Teachernoticerouter = require("./Routes/TeacherNoticeroute.js")
 const upload = require("./Middlewares/upload.js")
 const { signup, adminprofile } = require("./Controllers/AdminController.js");
 const { Studentsignup } = require("./Controllers/StudentController.js");
@@ -17,6 +17,7 @@ const Subjectroute = require("./Routes/Subjectroute.js");
 const Noticerouter = require("./Routes/Noticeroute.js");
 const Timetablerouter = require("./Routes/Timetablerouter.js");
 const { addTimetable } = require("./Controllers/TimetableController.js");
+const { Teachernotice, GetallNotice } = require("./Controllers/TeachernoticeController.js");
 require("dotenv").config()
 
 require("./Models/db")
@@ -46,6 +47,9 @@ app.use("/student", Studentroute)
 app.use("/notice", Noticerouter)
 app.use("/timetable",Timetablerouter)
 app.use("/class",Classroute)
+app.post("/t_notice/teachernotice",Teachernotice)
+app.get("/t_notice/teachernotice/getallnotice",GetallNotice)
+// app.use("/", );
 
 app.get("/", (req, res) => {
     res.send("welcome users")

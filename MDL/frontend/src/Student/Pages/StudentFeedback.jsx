@@ -28,7 +28,7 @@ const StudentFeedback = () => {
             Header
             <Header />
             {/* Main Content */}
-            <div className="flex-grow overflow-auto">
+            <div className="flex-grow overflow-auto min-h-screen mt-10">
                 <div className="max-w-3xl mx-auto p-20">
                 <h3 className="text-4xl font-bold text-blue-600 mb-6 text-center">Student Feedback</h3>
                 <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
