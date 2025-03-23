@@ -86,4 +86,23 @@ const Addsubject = async (req, res) => {
 };
 
 
-module.exports = { Addsubject };
+const getSubjects = async (req, res) => {
+    try {
+        // Check if the user already exists
+        const user = await SubjectModel.find({})
+        console.log(user);
+        res.status(200).json({
+            message: "Subject fetched successfully",
+            success: true,
+            data: user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
+
+module.exports = { Addsubject, getSubjects };

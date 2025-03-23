@@ -6,6 +6,18 @@ const teachernoticeschema = new mongoose.Schema({
         type: String,
         required: true
     },
+    title:{
+        type: String,
+        required: true
+    },
+    selectedclass:{
+        type: String,
+        required: true
+    },
+    date:{
+        type: String,
+        required: true
+    },
 })
 
 const TeacherNoticeModel = mongoose.model("TeacherNotice", teachernoticeschema)

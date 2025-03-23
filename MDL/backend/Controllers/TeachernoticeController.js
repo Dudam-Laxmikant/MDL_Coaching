@@ -3,13 +3,19 @@ const TeacherNoticeModel = require("../Models/teachernotice")
 const Teachernotice = async (req, res) => {
     console.log("body: ", req.body)
     const {
-        noticedescription
+        noticedescription,
+        title,
+        selectedclass,
+        date
     } = req.body
 
 
     try {
         const c = new TeacherNoticeModel({
-            noticedescription: noticedescription
+            noticedescription: noticedescription,
+            title: title,
+            selectedclass: selectedclass,
+            date: date
         })
 
         await c.save()
@@ -26,7 +32,7 @@ const Teachernotice = async (req, res) => {
 async function GetallNotice(req, res) {
     try {
        // Check if the user already exists
-        const user = await TeacherNoticeModel.find({});
+        const user = await TeacherNoticeModel.find({}).sort({date: -1});
         console.log(user);
       res.status(200).json({
             message: "Teacher fetched successfully",

@@ -15,6 +15,7 @@ const Teacherroute = require("./Routes/Teacherroute.js");
 const { Teacherform } = require("./Controllers/TeacherController.js");
 const Subjectroute = require("./Routes/Subjectroute.js");
 const Noticerouter = require("./Routes/Noticeroute.js");
+const AttendanceRoute = require("./Routes/AttendanceRoute.js");
 const Timetablerouter = require("./Routes/Timetablerouter.js");
 const { addTimetable } = require("./Controllers/TimetableController.js");
 const { Teachernotice, GetallNotice } = require("./Controllers/TeachernoticeController.js");
@@ -47,6 +48,7 @@ app.use("/student", Studentroute)
 app.use("/notice", Noticerouter)
 app.use("/timetable",Timetablerouter)
 app.use("/class",Classroute)
+app.use("/attendance",AttendanceRoute)
 app.post("/t_notice/teachernotice",Teachernotice)
 app.get("/t_notice/teachernotice/getallnotice",GetallNotice)
 // app.use("/", );

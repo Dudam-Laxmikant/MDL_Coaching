@@ -11,25 +11,29 @@ import { useNavigate } from "react-router-dom";
 const TeacherNotice = () => {
   const todayDate = new Date().toISOString().split("T")[0];
 
-  const [notices, setNotices] = useState([
-    { id: 1, date: todayDate, text: "Meeting at 10 AM in Room 301." },
-    { id: 2, date: "2025-03-02", text: "Submit assignm ents before 5 PM." },
-    { id: 3, date: "2025-03-01", text: "Holiday notice for March 1st." },
-  ]);
+  const [notices, setNotices] = useState([]);
 
   const [newNotice, setNewNotice] = useState();
-
+  const [title, setTitle] = useState();
+  const [selectedclass, setSelectedclass] = useState();
+  const [date, setDate] = useState();
+  const [classes, setClasses] = useState([]);
   // const [noticedescription, setNoticedescription] = useState({noticedescription: ""});
-  console.log(newNotice);
+  // console.log(newNotice);
   const handleClick = async (e) => {
     e.preventDefault();
-
+    console.log(newNotice, title, selectedclass, date);
     try {
       const url = "http://localhost:8080/t_notice/teachernotice";
 
       const response = await axios.post(
         url,
-        { noticedescription: newNotice },
+        {
+          noticedescription: newNotice,
+          date: date,
+          title: title,
+          selectedclass: selectedclass,
+        },
         {
           headers: {
             "Content-Type": "application/json", // Fixed typo here
@@ -39,15 +43,12 @@ const TeacherNotice = () => {
       console.log(response);
 
       const { message, success, error } = await response.data;
-      const navigate = useNavigate();
+
       if (success) {
         toast.success(message, {
           position: "top-center",
           autoClose: 2000,
         });
-        setTimeout(() => {
-          navigate("/teacherNotice");
-        }, 1000);
       } else if (error) {
         console.log(error);
         const details = error?.details[0].message;
@@ -67,8 +68,8 @@ const TeacherNotice = () => {
         autoClose: 2000,
       });
     }
+    getallnotice();
   };
-  
 
   // Add a new notice (Always today's date)
   // const addNotice = () => {
@@ -127,6 +128,31 @@ const TeacherNotice = () => {
   //   });
   // };
 
+  useEffect(() => {
+    getclasses();
+    getallnotice();
+  }, []);
+
+  const getclasses = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/class/getclasses");
+      console.log(res.data);
+      setClasses(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getallnotice = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8080/t_notice/teachernotice/getallnotice"
+      );
+      console.log(res.data);
+      setNotices(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
@@ -142,19 +168,37 @@ const TeacherNotice = () => {
             📌 Notices
           </h1>
           <div className="flex items-center gap-4 p-4">
-      <input
-        type="text"
-        placeholder="Enter notice title..."
-        className="border p-2 rounded-md w-60"
-      />
-      <select className="border p-2 rounded-md">
+            <input
+              type="text"
+              placeholder="Enter notice title..."
+              className="border p-2 rounded-md w-60"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {/* <select className="border p-2 rounded-md" onChange={(e) => setSelectedclass(e.target.value)}>
         <option value="">Select Class</option>
         <option value="General">fiveth</option>
         <option value="Homework">nineth</option>
         <option value="Holiday">Tenth</option>
-      </select>
-      <input type="date" className="border p-2 rounded-md" />
-    </div>
+      </select> */}
+            <select
+              name="s_class"
+              onChange={(e) => setSelectedclass(e.target.value)}
+              className="border p-2 rounded-md"
+              required
+            >
+              <option value="">Select Class</option>
+              {classes.map((cls, index) => (
+                <option value={cls.classname} key={index}>
+                  {cls.classname}
+                </option>
+              ))}
+            </select>
+            <input
+              type="date"
+              className="border p-2 rounded-md"
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
 
           {/* Add Notice Section */}
           <div className="flex gap-3 mb-6">
@@ -174,41 +218,38 @@ const TeacherNotice = () => {
               <FaPlus /> Add
             </button>
           </div>
-         
+
           {/* Notice List */}
           <div className="space-y-4">
-            {notices.map((notice) => (
+            {notices.map((notice, index) => (
               <div
-                key={notice.id}
-                className={`p-4 rounded-md shadow-md flex justify-between items-center ${
-                  notice.date === todayDate
-                    ? "bg-green-100 border-green-400"
-                    : "border-gray-300"
-                } border`}
+                key={index}
+                className={`p-4 rounded-md shadow-md flex justify-between items-center border-gray-300 border`}
               >
                 <div>
+                  <p className="text-lg">{notice.title}</p>
                   <p className="text-gray-500 text-sm">
-                    {notice.date === todayDate ? "Today" : notice.date}
+                    {notice.noticedescription}
                   </p>
-                  
-                  <p className="text-lg">{setNewNotice.noticedescription }</p>
+                  <p className="text-gray-500 text-sm">{notice.date}</p>
+                  <span className="text-gray-700 text-sm">
+                    {notice.selectedclass}
+                  </span>
                 </div>
-                {notice.date === todayDate && (
-                  <div className="flex gap-2">
-                    <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded-md"
-                      onClick={() => updateNotice(notice.id)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded-md"
-                      onClick={() => deleteNotice(notice.id)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
-                )}
+                <div className="flex gap-2">
+                  <button
+                    className="bg-blue-500 text-white px-3 py-1 rounded-md"
+                    onClick={() => updateNotice(notice.id)}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-3 py-1 rounded-md"
+                    onClick={() => deleteNotice(notice.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

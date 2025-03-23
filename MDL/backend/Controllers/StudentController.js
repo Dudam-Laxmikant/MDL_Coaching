@@ -114,6 +114,17 @@ const getStudents = async (req, res) => {
         res.status(500).json({ message: "Server error" + error, success: false })
     }
 }
+
+const getStudentsbyclass = async (req, res) => {
+    try {
+        const { classname } = req.params
+        const students = await StudentModel.find({ s_class: classname })
+        console.log(students);
+        res.status(200).json({ data: students })
+    } catch (error) {
+        res.status(500).json({ message: "Server error" + error, success: false })
+    }
+}
 async function studentprofile(req, res) {
     try {
         const { id } = req.params
@@ -133,4 +144,4 @@ async function studentprofile(req, res) {
         });
     }
 }
-module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile } 
+module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile, getStudentsbyclass } 

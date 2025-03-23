@@ -71,7 +71,7 @@ import RoleSelection from "./RoleSelection";
 import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
 import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
 import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
-import { TeacherUpdateAttendence } from "./Teacher/Pages/TeacherUpdateAttendence";
+import TeacherUpdateAttendence  from "./Teacher/Pages/TeacherUpdateAttendence";
 import StudentNotice from "./Student/Pages/StudentNotice";
 
 const App = () => {
