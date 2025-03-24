@@ -7,7 +7,8 @@ const cors = require("cors");
 const Adminroute = require("./Routes/Adminroute")
 const Studentroute = require("./Routes/Studentroute")
 const Classroute =  require("./Routes/Classroute.js")
-const Teachernoticerouter = require("./Routes/TeacherNoticeroute.js")
+// const TeacherNoticeroute = require("./Routes/TeacherNotesroute.js")
+// const Teachernoticerouter = require("./Routes/TeacherNoticeroute.js")
 const upload = require("./Middlewares/upload.js")
 const { signup, adminprofile } = require("./Controllers/AdminController.js");
 const { Studentsignup } = require("./Controllers/StudentController.js");
@@ -18,7 +19,8 @@ const Noticerouter = require("./Routes/Noticeroute.js");
 const AttendanceRoute = require("./Routes/AttendanceRoute.js");
 const Timetablerouter = require("./Routes/Timetablerouter.js");
 const { addTimetable } = require("./Controllers/TimetableController.js");
-const { Teachernotice, GetallNotice } = require("./Controllers/TeachernoticeController.js");
+const { Teachernotice, GetallNotice, deleteById } = require("./Controllers/TeachernoticeController.js");
+const { TeacherNotes, getallnotes } = require("./Controllers/TeacherNotesController.js");
 require("dotenv").config()
 
 require("./Models/db")
@@ -51,6 +53,10 @@ app.use("/class",Classroute)
 app.use("/attendance",AttendanceRoute)
 app.post("/t_notice/teachernotice",Teachernotice)
 app.get("/t_notice/teachernotice/getallnotice",GetallNotice)
+app.get("/t_notice/teachernotice/delete/:id", deleteById)
+app.post("/notes", upload.single("notesfille"), TeacherNotes);
+app.get("/notes/sendnotes",getallnotes)
+// app.get("/notes/getallnotes",GetallNotes)
 // app.use("/", );
 
 app.get("/", (req, res) => {

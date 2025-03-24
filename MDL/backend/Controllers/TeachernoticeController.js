@@ -47,4 +47,22 @@ async function GetallNotice(req, res) {
         });
     }
 }
-module.exports = { Teachernotice , GetallNotice}
+const deleteById = async (req, res) => {
+    try {
+        const { id } = req.params
+        console.log(id)
+        const notice = await TeacherNoticeModel.findByIdAndDelete(id)
+
+        if (!notice) {
+            return res.status(200)
+                .json({ message: "Notice Deleting Canceled", success: false })
+        }
+
+        return res.status(200)
+            .json({ message: "Notice Deleted SuccessFully", success: true })
+    } catch (error) {
+        return res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
+module.exports = { Teachernotice , GetallNotice, deleteById}

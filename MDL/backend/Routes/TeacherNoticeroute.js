@@ -1,4 +1,4 @@
-const { GetallNotice} = require("../Controllers/TeachernoticeController")
+const { GetallNotice, deleteById} = require("../Controllers/TeachernoticeController")
 
 const router = require("express").Router()
 // router.post("/tnotice/techernotice",Teachernotice)
