@@ -32,60 +32,52 @@ export const UpdateNotice = () => {
       console.log("Not Found Error", error);
     }
   };
-  //   const handleSubmit = () => {
-  //     Swal.fire({
-  //       title: "Notice Updated!",
-  //       text: "Your notice has been successfully updated.",
-  //       icon: "success",
-  //       confirmButtonText: "OK",
-  //     });
-  //   };
 
   function stripHtmlTags(html) {
     if (!html) return ""; // Handle empty input
 
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Removes all HTML tags
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    Swal.fire({
-      title: "Select Option",
-      input: "select",
-      inputOptions: {
-        Student: "Student",
-        Teacher: "Teacher",
-        Both: "Both",
-      },
-      inputPlaceholder: "Select one",
-      showCancelButton: true,
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        console.log(result);
-        const formdata = new FormData();
-        formdata.append("title", notice.title);
-        formdata.append("date", notice.date);
-        formdata.append("description", stripHtmlTags(notice.description));
-        formdata.append("name", notice.name);
-        formdata.append("role", result.value);
-        try {
-          const url = `http://localhost:8080/notice/UpdateByidNotice/${NoticeId}`;
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      Swal.fire({
+        title: "Select Option",
+        input: "select",
+        inputOptions: {
+          Student: "Student",
+          Teacher: "Teacher",
+          Both: "Both",
+        },
+        inputPlaceholder: "Select one",
+        showCancelButton: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          console.log(result);
+          const formdata = new FormData();
+          formdata.append("title", notice.title);
+          formdata.append("date", notice.date);
+          formdata.append("description", stripHtmlTags(notice.description));
+          formdata.append("name", notice.name);
+          formdata.append("role", result.value);
+          try {
+            const url = `http://localhost:8080/notice/UpdateByidNotice/${NoticeId}`;
 
-          const response = await axios.post(url, formdata, {
-            headers: { "Content-Type": "application/json" },
-          });
+            const response = await axios.post(url, formdata, {
+              headers: { "Content-Type": "application/json" },
+            });
 
-          Swal.fire({
-            title: response.data.data,
-            text: `Your notice has been successfully added for ${result.value}.`,
-            icon: "success",
-            confirmButtonText: "OK",
-          });
-        } catch (error) {
-          console.log("Error for update:", error);
+            Swal.fire({
+              title: response.data.data,
+              text: `Your notice has been successfully added for ${result.value}.`,
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+          } catch (error) {
+            console.log("Error for update:", error);
+          }
         }
-      }
-    });
-  };
+      });
+    };  
 
   return (
     <div className="flex flex-col min-h-screen bg-[#454649]">

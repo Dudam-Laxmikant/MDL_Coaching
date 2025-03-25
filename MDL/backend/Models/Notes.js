@@ -10,7 +10,7 @@ const Notesschema = new mongoose.Schema({
         type: String,
         required: true
     },
-    notesfille:{
+    notesfille  :{
         type: String,
         required: true
     }

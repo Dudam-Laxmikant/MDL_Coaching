@@ -125,7 +125,7 @@ const handleClick = async (e) => {
           autoClose: 2000,
         });
         setTimeout(() => {
-          navigate("/showclassTeacher/showallteacherlist");
+          navigate("/addclasses/showclasses");
         }, 1000);
       } else if (error) {
         console.log(error);

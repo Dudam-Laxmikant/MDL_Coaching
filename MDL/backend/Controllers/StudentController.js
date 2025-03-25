@@ -144,4 +144,31 @@ async function studentprofile(req, res) {
         });
     }
 }
-module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile, getStudentsbyclass } 
+const updatestudentdetails = async (req, res) => {
+    console.log("body: ", req.body);
+
+    const { fname,mname,lname,email,dob,city,country,adress,fee,s_class,passphoto } = req.body;
+    const { id } = req.params // Ensure 'id' is provided
+
+    if (!id) {
+        return res.status(400).json({ message: "Student ID is required", success: false });
+    }
+
+    try {
+        const notice = await StudentModel.findByIdAndUpdate(
+            id,  // Correctly pass the ID
+            { fname,mname,lname,email,dob,city,country,adress,fee,s_class,passphoto,adharnumber },
+            { new: true } // Return the updated document
+        );
+
+        if (!notice) {
+            return res.status(404).json({ message: "Student Is not found", success: false });
+        }
+
+        return res.status(200).json({ message: "Student Details Updated", success: true, date: notice });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Server error: " + error.message, success: false });
+    }
+};
+module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile, getStudentsbyclass ,updatestudentdetails} 

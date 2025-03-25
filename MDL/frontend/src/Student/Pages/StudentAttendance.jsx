@@ -138,9 +138,9 @@ export const StudentAttendance = () => {
             <Header />
 
             {/* Main Content */}
-            <div className="flex-grow overflow-auto">
+            <div className="flex-grow min-h-screen mt-16">
                 <div className="max-w-3xl mx-auto p-4 sm:p-6">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">📅 Attendance Calendar</h2>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">📅 Attendance</h2>
 
                     {/* Navigation Buttons */}
                     <div className="flex items-center justify-between max-w-xs mx-auto mb-4 space-x-2">

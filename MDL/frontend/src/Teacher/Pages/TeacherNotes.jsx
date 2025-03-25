@@ -211,7 +211,7 @@ import Header from "../Header";
 // };
 
 // export default TeacherNotes;
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -232,11 +232,34 @@ const TeacherNotes = () => {
 
     document.getElementById("notesForm").reset();
   }
-
+  const getsubject = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/subject/getsubjects");
+      console.log(res.data);
+      setSubjects(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
+    if (formDataToSend.classname === "") {
+      toast.error("Please select a class", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (formDataToSend.subject === "") {
+      toast.error("Please select a subject", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      return;
+    }
     formDataToSend.append("classname", formData.classname);
     formDataToSend.append("subject", formData.subject);
+    formDataToSend.append("subject_Id", formData.subject_Id);
     formDataToSend.append("notesfille", formData.notesfille);
 
     try {
@@ -290,12 +313,44 @@ const TeacherNotes = () => {
       }
     });
   };
+  
+  const [classes, setClasses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const getclasses = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/class/getclasses");
+      console.log(res.data);
+      setClasses(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getclasses();
+    getsubject();
+  }, []);
+  const handleClassChange = (event) => {
+    const selectedValue = JSON.parse(event.target.value);
+    setFormData({
+      ...formData,
+      classname: selectedValue.name,
+      s_classId: selectedValue.id,
+    });
+  };
 
   const handleFileChange = (e) => {
     const { name, type, files } = e.target;
     setFormData({
       ...formData,
       [name]: type === "file" ? files[0] : e.target.value,
+    });
+  };
+  const handlesubjectChange = (event) => {
+    const selectedValue = JSON.parse(event.target.value);
+    setFormData({
+      ...formData,
+      subject: selectedValue.name,
+      subject_Id: selectedValue.id,
     });
   };
 
@@ -320,16 +375,22 @@ const TeacherNotes = () => {
               </label>
               <select
                 name="classname"
-                id="class"
+                onChange={handleClassChange}
+                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
                 required
-                value={formData.classname}
-                onChange={(e) => setFormData({ ...formData, classname: e.target.value })}
-                className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-200 text-gray-900"
               >
-                <option value="" disabled>-- Select Class --</option>
-                <option value="first">First</option>
-                <option value="second">Second</option>
-                <option value="third">Third</option>
+                <option value="">-- Select Class --</option>
+                {classes.map((cls, index) => (
+                  <option
+                    value={JSON.stringify({
+                      id: cls._id,
+                      name: cls.classname,
+                    })}
+                    key={index}
+                  >
+                    {cls.classname}
+                  </option>
+                ))}
               </select>
 
               {/* Subject Selection */}
@@ -338,17 +399,24 @@ const TeacherNotes = () => {
               </label>
               <select
                 name="subject"
-                id="sub"
+                onChange={handlesubjectChange}
+                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
                 required
-                value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
               >
-                <option value="" disabled>-- Select Subject --</option>
-                <option value="science">Science</option>
-                <option value="maths">Maths</option>
-                <option value="english">English</option>
+                <option value="">-- Select Class --</option>
+                {subjects.map((sub, index) => (
+                  <option
+                    value={JSON.stringify({
+                      id: sub._id,
+                      name: sub.subjectName,
+                    })}
+                    key={index}
+                  >
+                    {sub.subjectName}
+                  </option>
+                ))}
               </select>
+              
 
               {/* File Input */}
               <label htmlFor="notes" className="block font-medium text-black text-lg">

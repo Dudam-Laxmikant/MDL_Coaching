@@ -2,6 +2,7 @@ const StudentModel = require("../Models/student")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const TeacherModel = require("../Models/teacher");
+const ClassModel = require("../Models/class");
 
 const Teacherform = async (req, res) => {
     console.log(req.body);
@@ -181,4 +182,5 @@ const login = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
+
 module.exports = { Teacherform, Getallteacher, deleteTeacherById, FindTeacherById, login } 
