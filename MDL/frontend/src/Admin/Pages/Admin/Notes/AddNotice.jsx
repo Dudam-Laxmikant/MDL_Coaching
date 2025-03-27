@@ -32,30 +32,6 @@ export const AddNotice = () => {
     }));
   };
 
-  // const handleSubmit = () => {
-  // Swal.fire({
-  //     title: 'Select Option',
-  //     input: 'select',
-  //     inputOptions: {
-  //         Student: 'Student',
-  //         Teacher: 'Teacher',
-  //         Mix: 'Both'
-  //     },
-  //     inputPlaceholder: 'Select one',
-  //     showCancelButton: true,
-  // }).then((result) => {
-  //     if (result.isConfirmed) {
-  //         Swal.fire({
-  //             title: 'Notice Added!',
-  //             text: `Your notice has been successfully added for ${result.value}.`,
-  //             icon: 'success',
-  //             confirmButtonText: 'OK'
-  //         });
-  //     }
-  // });
-
-  // };
-
   function stripHtmlTags(html) {
     if (!html) return ""; // Handle empty input
 

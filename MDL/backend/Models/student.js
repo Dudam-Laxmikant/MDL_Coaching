@@ -67,6 +67,10 @@ const Studentschema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mobilenumber:{
+        type:Number,
+        required:true
+    }
 
 })
 

@@ -113,7 +113,7 @@ export const StudentMenu = ({ profileImage }) => {
             </div>
             <div>
               <label className="block text-lg sm:text-xl font-semibold text-gray-800">
-                Makvana Mayur Dulabhai
+                {students.fname + " " + students.mname + " " + students.lname}
               </label>
               <label className="block text-sm text-gray-600"><b>id:</b> <strong>{students.s_id}</strong> </label>
               <label className="block text-sm text-gray-600"><b>class:</b>{students.s_class}</label>

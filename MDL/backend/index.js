@@ -19,7 +19,7 @@ const Noticerouter = require("./Routes/Noticeroute.js");
 const AttendanceRoute = require("./Routes/AttendanceRoute.js");
 const Timetablerouter = require("./Routes/Timetablerouter.js");
 const { addTimetable } = require("./Controllers/TimetableController.js");
-const { Teachernotice, GetallNotice, deleteById } = require("./Controllers/TeachernoticeController.js");
+const { Teachernotice, GetallNotice, deleteById, Getclasses } = require("./Controllers/TeachernoticeController.js");
 const { TeacherNotes, getallnotes } = require("./Controllers/TeacherNotesController.js");
 require("dotenv").config()
 
@@ -53,9 +53,10 @@ app.use("/class",Classroute)
 app.use("/attendance",AttendanceRoute)
 app.post("/t_notice/teachernotice",Teachernotice)
 app.get("/t_notice/teachernotice/getallnotice",GetallNotice)
+app.get("/t_notice/teachernotice/selectedclass/:classname",Getclasses)
 app.get("/t_notice/teachernotice/delete/:id", deleteById)
 app.post("/notes", upload.single("notesfille"), TeacherNotes);
-app.get("/notes/sendnotes",getallnotes)
+app.get("/notes/sendnotes/:classname",getallnotes)
 // app.get("/notes/getallnotes",GetallNotes)
 // app.use("/", );
 

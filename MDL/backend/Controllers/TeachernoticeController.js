@@ -47,6 +47,25 @@ async function GetallNotice(req, res) {
         });
     }
 }
+async function Getclasses(req, res) {
+    try {
+        const { classname } = req.params
+       // Check if the user already exists
+        const user = await TeacherNoticeModel.find({selectedclass:classname}).sort({date: -1});
+        console.log(user);
+      res.status(200).json({
+            message: "Teacher fetched successfully",
+            success: true,
+            data: user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
 const deleteById = async (req, res) => {
     try {
         const { id } = req.params
@@ -65,4 +84,4 @@ const deleteById = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
-module.exports = { Teachernotice , GetallNotice, deleteById}
+module.exports = { Teachernotice , GetallNotice, deleteById,Getclasses}

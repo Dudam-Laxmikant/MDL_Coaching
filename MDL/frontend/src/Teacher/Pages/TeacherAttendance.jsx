@@ -102,6 +102,14 @@ const TeacherAttendance = () => {
   };
 
   const handlePresentToggle = (id) => {
+    if (!selectedClass || !selectedSubject) {
+      Swal.fire({
+        title: "All fields are required!",
+        icon: "error",
+        draggable: true,
+      });
+      return;
+    }
     setAttendance({ ...attendance, [id]: !attendance[id] });
   };
 

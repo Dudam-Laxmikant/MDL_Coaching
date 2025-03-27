@@ -17,14 +17,19 @@ const markAttendance = async (req, res) => {
 
 const getAttendance = async (req, res) => {
     try {
-        const { classname, date } = req.params;
-        const attendance = await AttendanceModel.findOne({ classname, date });
+        const { classname, subject, date } = req.params;
+        const attendance = await AttendanceModel.findOne({ classname, subject, date })
+            .populate({
+                path: "records.studentId",
+                select: "fname mname lname"
+            });
 
+        console.log(attendance)
         if (!attendance) {
             return res.status(404).json({ message: "No attendance found" });
         }
 
-        res.status(200).json({data:attendance});
+        res.status(200).json({ data: attendance });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -32,7 +37,7 @@ const getAttendance = async (req, res) => {
 
 const updateAttendance = async (req, res) => {
     try {
-        
+
         const { records } = req.body;
 
         const updatedAttendance = await AttendanceModel.findByIdAndUpdate(

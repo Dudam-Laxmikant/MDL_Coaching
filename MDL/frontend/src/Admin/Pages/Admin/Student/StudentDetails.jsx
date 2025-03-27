@@ -131,7 +131,7 @@ function StudentDetails() {
                     <td className="p-3 border border-gray-700">
                       <Link
                         to={
-                          "/addstudents/showstudentdetails/studentdetails/updatestudentdetails"
+                          `/addstudents/showstudentdetails/studentdetails/updatestudentdetails/${student._id}`
                         }
                         className="text-blue-500 hover:text-blue-600 transition"
                       >
@@ -151,7 +151,7 @@ function StudentDetails() {
                     <td className="p-3 border border-gray-700">
                       <Link
                         to={
-                          "/addstudents/showstudentdetails/studentdetails/displaystudentdetails"
+                          `/addstudents/showstudentdetails/studentdetails/displaystudentdetails/${student._id}`
                         }
                         className="text-green-500 hover:text-green-600 transition"
                       >

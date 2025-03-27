@@ -13,6 +13,7 @@ import {
   FaChalkboardTeacher,
   FaEnvelope,
   FaVenusMars,
+  FaPhone,
 } from "react-icons/fa";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
@@ -43,6 +44,7 @@ function StudentForm() {
     passphoto: null,
     s_class: "",
     s_classId: "",
+    mobilenumber: "",
   });
 
   const handleChange = (e) => {
@@ -151,6 +153,7 @@ function StudentForm() {
       gender: "",
       passphoto: null,
       s_class: "",
+      mobilenumber: "",
       s_classId: "",
     });
   };
@@ -238,6 +241,13 @@ function StudentForm() {
                 icon: <FaFlag />,
                 type: "text",
                 placeholder: "Enter Country",
+              },
+              {
+                label: "Mobile Number",
+                name: "mobilenumber",
+                icon: <FaPhone />,
+                type: "number",
+                placeholder: "Enter Mobile Number",
               },
             ].map((field, index) => (
               <div key={index} className="flex flex-col">
@@ -378,6 +388,18 @@ function StudentForm() {
           </form>
         </div>
       </div>
+      {/* <div className="flex flex-col">
+        <label className="text-gray-300 font-medium mb-1">Mobile Number</label>
+        <input
+          type="number"
+          name="mobilenumber"
+          value={formData.mobilenumber}
+          onChange={handleChange}
+          placeholder="Enter Mobile Number"
+          className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          required
+        ></input>
+      </div> */}
 
       <button
         type="submit"

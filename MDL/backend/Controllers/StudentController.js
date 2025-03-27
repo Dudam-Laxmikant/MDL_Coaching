@@ -19,6 +19,7 @@ const Studentsignup = async (req, res) => {
         adress,
         fee,
         gender,
+        mobilenumber,
         s_class,
         s_classId } = req.body
 
@@ -51,6 +52,7 @@ const Studentsignup = async (req, res) => {
             gender,
             passphoto: filename,
             s_class,
+            mobilenumber,
             s_classId
         });
         console.log("New Student: ", newUser)
@@ -95,7 +97,7 @@ const StudentLogin = async (req, res) => {
         const fullname = useremail.fname + " " + useremail.mname + " " + useremail.lname
 
         res.status(201)
-            .json({ message: "login successfully", success: true, jwttoken, s_id, email, _id: useremail._id, name: fullname })
+            .json({ message: "login successfully", success: true, jwttoken, s_id, email, _id: useremail._id, name: fullname, s_class: useremail.s_class })
 
 
     } catch (error) {
@@ -108,7 +110,7 @@ const getStudents = async (req, res) => {
     const { id } = req.params
     console.log(id)
     try {
-        const students = await StudentModel.find({ s_classId: id })
+        const students = await StudentModel.find({ s_class: id })
         res.status(200).json({ students })
     } catch (error) {
         res.status(500).json({ message: "Server error" + error, success: false })
@@ -144,31 +146,52 @@ async function studentprofile(req, res) {
         });
     }
 }
+
+async function showprofile(req, res) {
+    try {
+        const { id } = req.params
+        console.log(id)
+        // Check if the user already exists
+        const student = await StudentModel.findById(id);
+        res.status(200).json({
+            message: "Student fetched successfully",
+            success: true,
+            data: student
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
 const updatestudentdetails = async (req, res) => {
     console.log("body: ", req.body);
 
-    const { fname,mname,lname,email,dob,city,country,adress,fee,s_class,passphoto } = req.body;
-    const { id } = req.params // Ensure 'id' is provided
+    const { fname, mname, lname,dob, adharnumber, city, country,fee, passphoto} = req.body;
+    const { id } = req.params
 
     if (!id) {
-        return res.status(400).json({ message: "Student ID is required", success: false });
+        return res.status(400).json({ message: "Notice ID is required", success: false });
     }
 
     try {
         const notice = await StudentModel.findByIdAndUpdate(
             id,  // Correctly pass the ID
-            { fname,mname,lname,email,dob,city,country,adress,fee,s_class,passphoto,adharnumber },
+            { fname, mname, lname,dob, adharnumber, city, country,fee, passphoto},
             { new: true } // Return the updated document
         );
 
         if (!notice) {
-            return res.status(404).json({ message: "Student Is not found", success: false });
+            return res.status(404).json({ message: "Notice not found", success: false });
         }
 
-        return res.status(200).json({ message: "Student Details Updated", success: true, date: notice });
+        return res.status(200).json({ message: "Notice Updated", success: true, date: notice });
 
     } catch (error) {
         return res.status(500).json({ message: "Server error: " + error.message, success: false });
     }
 };
-module.exports = { Studentsignup, StudentLogin, getStudents, studentprofile, getStudentsbyclass ,updatestudentdetails} 
+
+module.exports = { Studentsignup, StudentLogin, getStudents, getStudentsbyclass,showprofile,studentprofile,updatestudentdetails} 

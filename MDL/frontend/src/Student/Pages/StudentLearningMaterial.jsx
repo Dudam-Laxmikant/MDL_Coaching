@@ -160,7 +160,7 @@ const StudentLearningMaterial = () => {
 
   const handleDownload = async (fileUrl) => {
     try {
-      const response = await axios.get(fileUrl, { responseType: "blob" });
+      const response = await axios.get(`http://localhost:8080/images/${fileUrl}`, { responseType: "blob" });
       const blob = new Blob([response.data], {
         type: response.headers["content-type"],
       });
@@ -182,13 +182,13 @@ const StudentLearningMaterial = () => {
 
   const getAllNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/notes/sendnotes");
+      const res = await axios.get(`http://localhost:8080/notes/sendnotes/${localStorage.getItem("studentclass")}`);
       console.log(res.data);
       setSubjects(res.data.data); // API response se data set karo
     } catch (error) {
       console.log(error);
     }
-    getAllNotes();
+    
   };
 
   return (

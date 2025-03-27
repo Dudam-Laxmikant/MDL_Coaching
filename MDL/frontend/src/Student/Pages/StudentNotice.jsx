@@ -14,7 +14,7 @@ const StudentNotice = () => {
   const fetchNotices = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/t_notice/teachernotice/getallnotice"
+        `http://localhost:8080/t_notice/teachernotice/selectedclass/${localStorage.getItem("studentclass")}`
       );
       setNewNotice(response.data.data);
     } catch (error) {

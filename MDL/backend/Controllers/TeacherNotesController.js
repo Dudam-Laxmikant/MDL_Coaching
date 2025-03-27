@@ -1,14 +1,14 @@
 const NotesModel = require("../Models/Notes")
 const multer = require("multer");
-const TeacherNotes= async (req, res) => {
+const TeacherNotes = async (req, res) => {
     console.log("body: ", req.body)
     // console.log("file is :", req.file);
     const {
         classname,
         subject
     } = req.body
-    
-    
+
+
     try {
         const { filename } = req.file
         console.log("filename: ", filename)
@@ -29,9 +29,10 @@ const TeacherNotes= async (req, res) => {
     }
 }
 const getallnotes = async (req, res) => {
+    const { classname } = req.params
 
     try {
-        const notice = await NotesModel.find({})
+        const notice = await NotesModel.find({ classname: classname })
 
         return res.status(200)
             .json({ message: "Notice Founded", success: true, data: notice })
@@ -61,4 +62,4 @@ const getsubjects = async (req, res) => {
     }
 }
 
-module.exports = { TeacherNotes, getallnotes ,getStudentsbyclass,getsubjects}
+module.exports = { TeacherNotes, getallnotes, getStudentsbyclass, getsubjects }

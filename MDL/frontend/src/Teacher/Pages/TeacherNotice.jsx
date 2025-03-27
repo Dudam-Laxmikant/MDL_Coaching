@@ -71,62 +71,7 @@ const TeacherNotice = () => {
     getallnotice();
   };
 
-  // Add a new notice (Always today's date)
-  // const addNotice = () => {
-  //   if (!newNotice.trim()) {
-  //     Swal.fire("Error", "Please enter notice text!", "error");
-  //     return;
-  //   }
-
-  //   const newEntry = {
-  //     id: notices.length + 1,
-  //     date: todayDate,
-  //     text: newNotice,
-  //   };
-
-  //   setNotices([newEntry, ...notices]); // Adds new notice at the top
-  //   setNewNotice("");
-  //   Swal.fire("Added!", "Notice added successfully.", "success");
-  // };
-
-  // // Update a notice (Only for today's notices)
-  // const updateNotice = (id) => {
-  //   const noticeText = notices.find((n) => n.id === id).text;
-
-  //   Swal.fire({
-  //     title: "Edit Notice",
-  //     input: "text",
-  //     inputValue: noticeText,
-  //     showCancelButton: true,
-  //     confirmButtonText: "Update",
-  //   }).then((result) => {
-  //     if (result.isConfirmed && result.value.trim()) {
-  //       setNotices(
-  //         notices.map((n) =>
-  //           n.id === id ? { ...n, text: result.value } : n
-  //         )
-  //       );
-  //       Swal.fire("Updated!", "Notice updated successfully.", "success");
-  //     }
-  //   });
-  // };
-
-  // // Delete a notice (Only for today's notices)
-  // const deleteNotice = (id) => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonText: "Yes, delete it!",
-  //     cancelButtonText: "Cancel",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       setNotices(notices.filter((n) => n.id !== id));
-  //       Swal.fire("Deleted!", "Your notice has been deleted.", "success");
-  //     }
-  //   });
-  // };
+  
 
   useEffect(() => {
     getclasses();

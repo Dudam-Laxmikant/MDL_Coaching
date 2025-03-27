@@ -44,7 +44,7 @@ function StudentLogin() {
       });
 
       const result = await response.json();
-      const { message, success, jwttoken, name, email, _id, error } = result;
+      const { message, success, jwttoken, name, email, _id, error, s_class } = result;
       // console.log("The logged user data :: " + result);
       console.log(formData);
       if (success) {
@@ -56,6 +56,7 @@ function StudentLogin() {
         localStorage.setItem("token", jwttoken);
         localStorage.setItem("name", name);
         localStorage.setItem("studentid", _id);
+        localStorage.setItem("studentclass", s_class);
         setTimeout(() => {
           navigate("/studentMenu");
         }, 1000);

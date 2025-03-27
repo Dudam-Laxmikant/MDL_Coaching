@@ -104,8 +104,8 @@ const App = () => {
             <Route path="/addstudents/showstudentdetails" element={<ShowStudentDetails />} />
             <Route path="/addstudents/showstudentdetails/studentdetails/:classId" element={<StudentDetails />} />
             <Route path="/addstudents/showstudentdetails/studentdetails/feedetails" element={<FeeDetails/>}/>
-            <Route path="/addstudents/showstudentdetails/studentdetails/updatestudentdetails" element={<UpdateStudentDetails/>}/>
-            <Route path="/addstudents/showstudentdetails/studentdetails/displaystudentdetails" element={<DisplayStudentDetails />} />
+            <Route path="/addstudents/showstudentdetails/studentdetails/updatestudentdetails/:studentId" element={<UpdateStudentDetails/>}/>
+            <Route path="/addstudents/showstudentdetails/studentdetails/displaystudentdetails/:studentId" element={<DisplayStudentDetails />} />
 
             {/* Teacher */}
             <Route path="/showclassTeacher" element={<ShowClassTeacher />} />

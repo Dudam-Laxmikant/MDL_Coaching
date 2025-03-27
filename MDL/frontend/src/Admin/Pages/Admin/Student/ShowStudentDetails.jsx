@@ -52,7 +52,7 @@ function ShowStudentDetails() {
                     </td>
                     <td className="p-3 border border-gray-500">
                       <Link
-                        to={`/addstudents/showstudentdetails/studentdetails/${cls._id}`}
+                        to={`/addstudents/showstudentdetails/studentdetails/${cls.classname}`}
                         className="flex items-center justify-center w-28 p-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-300 shadow-md gap-2"
                       >
                         <AiOutlineEye className="text-lg" /> View

@@ -157,7 +157,7 @@ const StudentProfile = ({ profileImage }) => {
               <FaEnvelope className="mr-2" /> {students.email}
             </p>
             <p className="text-gray-700 flex items-center">
-              <FaPhone className="mr-2" /> 
+              <FaPhone className="mr-2" /> {students.mobilenumber}
             </p>
             <p className="text-gray-700 flex items-center">
               <FaMapMarkerAlt className="mr-2" /> City: {students.city}
