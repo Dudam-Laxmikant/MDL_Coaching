@@ -11,7 +11,7 @@ const Classroute =  require("./Routes/Classroute.js")
 // const Teachernoticerouter = require("./Routes/TeacherNoticeroute.js")
 const upload = require("./Middlewares/upload.js")
 const { signup, adminprofile } = require("./Controllers/AdminController.js");
-const { Studentsignup } = require("./Controllers/StudentController.js");
+const { Studentsignup, updatestudentdetails } = require("./Controllers/StudentController.js");
 const Teacherroute = require("./Routes/Teacherroute.js");
 const { Teacherform } = require("./Controllers/TeacherController.js");
 const Subjectroute = require("./Routes/Subjectroute.js");
@@ -57,9 +57,7 @@ app.get("/t_notice/teachernotice/selectedclass/:classname",Getclasses)
 app.get("/t_notice/teachernotice/delete/:id", deleteById)
 app.post("/notes", upload.single("notesfille"), TeacherNotes);
 app.get("/notes/sendnotes/:classname",getallnotes)
-// app.get("/notes/getallnotes",GetallNotes)
-// app.use("/", );
-
+app.post("/Updatestudentdetails/:id",upload.single("passphoto"),updatestudentdetails)
 app.get("/", (req, res) => {
     res.send("welcome users")
 })

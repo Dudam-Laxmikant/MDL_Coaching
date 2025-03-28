@@ -168,12 +168,11 @@ async function showprofile(req, res) {
 }
 const updatestudentdetails = async (req, res) => {
     console.log("body: ", req.body);
-
     const { fname, mname, lname,dob, adharnumber, city, country,fee, passphoto} = req.body;
     const { id } = req.params
 
     if (!id) {
-        return res.status(400).json({ message: "Notice ID is required", success: false });
+        return res.status(400).json({ message: "Student ID is required", success: false });
     }
 
     try {
@@ -184,14 +183,62 @@ const updatestudentdetails = async (req, res) => {
         );
 
         if (!notice) {
-            return res.status(404).json({ message: "Notice not found", success: false });
+            return res.status(404).json({ message: "Student not found", success: false });
         }
 
-        return res.status(200).json({ message: "Notice Updated", success: true, date: notice });
+        return res.status(200).json({ message: "Student Detailes Updated", success: true, date: notice });
 
     } catch (error) {
         return res.status(500).json({ message: "Server error: " + error.message, success: false });
     }
+    // try {
+    //     console.log("file: ", req.file); // Uploaded file info
+        
+    //     console.log("body: ", req.body);
+    //     const { fname, mname, lname, dob, adharnumber, city, country, fee } = req.body;
+    //     const { id } = req.params;
+
+    //     if (!id) {
+    //         return res.status(400).json({ message: "Student ID is required", success: false });
+    //     }
+
+    //     // Check if file is uploaded
+    //     let updateData = { fname, mname, lname, dob, adharnumber, city, country, fee };
+    //     if (req.file) {
+    //         updateData.passphoto = req.file.path; // Store file path in DB
+    //     }
+
+    //     const student = await StudentModel.findByIdAndUpdate(id, updateData, { new: true });
+
+    //     if (!student) {
+    //         return res.status(404).json({ message: "Student not found", success: false });
+    //     }
+
+    //     return res.status(200).json({ message: "Student Updated", success: true, data: student });
+
+    // } catch (error) {
+    //     return res.status(500).json({ message: "Server error: " + error.message, success: false });
+    // }
+
 };
 
-module.exports = { Studentsignup, StudentLogin, getStudents, getStudentsbyclass,showprofile,studentprofile,updatestudentdetails} 
+const Deletestudent = async (req, res) => {
+    try {
+        const { studentId } = req.params
+        console.log(studentId)
+        const notice = await StudentModel.findByIdAndDelete(studentId)
+
+        if (!notice) {
+            return res.status(200)
+                .json({ message: "Student Deleting Canceled", success: false })
+        }
+
+        return res.status(200)
+            .json({ message: "Student Deleted SuccessFully", success: true })
+    } catch (error) {
+        return res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
+
+module.exports = { Studentsignup, StudentLogin, getStudents, getStudentsbyclass,showprofile,studentprofile,updatestudentdetails,Deletestudent} 

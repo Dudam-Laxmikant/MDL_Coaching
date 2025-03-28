@@ -31,6 +31,7 @@ function Header() {
         '/showclassTeacher/addteacher':"Teachers",
         '/showclassTeacher/showtecherslist':"Teachers",
         '/addsubjects': 'Subjects',
+        '/addsubjects/showsubjects':'Subjects',
         '/notes': 'Notice',
         '/feedback': 'FeedBack',
         '/profile': 'Profile',

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaDownload, FaPlus } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export const FeeDetails = () => {
     const student = {
-        name: "Dudam Laxmikant Shankar",
-        rollNo: "101",
+        
         totalFees: 25000,
         paidFees: 15000,
         installments: [
@@ -25,6 +25,25 @@ export const FeeDetails = () => {
         Swal.fire('Downloading...', `Your receipt (${receipt}) is being downloaded.`, 'info');
     };
 
+
+
+const { id } = useParams();
+  const [studentDetails, setStudentDetails] = useState({});
+  useEffect(() => {
+    Feedetail();
+  }, [id]);
+
+  const Feedetail = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:8080/student/showprofile/${id}`
+      );
+      console.log(res.data.data);
+      setStudentDetails(res.data.data); // Ensure it's an array
+    } catch (error) {
+      console.log(error);
+    }
+  };
     return (
         <div className="flex flex-col min-h-screen bg-[#454649] text-gray-200 mt-10">
             <Header />
@@ -32,8 +51,8 @@ export const FeeDetails = () => {
                 <div className="max-w-4xl mx-auto bg-gray-800 p-6 md:p-8 rounded-lg shadow-lg border border-gray-700">
                     <h2 className="text-2xl md:text-3xl font-bold text-center text-yellow-600 mb-6">Fee Details</h2>
                     <div className="bg-gray-900 p-4 md:p-6 rounded-lg shadow-md">
-                        <p className="text-lg font-semibold">🎓 Roll No: <span className="font-normal">{student.rollNo}</span></p>
-                        <p className="text-lg font-semibold">👤 Student Name: <span className="font-normal">{student.name}</span></p>
+                        <p className="text-lg font-semibold">🎓 Roll No: <span className="font-normal">{studentDetails.s_id}</span></p>
+                        <p className="text-lg font-semibold">👤 Student Name: <span className="font-normal">{studentDetails.fname +" "+studentDetails.mname+" "+studentDetails.lname}</span></p>
                     </div>
                     <div className="overflow-x-auto mt-6">
                         <table className="w-full border border-gray-700 rounded-lg">
@@ -47,16 +66,19 @@ export const FeeDetails = () => {
                             </thead>
                             <tbody>
                                 <tr className="text-center bg-gray-700 hover:bg-gray-600 transition">
-                                    <td className="p-3 border font-medium">₹ {student.totalFees}</td>
-                                    <td className="p-3 border font-medium text-green-400">₹ {student.paidFees}</td>
+                                    <td className="p-3 border font-medium">₹ {studentDetails.fee}</td>
+                                    <td className="p-3 border font-medium text-green-400">₹ {studentDetails.paidFees}</td>
                                     <td className={`p-3 border font-medium ${remainingFees > 0 ? "text-red-400" : "text-green-400"}`}>₹ {remainingFees}</td>
                                     <td className="p-3 border">
-                                        {student.paidFees > 0 ? (
+                                        {studentDetails.paidFees > 0 ? (
                                             <button onClick={() => downloadReceipt("Overall_Receipt.pdf")} className="text-blue-400 hover:text-blue-600">
                                                 <FaDownload size={20} />
                                             </button>
                                         ) : (
-                                            <span className="text-gray-400">N/A</span>
+                                            // <span className="text-gray-400">N/A</span>
+                                            <button onClick={() => downloadReceipt("Overall_Receipt.pdf")} className="text-blue-400 hover:text-blue-600">
+                                                <FaDownload size={20} />
+                                            </button>
                                         )}
                                     </td>
                                 </tr>
@@ -75,18 +97,18 @@ export const FeeDetails = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {student.installments.map((installment, index) => (
-                                    <tr key={installment.id} className="text-center bg-gray-700 hover:bg-gray-600 transition">
-                                        <td className="p-3 border">{index + 1}</td>
-                                        <td className="p-3 border">{installment.date}</td>
-                                        <td className="p-3 border font-medium text-green-400">₹ {installment.amount}</td>
+                                {/* {student.map((installment, index) => ( */}
+                                    <tr  className="text-center bg-gray-700 hover:bg-gray-600 transition">
+                                        <td className="p-3 border">1</td>
+                                        <td className="p-3 border">12-02-2004</td>
+                                        <td className="p-3 border font-medium text-green-400">₹1500</td>
                                         <td className="p-3 border">
-                                            <button onClick={() => downloadReceipt(installment.receipt)} className="text-blue-400 hover:text-blue-600">
+                                            <button className="text-blue-400 hover:text-blue-600">
                                                 <FaDownload size={20} />
                                             </button>
                                         </td>
                                     </tr>
-                                ))}
+                                {/* ))} */}
                             </tbody>
                         </table>
                     </div>
@@ -97,7 +119,10 @@ export const FeeDetails = () => {
                     </div>
                 </div>
             </div>
-            <Link to="/addstudents/showstudentdetails/studentdetails" className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+            
+            <Link to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem(
+          "studentclass"
+        )}`}className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
                  <AiOutlineArrowLeft size={24} />
              </Link>
             <Footer />

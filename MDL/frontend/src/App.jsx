@@ -27,7 +27,7 @@ import StudentGeneralRegister from "./Student/Pages/StudentGeneralRegister";
 import StudentClassDetails from "./Student/Pages/StudentClassDetails";
 import StudentTimetable from "./Student/Pages/StudentTimetable";
 import StudentFees from "./Student/Pages/StudentFees";
-import { StudentAttendance} from "./Student/Pages/StudentAttendance";
+import { StudentAttendance } from "./Student/Pages/StudentAttendance";
 import StudentHoliday from "./Student/Pages/StudentHoliday";
 import StudentLearningMaterial from "./Student/Pages/StudentLearningMaterial";
 import StudentResult from "./Student/Pages/StudentResult";
@@ -36,9 +36,7 @@ import StudentFeedback from "./Student/Pages/StudentFeedback";
 import StudentDigitalICard from "./Student/Pages/StudentDigitalICard";
 import StudentProfile from "./Student/Pages/StudentProfile";
 
-
 // Admin
-
 
 import AdminLogin from "./Admin/Pages/Admin/Home/AdminLogin";
 import AdminRegistration from "./Admin/Pages/Admin/Home/AdminRegistration";
@@ -71,63 +69,107 @@ import RoleSelection from "./RoleSelection";
 import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
 import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
 import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
-import TeacherUpdateAttendence  from "./Teacher/Pages/TeacherUpdateAttendence";
+import TeacherUpdateAttendence from "./Teacher/Pages/TeacherUpdateAttendence";
 import StudentNotice from "./Student/Pages/StudentNotice";
+import { Showsubjects } from "./Admin/Pages/Admin/Subjects/Showsubjects";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-<Route path="/" element={<Home />} /> 
-<Route path="/roleSelection" element={<RoleSelection />} /> 
+          <Route path="/" element={<Home />} />
+          <Route path="/roleSelection" element={<RoleSelection />} />
 
-        {/* admin */}
+          {/* admin */}
           {/* <Route path="/" element={<Home />} /> */}
-            {/* <Route path="/login" element={<Login />}></Route>
+          {/* <Route path="/login" element={<Login />}></Route>
             <Route path="/registration" element={<Registration />}></Route>
             <Route path="/categoryHome" element={<CategoryHome/>}></Route> */}
-            <Route path="/addadmin" element={<AddAdmin/>}/>
-            <Route path="/adminhome" element={<AdminHome />}></Route>
-            <Route path="/AdminLogin" element={<AdminLogin />}></Route>
-            <Route path="/adminregistration" element={<AdminRegistration />}></Route>
-            {/* class */}
-            <Route path="/addclasses" element={<AddClasses />} />
-            <Route path="/addclasses/class" element={<Classes />} />
-            <Route path="/addclasses/showclasses" element={<ShowClasses />} />
-            <Route path="/showclassTeacher/addclassteacher" element={<AddClassTeacher/>}/>
+          <Route path="/addadmin" element={<AddAdmin />} />
+          <Route path="/adminhome" element={<AdminHome />}></Route>
+          <Route path="/AdminLogin" element={<AdminLogin />}></Route>
+          <Route
+            path="/adminregistration"
+            element={<AdminRegistration />}
+          ></Route>
+          {/* class */}
+          <Route path="/addclasses" element={<AddClasses />} />
+          <Route path="/addclasses/class" element={<Classes />} />
+          <Route path="/addclasses/showclasses" element={<ShowClasses />} />
+          <Route
+            path="/showclassTeacher/addclassteacher"
+            element={<AddClassTeacher />}
+          />
 
-            {/* student */}
-            
-            <Route path="/addstudents" element={<AddStudents />} />
-            <Route path="/addstudents/studentform" element={<StudentForm />} />
-            <Route path="/addstudents/showstudentdetails" element={<ShowStudentDetails />} />
-            <Route path="/addstudents/showstudentdetails/studentdetails/:classId" element={<StudentDetails />} />
-            <Route path="/addstudents/showstudentdetails/studentdetails/feedetails" element={<FeeDetails/>}/>
-            <Route path="/addstudents/showstudentdetails/studentdetails/updatestudentdetails/:studentId" element={<UpdateStudentDetails/>}/>
-            <Route path="/addstudents/showstudentdetails/studentdetails/displaystudentdetails/:studentId" element={<DisplayStudentDetails />} />
+          {/* student */}
 
-            {/* Teacher */}
-            <Route path="/showclassTeacher" element={<ShowClassTeacher />} />
-            <Route path="/showclassTeacher/showallteacherlist" element={<ShowAllTeachersList />} />
-            <Route path="/showclassTeacher/showallteacherlist/updatetecherdetails" element={<UpdateTeacherDetails />} />
-            <Route path="/showclassTeacher/showallteacherlist/showprofile/:teacherId" element={<ShowProfile />} />
-            <Route path="/showclassTeacher/showallteacherlist/salarydetails" element={<SalaryDetails/>}/>
-            <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />
-            <Route path="/showclassTeacher/showteacherslist" element={<ShowTeachersList />} />
+          <Route path="/addstudents" element={<AddStudents />} />
+          <Route path="/addstudents/studentform" element={<StudentForm />} />
+          <Route
+            path="/addstudents/showstudentdetails"
+            element={<ShowStudentDetails />}
+          />
+          <Route
+            path="/addstudents/showstudentdetails/studentdetails/:classId"
+            element={<StudentDetails />}
+          />
+          <Route
+            path="/addstudents/showstudentdetails/studentdetails/feedetails/:id"
+            element={<FeeDetails />}
+          />
+          <Route
+            path="/addstudents/showstudentdetails/studentdetails/updatestudentdetails/:studentId"
+            element={<UpdateStudentDetails />}
+          />
+          <Route
+            path="/addstudents/showstudentdetails/studentdetails/displaystudentdetails/:studentId"
+            element={<DisplayStudentDetails />}
+          />
 
-            <Route path="/adminhome/viewnotes/:NoticeId" element={<ViewNotes/>}/>
-            <Route path="/adminhome/updatenotice/:NoticeId" element={<UpdateNotice/>}/>
-            <Route path="/adminhome/addNotice" element={<AddNotice/>}/>
-            <Route path="/timetable" element={<Timetable/>}/>
+          {/* Teacher */}
+          <Route path="/showclassTeacher" element={<ShowClassTeacher />} />
+          <Route
+            path="/showclassTeacher/showallteacherlist"
+            element={<ShowAllTeachersList />}
+          />
+          <Route
+            path="/showclassTeacher/showallteacherlist/updatetecherdetails"
+            element={<UpdateTeacherDetails />}
+          />
+          <Route
+            path="/showclassTeacher/showallteacherlist/showprofile/:teacherId"
+            element={<ShowProfile />}
+          />
+          <Route
+            path="/showclassTeacher/showallteacherlist/salarydetails"
+            element={<SalaryDetails />}
+          />
+          <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />
+          <Route
+            path="/showclassTeacher/showteacherslist"
+            element={<ShowTeachersList />}
+          />
 
-            {/* <Route path="/notes" element={<Notes />} /> */}
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/adminlogout" element={<LogOut />} />
-            <Route path="/addsubjects" element={<AddSubjects/>} />
-            <Route path="/feedback" element={<Feedback/>}/>
+          <Route
+            path="/adminhome/viewnotes/:NoticeId"
+            element={<ViewNotes />}
+          />
+          <Route
+            path="/adminhome/updatenotice/:NoticeId"
+            element={<UpdateNotice />}
+          />
+          <Route path="/adminhome/addNotice" element={<AddNotice />} />
+          <Route path="/timetable" element={<Timetable />} />
 
-        {/* teacher */}
+          {/* <Route path="/notes" element={<Notes />} /> */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/adminlogout" element={<LogOut />} />
+          <Route path="/addsubjects" element={<AddSubjects />} />
+          <Route path="/addsubjects/showsubjects" element={<Showsubjects/>}/>
+          <Route path="/feedback" element={<Feedback />} />
+
+          {/* teacher */}
           <Route path="/teacherLogin" element={<TeacherLogin />} />
           {/* <Route path="/teacherRegistration" element={<TeacherRegistration />}/> */}
           <Route path="/teacherDashboard" element={<TeacherDashboard />} />
@@ -135,36 +177,82 @@ const App = () => {
           <Route path="/teacherNotes" element={<TeacherNotes />} />
           <Route path="/teacherAssignment" element={<TeacherAssignment />} />
           <Route path="/teacherAttendence" element={<TeacherAttendance />} />
-          <Route path="/teacherTimeSchedule" element={<TeacherTimeSchedule />}/>
+          <Route
+            path="/teacherTimeSchedule"
+            element={<TeacherTimeSchedule />}
+          />
           <Route path="/teacherProfile" element={<TeacherProfile />} />
           <Route path="/teacherNotice" element={<TeacherNotice />} />
           <Route path="/teacherSalary" element={<TeacherSalary />} />
-          <Route path="/techerUpdateAttendence" element={<TeacherUpdateAttendence/>}/>
+          <Route
+            path="/techerUpdateAttendence"
+            element={<TeacherUpdateAttendence />}
+          />
 
-        {/* student */}
-          <Route path="/studentMenu/studentDashboard" element={<StudentDashboard />} />
+          {/* student */}
+          <Route
+            path="/studentMenu/studentDashboard"
+            element={<StudentDashboard />}
+          />
           <Route path="/studentLogin" element={<StudentLogin />} />
           <Route path="/studentMenu" element={<StudentMenu />} />
           {/* <Route path="/studentRegistration" element={<StudentRegistration />} /> */}
-          <Route path="/studentMenu/studentPayment" element={<StudentPayment />} />
-          <Route path="/studentMenu/studentDashboard/studentGeneralRegister" element={<StudentGeneralRegister />} />
-          <Route path="/studentMenu/studentDashboard/studentClassDetails" element={<StudentClassDetails />} />
-          <Route path="/studentMenu/studentDashboard/studentNotice" element={<StudentNotice/>} />
-          <Route path="/studentMenu/studentDashboard/studentTimetable" element={<StudentTimetable />} />
-          <Route path="/studentMenu/studentDashboard/studentFees" element={<StudentFees />} />
-          <Route path="/studentMenu/studentDashboard/studentAttendance" element={<StudentAttendance />} />
-          <Route path="/studentMenu/studentDashboard/studentHoliday" element={<StudentHoliday />} />
-          <Route path="/studentMenu/studentDashboard/studentLearningMaterial" element={<StudentLearningMaterial />} />
-          <Route path="/studentMenu/studentDashboard/studentResult" element={<StudentResult />} />
-          <Route path="/studentMenu/studentDashboard/studentPracticeTest" element={<StudentPracticeTest />} />
-          <Route path="/studentMenu/studentDashboard/studentFeedback" element={<StudentFeedback />} />
-          <Route path="/studentMenu/studentProfile" element={<StudentProfile />} />
-          <Route path="/studentMenu/studentDigitalI_Card" element={<StudentDigitalICard />} />
-          
-          
-
-
-          
+          <Route
+            path="/studentMenu/studentPayment"
+            element={<StudentPayment />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentGeneralRegister"
+            element={<StudentGeneralRegister />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentClassDetails"
+            element={<StudentClassDetails />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentNotice"
+            element={<StudentNotice />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentTimetable"
+            element={<StudentTimetable />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentFees"
+            element={<StudentFees />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentAttendance"
+            element={<StudentAttendance />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentHoliday"
+            element={<StudentHoliday />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentLearningMaterial"
+            element={<StudentLearningMaterial />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentResult"
+            element={<StudentResult />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentPracticeTest"
+            element={<StudentPracticeTest />}
+          />
+          <Route
+            path="/studentMenu/studentDashboard/studentFeedback"
+            element={<StudentFeedback />}
+          />
+          <Route
+            path="/studentMenu/studentProfile"
+            element={<StudentProfile />}
+          />
+          <Route
+            path="/studentMenu/studentDigitalI_Card"
+            element={<StudentDigitalICard />}
+          />
         </Routes>
       </BrowserRouter>
     </>

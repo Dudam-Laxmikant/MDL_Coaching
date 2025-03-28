@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -42,19 +42,6 @@ export const AddSubjects = () => {
     );
   };
 
-  // const handleSave = () => {
-  //   const isValid = subjectEntries.every(
-  //     (entry) => entry.subjectName && entry.subjectCode
-  //   );
-
-  //   if (!isValid) {
-  //     alert("Please fill out all fields before saving.");
-  //     return;
-  //   }
-  //   console.log("Saved Subjects:", subjectEntries);
-  //   // API call or local storage logic here
-  // };
-
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -76,7 +63,7 @@ export const AddSubjects = () => {
           autoClose: 2000,
         });
         setTimeout(() => {
-          navigate("/adminhome");
+          navigate("/addsubjects/showsubjects");
         }, 1000);
       } else if (error) {
         console.log(error);
@@ -107,6 +94,13 @@ export const AddSubjects = () => {
           <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
             Manage Subjects
           </h2>
+          <Link to={"/addsubjects/showsubjects"}>
+            <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg hover:bg-blue-700 transition mt-4">
+              Show Subjects
+            </button>
+          </Link>
+          <br />
+          <br />
           {subjectEntries.map((entry, index) => (
             <div
               key={index}

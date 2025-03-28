@@ -9,16 +9,15 @@ import {
   FaCalendarAlt,
   FaEye,
   FaEdit,
+  FaCamera,
 } from "react-icons/fa";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 function UpdateStudentDetails() {
-  
-
-  
   const [formData, setFormData] = useState({
     fname: "",
     mname: "",
@@ -36,9 +35,15 @@ function UpdateStudentDetails() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [preview, setPreview] = useState(null);
+
   const handleFileChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    const file = e.target.files[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
   };
+
   const handleReset = () => {
     setFormData({
       fname: "",
@@ -61,13 +66,6 @@ function UpdateStudentDetails() {
       const response = await axios.post(url, formData, {
         headers: { "Content-Type": "application/json" },
       });
-
-      //   Swal.fire({
-      //     title: response.data.data,
-      //     text: `Your notice has been successfully added for ${result.value}.`,
-      //     icon: "success",
-      //     confirmButtonText: "OK",
-      //   });
     } catch (error) {
       console.log("Error for update:", error);
     }
@@ -92,11 +90,49 @@ function UpdateStudentDetails() {
   return (
     <div className="flex flex-col min-h-screen bg-[#454649] text-white">
       <Header />
-      <div className="flex flex-1 p-6 mt-20">
-        <div className="flex-1 bg-gray-800 p-10 rounded-lg shadow-lg max-w-4xl mx-auto">
+
+      <div className="flex flex-1 p-6 mt-20 min-h-screen">
+        <div className="flex-1 bg-gray-800 p-10 rounded-lg shadow-lg max-w-4xl mx-auto min-h-screen">
           <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
             Update Student Details
           </h2>
+          <div className="flex flex-col items-center">
+            {/* Profile Image Container */}
+            <div className="flex flex-col items-center">
+              {/* Profile Image Container */}
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md overflow-hidden flex items-center justify-center border-2 border-green-500">
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt="Profile Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-xs sm:text-sm">
+                    No Image
+                  </span>
+                )}
+
+                {/* Camera Icon Button */}
+                <label
+                  htmlFor="fileInput"
+                  className="absolute bottom-1 right-1 bg-gray-800 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border border-white cursor-pointer shadow"
+                >
+                  <FaCamera className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                </label>
+              </div>
+
+              {/* Hidden File Input */}
+              <input
+                type="file"
+                id="fileInput"
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+            </div>
+          </div>
+
           <form
             onSubmit={updateStudentDetails}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
@@ -106,6 +142,7 @@ function UpdateStudentDetails() {
                 Student ID: {formData.s_id}
               </label>
             </div>
+
             {[
               {
                 label: "First Name",
@@ -182,24 +219,12 @@ function UpdateStudentDetails() {
               </div>
             ))}
 
-            <div style={{ textAlign: "center" }}>
-              <img
-                src={`http://localhost:8080/images/${formData.passphoto}`}
-                alt="Profile"
-                style={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-              />
-              <br />
-              <input
-                type="file"
-                accept="image/*"
-                // onChange={handleImageChange}
-              />
-            </div>
+            <input
+              id="fileInput"
+              type="file"
+              onChange={handleFileChange}
+              className="hidden"
+            />
 
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
               <button
@@ -225,6 +250,12 @@ function UpdateStudentDetails() {
           </Link>
         </div>
       </div>
+      <Link
+        to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem("studentclass")}`}
+        className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300"
+      >
+        <AiOutlineArrowLeft size={24} />
+      </Link>
       <Footer />
     </div>
   );

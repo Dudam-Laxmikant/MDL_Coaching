@@ -208,6 +208,7 @@ function ShowAllTeachersList() {
       console.error("Error fetching teachers:", error);
     }
   };
+  
 
   const filterTeachers = () => {
     let filtered = teachers.filter((teacher) => {

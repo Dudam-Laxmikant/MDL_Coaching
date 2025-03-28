@@ -104,7 +104,13 @@ import axios from "axios";
 
 function DisplayStudentDetails() {
   const { studentId } = useParams();
-  const [studentDetails, setStudentDetails] = useState(); // Initialize as empty array
+  const [studentDetails, setStudentDetails] = useState({
+    passphoto: "",
+    dob: "",
+    fname: "",
+    lname: "",
+    mname: "",
+  }); // Initialize as empty array
 
   useEffect(() => {
     profile();
@@ -128,56 +134,87 @@ function DisplayStudentDetails() {
       <Header />
 
       {/* Main Content */}
-      <div className="flex flex-1 items-center justify-center p-6 min-h-screen mt-14">
-        <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full">
-          <h1 className="text-3xl font-bold text-center mb-6 text-black">
-            Student I-Card
+      <div className="flex items-center justify-center min-h-screen bg-[#454649] p-6">
+        <div className="bg-white shadow-xl rounded-lg overflow-hidden w-[320px] sm:w-[400px] border border-gray-300">
+          {/* Header */}
+          <div className="bg-indigo-600 text-white text-center py-4">
+            <h2 className="text-lg font-bold">STUDENT ID CARD</h2>
+          </div>
+
+          {/* Profile Image */}
+          <div className="flex justify-center mt-4">
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28">
+              <img
+                src={`http://localhost:8080/images/${studentDetails.passphoto}`}
+                alt="Student"
+                className="w-full h-full rounded-full border-4 border-indigo-500 shadow-md  transition-transform transform hover:scale-110"
+              />
+            </div>
+          </div>
+
+          {/* Student Name */}
+          <h1 className="text-center mt-3 text-xl sm:text-2xl font-bold text-gray-800">
+            {studentDetails.fname} {studentDetails.mname} {studentDetails.lname}
+          </h1>
+          <h1 className="text-center mt-2 font-bold text-gray-800">
+            Student ID:{studentDetails?.s_id}
           </h1>
 
-          {/* Check if studentDetails is available before mapping */}
-          {studentDetails ? (
-            <div key={studentDetails._id} className="student-info">
-              <p>
-                <strong>Name:</strong> {studentDetails.fname} {studentDetails.mname} {studentDetails.lname}
-              </p>
-              <p>
-                <strong>Roll No:</strong> {studentDetails.s_id}
-              </p>
-              <p>
-                <strong>Gender:</strong> {studentDetails.gender || "N/A"}
-              </p>
-              <p>
-                <strong>Date of Birth:</strong> {studentDetails.dob}
-              </p>
-              <p>
-                <strong>Aadhaar Number:</strong> {studentDetails.aadhaar || "N/A"}
-              </p>
-              <p>
-                <strong>Address:</strong> {studentDetails.address || "N/A"}
-              </p>
-              <p>
-                <strong>City:</strong> {studentDetails.city || "N/A"}
-              </p>
-              <p>
-                <strong>Country:</strong> {studentDetails.country || "N/A"}
-              </p>
-              <p>
-                <strong>Class:</strong> {studentDetails.s_class}
-              </p>
-              <p>
-                <strong>Amount:</strong> N/A
-              </p>
+          {/* Student Details */}
+          <div className="mt-4 px-6 py-4 bg-gray-100 rounded-b-lg text-sm">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="font-semibold text-gray-700">Class:</div>
+              <div className="text-gray-900">{studentDetails?.s_class}</div>
+
+              <div className="font-semibold text-gray-700">DOB:</div>
+              <div className="text-gray-900">{studentDetails?.dob}</div>
+
+              <div className="font-semibold text-gray-700">Gender:</div>
+              <div className="text-gray-900">
+                {studentDetails?.gender || "N/A"}
+              </div>
+
+              <div className="font-semibold text-gray-700">Address:</div>
+              <div className="text-gray-900">
+                {studentDetails?.adress || "N/A"}
+              </div>
+
+              <div className="font-semibold text-gray-700">City:</div>
+              <div className="text-gray-900">
+                {studentDetails?.city}
+              </div>
+
+              <div className="font-semibold text-gray-700">Country:</div>
+              <div className="text-gray-900">
+                {studentDetails?.country}
+              </div>
+
+              <div className="font-semibold text-gray-700">Aadhaar:</div>
+              <div className="text-gray-900">
+                {studentDetails?.adharnumber}
+              </div>
+
+              <div className="font-semibold text-gray-700">Fee Amount:</div>
+              <div className="text-gray-900">
+                {studentDetails?.fee}
+              </div>
+
+
+              <div className="font-semibold text-gray-700">Mobile Number:</div>
+              <div className="text-gray-900">
+                {studentDetails?.mobilenumber}
+              </div>
+              
+
             </div>
-          ) : (
-            <p className="text-center text-gray-500">
-              No student details available.
-            </p>
-          )}
+          </div>
         </div>
       </div>
 
       <Link
-        to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem("studentclass")}`}
+        to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem(
+          "studentclass"
+        )}`}
         className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300"
       >
         <AiOutlineArrowLeft size={24} />
