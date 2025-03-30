@@ -98,7 +98,7 @@ const App = () => {
           <Route path="/addclasses/class" element={<Classes />} />
           <Route path="/addclasses/showclasses" element={<ShowClasses />} />
           <Route
-            path="/showclassTeacher/addclassteacher"
+            path="/showclassTeacher/addclassteacher/:classid"
             element={<AddClassTeacher />}
           />
 
@@ -134,7 +134,7 @@ const App = () => {
             element={<ShowAllTeachersList />}
           />
           <Route
-            path="/showclassTeacher/showallteacherlist/updatetecherdetails"
+            path="/showclassTeacher/showallteacherlist/updatetecherdetails/:teacherid"
             element={<UpdateTeacherDetails />}
           />
           <Route
@@ -142,12 +142,12 @@ const App = () => {
             element={<ShowProfile />}
           />
           <Route
-            path="/showclassTeacher/showallteacherlist/salarydetails"
+            path="/showclassTeacher/showallteacherlist/salarydetails/:teacherid"
             element={<SalaryDetails />}
           />
           <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />
           <Route
-            path="/showclassTeacher/showteacherslist"
+            path="/showclassTeacher/showteacherslist/:classname"
             element={<ShowTeachersList />}
           />
 

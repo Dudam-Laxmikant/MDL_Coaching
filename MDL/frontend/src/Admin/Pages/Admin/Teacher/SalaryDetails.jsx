@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
 import { FiDownload } from "react-icons/fi";
 import { FaTimesCircle, FaCheckCircle } from "react-icons/fa";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import axios from "axios";
 
 function SalaryDetails() {
-  const teacher = { id: "2001", name: "Laxmikant Dudam", monthlySalary: 31000 };
+  // const teacher = { id: "2001", name: "Laxmikant Dudam", monthlySalary: 31000 };
+  const [teacher,setteacher] = useState({});
   const [selectedMonth, setSelectedMonth] = useState("");
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const [salaries, setSalaries] = useState([
@@ -39,6 +41,22 @@ function SalaryDetails() {
       }
     });
   }
+  const { teacherid } = useParams();
+  useEffect(() => {
+    fetchdata();
+  }, []);
+
+  const fetchdata = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/teacher/displaydata/${teacherid}`
+      );
+      console.log("Teacher by id :: ", response.data.data);
+      setteacher(response.data.data);
+    } catch (error) {
+      console.log("Not Found Error", error);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -47,8 +65,8 @@ function SalaryDetails() {
         <div className="w-full mt-20 max-w-4xl mx-auto  p-6 overflow-x-auto mb-10">
           <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center">Teacher Salary Details</h1>
           <div className="mb-6 border-b pb-4">
-            <p className="text-lg text-slate-300"><strong>Teacher ID:</strong> {teacher.id}</p>
-            <p className="text-lg text-slate-300"><strong>Name:</strong> {teacher.name}</p>
+            <p className="text-lg text-slate-300"><strong>Teacher ID:</strong> {teacher.t_id}</p>
+            <p className="text-lg text-slate-300"><strong>Name:</strong> {teacher.s_name+" "+teacher.name+" "+teacher.lname}</p>
             <p className="text-lg text-slate-300"><strong>Monthly Salary:</strong> ₹{teacher.monthlySalary}</p>
           </div>
           <div className="overflow-x-auto">

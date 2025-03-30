@@ -64,7 +64,7 @@ const updateNotice = async (req, res) => {
 const getnotice = async (req, res) => {
 
     try {
-        const notice = await NoticeModel.find({})
+        const notice = await NoticeModel.find({ role: { $in: ["Teacher", "Both"] } });[]
 
         return res.status(200)
             .json({ message: "Notice Founded", success: true, data: notice })

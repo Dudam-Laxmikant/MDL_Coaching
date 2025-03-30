@@ -79,7 +79,7 @@ const Teacherform = async (req, res) => {
         });
     }
 }
-const deleteTeacherById = async (req, res) => {
+const deleteTeacher = async (req, res) => {
     const { id } = req.params;
     try {
         const teacher = await TeacherModel.findByIdAndDelete(id);
@@ -160,11 +160,7 @@ const login = async (req, res) => {
             return res.status(200)
                 .json({ message: "Auth failed password is wrong", success: false })
         }
-        // const resultid = (t_id, user.t_id)
-        // if (!resultid) {
-        //     return res.status(200)
-        //         .json({ message: "Auth failed TeacherID is wrong", success: false })
-        // }
+       
 
         const jwttoken = jwt.sign(
             { email: useremail.email, _id: useremail._id },
@@ -183,4 +179,74 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { Teacherform, Getallteacher, deleteTeacherById, FindTeacherById, login } 
+async function Showdata(req, res) {
+    try {
+        const { teacherid } = req.params
+        console.log(teacherid)
+        // Check if the user already exists
+        const student = await TeacherModel.findById(teacherid);
+        res.status(200).json({
+            message: "Teacher fetched successfully",
+            success: true,
+            data: student
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
+
+const updateTeacherdetails = async (req, res) => {
+    console.log("body: ", req.body);
+    const {s_name,name,lname,email,mobilenumber,dob,coures,qualification,subject,address,adharnumber,photo} = req.body;
+    const { id } = req.params
+
+    if (!id) {
+        return res.status(400).json({ message: "Student ID is required", success: false });
+    }
+
+    try {
+        const notice = await TeacherModel.findByIdAndUpdate(
+            id,  // Correctly pass the ID
+            {s_name,name,lname,email,mobilenumber,dob,coures,qualification,subject,address,adharnumber,photo},
+            { new: true } // Return the updated document
+        );
+
+        if (!notice) {
+            return res.status(404).json({ message: "Teacher not found", success: false });
+        }
+
+        return res.status(200).json({ message: "Teacher Detailes Updated", success: true, date: notice });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Server error: " + error.message, success: false });
+    }
+};
+
+async function displayallteachers(req, res) {
+    try {
+       // Check if the user already exists
+       const { classid } = req.params
+       console.log(classid)
+        const user = await TeacherModel.find({});
+
+   
+      res.status(200).json({
+            message: "Teacher fetched successfully",
+            success: true,
+            data: user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
+
+
+module.exports = { Teacherform, Getallteacher, deleteTeacher, FindTeacherById, login,Showdata,updateTeacherdetails,displayallteachers} 

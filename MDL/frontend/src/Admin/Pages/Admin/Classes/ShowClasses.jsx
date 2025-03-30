@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
 import { AiFillDelete, AiOutlineArrowLeft } from "react-icons/ai";
 import Swal from "sweetalert2";
 import axios from "axios";
 function ShowClasses() {
-  function deleteClass() {
+  function deleteClass(classid) {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "The class has been deleted.", "success");
+        try {
+          const url = `http://localhost:8080/class/deleteclass/${classid}`;
+
+          const response = await axios.get(url);
+
+          Swal.fire({
+            title: response.data.message,
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          getclasses();
+        } catch (error) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
       }
     });
   }
@@ -29,7 +46,7 @@ function ShowClasses() {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("http://localhost:8080/class/classBystudent");
       console.log(res.data);
       setClasses(res.data.data);
     } catch (error) {
@@ -64,16 +81,16 @@ function ShowClasses() {
                 {classes.map((cls, index) => (
                   <tr key={index} className="bg-gray-600 text-white">
                     <td className="border border-gray-500 px-4 py-2">
-                      {cls.classname}
+                      {cls.class_name}
                     </td>
                     <td className="border border-gray-500 px-4 py-2">
-                      {/* {cls.studentsCount} */}50
+                      {cls.student_count}
                     </td>
                     <td className="border border-gray-500 px-4 py-2 flex">
                       <AiFillDelete
                         className="text-red-500 hover:text-red-700 cursor-pointer transition"
                         size={24}
-                        onClick={() => deleteClass(cls.id)}
+                        onClick={() => deleteClass(cls.class_id)}
                       />
                     </td>
                   </tr>

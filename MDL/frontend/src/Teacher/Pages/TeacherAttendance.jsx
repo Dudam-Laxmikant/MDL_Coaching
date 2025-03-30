@@ -120,22 +120,7 @@ const TeacherAttendance = () => {
     );
   };
 
-  // function upload(event) {
-  //   event.preventDefault();
-  //   if (!selectedClass || !selectedSubject || !date) {
-  //     Swal.fire({
-  //       title: "All fields are required!",
-  //       icon: "error",
-  //       draggable: true,
-  //     });
-  //     return;
-  //   }
-  //   Swal.fire({
-  //     title: "Uploaded Successfully",
-  //     icon: "success",
-  //     draggable: true,
-  //   });
-  // }
+
 
   async function upload(event) {
     event.preventDefault();

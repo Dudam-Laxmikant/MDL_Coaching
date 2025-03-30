@@ -57,7 +57,7 @@ function ShowClassTeacher() {
                       {/* Add Teacher Button */}
                       <td className="p-4 border border-gray-300">
                         <Link
-                          to={"/showclassTeacher/addclassteacher"}
+                          to={`/showclassTeacher/addclassteacher/${cls.classname}`}
                           className="flex items-center justify-center gap-2 px-6 py-2 bg-green-500 text-white rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
                         >
                           <FiUserPlus className="text-lg" /> Add Teacher
@@ -67,7 +67,7 @@ function ShowClassTeacher() {
                       {/* Show Teachers Button */}
                       <td className="p-4 border border-gray-300">
                         <Link
-                          to={"/showclassTeacher/showteacherslist"}
+                          to={`/showclassTeacher/showteacherslist/${cls.classname}`}
                           className="flex items-center justify-center gap-2 px-6 py-2 bg-green-500 text-white rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
                         >
                           <FiUsers className="text-lg" /> Show Teachers

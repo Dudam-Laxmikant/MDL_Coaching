@@ -103,10 +103,8 @@ function Classes() {
   const [cookiesAccepted, setCookiesAccepted] = useState(false);
   const [inputValue, setInputValue] = useState("");
   console.log(inputValue);
-
 const handleClick = async (e) => {
     e.preventDefault();
-
     try {
       const url = "http://localhost:8080/class/addclass";
 
@@ -116,9 +114,7 @@ const handleClick = async (e) => {
         },
       });
       console.log(response);
-
       const { message, success, error } = await response.data;
-
       if (success) {
         toast.success(message, {
           position: "top-center",

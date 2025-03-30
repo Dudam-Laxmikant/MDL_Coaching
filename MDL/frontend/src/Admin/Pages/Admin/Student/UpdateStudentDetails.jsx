@@ -10,6 +10,7 @@ import {
   FaEye,
   FaEdit,
   FaCamera,
+  FaPhone,
 } from "react-icons/fa";
 import Header from "../Home/Header";
 import Footer from "../Home/Footer";
@@ -54,6 +55,7 @@ function UpdateStudentDetails() {
       city: "",
       country: "",
       fee: "",
+      mobilenumber:"",
       passphoto: "",
     });
   };
@@ -200,6 +202,13 @@ function UpdateStudentDetails() {
                 type: "text",
                 placeholder: "Enter Fee Amount",
               },
+              {
+                label: "Mobile Number",
+                name: "mobilenumber",
+                icon: <FaPhone  className="text-teal-400" />,
+                type: "text",
+                placeholder: "Enter Mobile Number",
+              },
             ].map((field, index) => (
               <div key={index} className="flex flex-col">
                 <label className="text-gray-300 font-medium mb-1">
@@ -262,3 +271,177 @@ function UpdateStudentDetails() {
 }
 
 export default UpdateStudentDetails;
+
+// import React, { useEffect, useState } from "react";
+// import { Link, useParams } from "react-router-dom";
+// import {
+//   FaUser,
+//   FaCity,
+//   FaFlag,
+//   FaMoneyBillWave,
+//   FaIdCard,
+//   FaCalendarAlt,
+//   FaCamera,
+//   FaPhone,
+// } from "react-icons/fa";
+// import Header from "../Home/Header";
+// import Footer from "../Home/Footer";
+// import Swal from "sweetalert2";
+// import axios from "axios";
+// import { AiOutlineArrowLeft } from "react-icons/ai";
+
+// function UpdateStudentDetails() {
+//   const [formData, setFormData] = useState({
+//     fname: "",
+//     mname: "",
+//     lname: "",
+//     dob: "",
+//     adharnumber: "",
+//     city: "",
+//     country: "",
+//     fee: "",
+//     mobilenumber: "",
+//     passphoto: "",
+//   });
+//   const [preview, setPreview] = useState(null);
+//   const [fileChanged, setFileChanged] = useState(false);
+//   const { studentId } = useParams();
+
+//   useEffect(() => {
+//     fetchdata();
+//   }, [studentId]);
+
+//   const fetchdata = async () => {
+//     try {
+//       const response = await axios.get(
+//         `http://localhost:8080/student/showprofile/${studentId}`
+//       );
+//       setFormData(response.data.data);
+//       // Set initial preview from server image
+//       if (response.data.data.passphoto) {
+//         setPreview(`http://localhost:8080/images/${response.data.data.passphoto}`);
+//       }
+//     } catch (error) {
+//       console.log("Not Found Error", error);
+//     }
+//   };
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleFileChange = (e) => {
+//     const file = e.target.files[0];
+//     if (file) {
+//       // Create local preview URL for new image
+//       const localPreview = URL.createObjectURL(file);
+//       setPreview(localPreview);
+//       setFileChanged(true);
+//       setFormData({ ...formData, passphoto: file });
+//     }
+//   };
+
+//   // Cleanup preview URL when component unmounts or when new file is selected
+//   useEffect(() => {
+//     return () => {
+//       if (preview && preview.startsWith('blob:')) {
+//         URL.revokeObjectURL(preview);
+//       }
+//     };
+//   }, [preview]);
+
+//   const updateStudentDetails = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const url = `http://localhost:8080/student/Updatestudentdetails/${studentId}`;
+//       const formDataToSend = new FormData();
+      
+//       Object.keys(formData).forEach((key) => {
+//         if (key !== "passphoto" || fileChanged) {
+//           formDataToSend.append(key, formData[key]);
+//         }
+//       });
+      
+//       const response = await axios.post(url, formDataToSend, {
+//         headers: { "Content-Type": "multipart/form-data" },
+//       });
+
+//       Swal.fire("Success", "Student details updated successfully", "success");
+//     } catch (error) {
+//       console.log("Error updating student details:", error);
+//       Swal.fire("Error", "Failed to update student details", "error");
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col min-h-screen bg-[#454649] text-white">
+//       <Header />
+//       <div className="flex flex-1 p-6 mt-20 min-h-screen">
+//         <div className="flex-1 bg-gray-800 p-10 rounded-lg shadow-lg max-w-4xl mx-auto min-h-screen">
+//           <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
+//             Update Student Details
+//           </h2>
+//           <div className="flex flex-col items-center">
+//             <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-green-500">
+//               {preview ? (
+//                 <img 
+//                   src={preview} 
+//                   alt="Profile Preview" 
+//                   className="w-full h-full object-cover" 
+//                 />
+//               ) : (
+//                 <span className="text-gray-400 text-xs">No Image</span>
+//               )}
+//               <label 
+//                 htmlFor="fileInput" 
+//                 className="absolute bottom-1 right-1 bg-gray-800 p-2 rounded-full cursor-pointer"
+//               >
+//                 <FaCamera className="text-white" />
+//               </label>
+//             </div>
+//             <input 
+//               type="file" 
+//               id="fileInput" 
+//               className="hidden" 
+//               accept="image/*" 
+//               onChange={handleFileChange} 
+//             />
+//           </div>
+//           <form onSubmit={updateStudentDetails} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//             {[
+//               { label: "First Name", name: "fname", type: "text" },
+//               { label: "Middle Name", name: "mname", type: "text" },
+//               { label: "Last Name", name: "lname", type: "text" },
+//               { label: "Date of Birth", name: "dob", type: "date" },
+//               { label: "Aadhar Number", name: "adharnumber", type: "number" },
+//               { label: "City", name: "city", type: "text" },
+//               { label: "Country", name: "country", type: "text" },
+//               { label: "Fee Amount", name: "fee", type: "text" },
+//               { label: "Mobile Number", name: "mobilenumber", type: "text" },
+//             ].map((field, index) => (
+//               <div key={index} className="flex flex-col">
+//                 <label className="text-gray-300 font-medium mb-1">{field.label}</label>
+//                 <input
+//                   type={field.type}
+//                   name={field.name}
+//                   value={formData[field.name]}
+//                   onChange={handleChange}
+//                   className="p-3 border border-gray-600 rounded-lg bg-gray-700 text-white"
+//                 />
+//               </div>
+//             ))}
+//             <button type="submit" className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition">
+//               Update
+//             </button>
+//           </form>
+//           <Link to="/addstudents" className="block text-center mt-4 text-blue-400 hover:underline">
+//             Go Back
+//           </Link>
+//         </div>
+//       </div>
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// export default UpdateStudentDetails;

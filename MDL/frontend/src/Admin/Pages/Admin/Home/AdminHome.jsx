@@ -51,6 +51,21 @@ function AdminHome() {
     getnotice();
   }, []);
 
+  const [totalclass, settotalclass] = useState(0);
+  const [totalteacher, settotalteacher] = useState(0);
+
+  useEffect(() => {
+    const gettotals = async () => {
+      const response = await axios.get(
+        "http://localhost:8080/TotalAdminDashboards"
+      );
+      console.log(response.data);
+      settotalclass(response.data.totalclass);
+      settotalteacher(response.data.totalteachers);
+    };
+    gettotals();
+  }, []);
+
   // Animated Counter Hook
   const AnimatedCounter = ({ value, speed = 1000 }) => {
     const [count, setCount] = useState(0);
@@ -117,14 +132,14 @@ function AdminHome() {
     {
       id: 1,
       title: "Total Classes",
-      value: 12,
+      value: totalclass,
       icon: <FaChalkboardTeacher className="text-4xl text-white" />,
       bg: "bg-blue-500",
     },
     {
       id: 2,
       title: "Total Teachers",
-      value: 24,
+      value: totalteacher,
       icon: <FaUserGraduate className="text-4xl text-white" />,
       bg: "bg-green-500",
     },

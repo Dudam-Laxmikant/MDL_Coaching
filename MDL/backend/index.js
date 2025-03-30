@@ -6,7 +6,7 @@ const cors = require("cors");
 
 const Adminroute = require("./Routes/Adminroute")
 const Studentroute = require("./Routes/Studentroute")
-const Classroute =  require("./Routes/Classroute.js")
+const Classroute = require("./Routes/Classroute.js")
 // const TeacherNoticeroute = require("./Routes/TeacherNotesroute.js")
 // const Teachernoticerouter = require("./Routes/TeacherNoticeroute.js")
 const upload = require("./Middlewares/upload.js")
@@ -21,6 +21,9 @@ const Timetablerouter = require("./Routes/Timetablerouter.js");
 const { addTimetable } = require("./Controllers/TimetableController.js");
 const { Teachernotice, GetallNotice, deleteById, Getclasses } = require("./Controllers/TeachernoticeController.js");
 const { TeacherNotes, getallnotes } = require("./Controllers/TeacherNotesController.js");
+const ClassModel = require("./Models/class.js");
+const TeacherModel = require("./Models/teacher.js");
+const Teacherclassroute = require("./Routes/TeacherclassRoute.js");
 require("dotenv").config()
 
 require("./Models/db")
@@ -42,22 +45,28 @@ app.use("/admin", Adminroute)
 // app.post("/admin",adminprofile)
 app.use("/subject", Subjectroute)
 app.post("/student/signup", upload.single("passphoto"), Studentsignup)
-app.post("/admin/signup", upload.single("image"), signup)       
+app.post("/admin/signup", upload.single("image"), signup)
 app.post("/teacher/addteacher", upload.single("photo"), Teacherform)
 app.post("/timetable/addTimetable", upload.single("table"), addTimetable)
 app.use("/teacher", Teacherroute)
 app.use("/student", Studentroute)
 app.use("/notice", Noticerouter)
-app.use("/timetable",Timetablerouter)
-app.use("/class",Classroute)
-app.use("/attendance",AttendanceRoute)
-app.post("/t_notice/teachernotice",Teachernotice)
-app.get("/t_notice/teachernotice/getallnotice",GetallNotice)
-app.get("/t_notice/teachernotice/selectedclass/:classname",Getclasses)
+app.use("/timetable", Timetablerouter)
+app.use("/class", Classroute)
+app.use("/attendance", AttendanceRoute)
+app.post("/t_notice/teachernotice", Teachernotice)
+app.get("/t_notice/teachernotice/getallnotice", GetallNotice)
+app.get("/t_notice/teachernotice/selectedclass/:classname", Getclasses)
 app.get("/t_notice/teachernotice/delete/:id", deleteById)
 app.post("/notes", upload.single("notesfille"), TeacherNotes);
-app.get("/notes/sendnotes/:classname",getallnotes)
-app.post("/Updatestudentdetails/:id",upload.single("passphoto"),updatestudentdetails)
+app.get("/notes/sendnotes/:classname", getallnotes)
+app.post("/Updatestudentdetails/:id", upload.single("passphoto"), updatestudentdetails)
+app.get("/TotalAdminDashboards", async (req, res) => {
+    const totalclass = await ClassModel.countDocuments()
+    const totalteachers = await TeacherModel.countDocuments()
+    res.json({ totalclass, totalteachers, success: true })
+})
+app.use("/teacherclass",Teacherclassroute)
 app.get("/", (req, res) => {
     res.send("welcome users")
 })

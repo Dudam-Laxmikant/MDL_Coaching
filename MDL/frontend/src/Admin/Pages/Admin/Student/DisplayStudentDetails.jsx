@@ -105,11 +105,6 @@ import axios from "axios";
 function DisplayStudentDetails() {
   const { studentId } = useParams();
   const [studentDetails, setStudentDetails] = useState({
-    passphoto: "",
-    dob: "",
-    fname: "",
-    lname: "",
-    mname: "",
   }); // Initialize as empty array
 
   useEffect(() => {

@@ -104,5 +104,22 @@ const getSubjects = async (req, res) => {
         });
     }
 }
+const DeleteSubject = async (req, res) => {
+    try {
+        const { id } = req.params
+        console.log(id)
+        const notice = await SubjectModel.findByIdAndDelete(id)
 
-module.exports = { Addsubject, getSubjects };
+        if (!notice) {
+            return res.status(200)
+                .json({ message: "Subject Deleting Canceled", success: false })
+        }
+
+        return res.status(200)
+            .json({ message: "Subject Deleted SuccessFully", success: true })
+    } catch (error) {
+        return res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
+module.exports = { Addsubject, getSubjects ,DeleteSubject};
