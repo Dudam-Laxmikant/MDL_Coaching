@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import { FaRegUser, FaRegCalendar,FaBell, FaRegClock, FaDollarSign, FaClipboard, FaRegCalendarAlt, FaBook, FaAward, FaQuestionCircle, FaRegCommentDots } from "react-icons/fa";
+import { FaRegUser, FaRegCalendar,FaBell,FaComment  , FaRegClock, FaDollarSign, FaClipboard, FaRegCalendarAlt, FaBook, FaAward, FaQuestionCircle, FaRegCommentDots } from "react-icons/fa";
 
 const menuItems = [
   { to: "/studentMenu/studentDashboard/StudentGeneralRegister", label: "General Register", icon: FaRegUser, color: "bg-blue-500 hover:bg-blue-600" },
@@ -15,7 +15,8 @@ const menuItems = [
   { to: "/studentMenu/studentDashboard/studentResult", label: "Result", icon: FaAward, color: "bg-pink-500 hover:bg-pink-600" },
   { to: "/studentMenu/studentDashboard/studentPracticeTest", label: "Practice Test", icon: FaQuestionCircle, color: "bg-blue-500 hover:bg-blue-600" },
   { to: "/studentMenu/studentDashboard/studentFeedback", label: "Feedback", icon: FaRegCommentDots, color: "bg-teal-500 hover:bg-teal-600" },
-  { to: "/studentMenu/studentDashboard/studentNotice", label: "Notics", icon: FaBell, color: "bg-red-500 hover:bg-red-600" }
+  { to: "/studentMenu/studentDashboard/studentNotice", label: "Notics", icon: FaBell, color: "bg-red-500 hover:bg-red-600" },
+  { to: "/studentMenu/studentDashboard/StudentAdminMeassages", label: "Meassages", icon: FaComment   , color:  "bg-blue-500 hover:bg-blue-600"}
 ];
 
 const StudentDashboard = () => {

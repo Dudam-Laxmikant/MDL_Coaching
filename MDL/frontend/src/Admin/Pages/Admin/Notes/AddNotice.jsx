@@ -6,8 +6,10 @@ import "react-quill/dist/quill.snow.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const AddNotice = () => {
+  const navigate = useNavigate();
   const [fordata, setforData] = useState({
     title: "",
     date: "",
@@ -73,9 +75,9 @@ export const AddNotice = () => {
               position: "top-center",
               autoClose: 2000,
             });
-            //   setTimeout(() => {
-            //     navigate("/showclassTeacher/showallteacherlist");
-            //   }, 1000);
+              setTimeout(() => {
+                navigate("/adminhome");
+              }, 1000);
           } else if (error) {
             console.log(error);
             const details = error?.details[0].message;

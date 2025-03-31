@@ -8,11 +8,15 @@ import {
   FaChalkboardTeacher,
   FaUserGraduate,
   FaRupeeSign,
+  FaUsers,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { FiSearch } from "react-icons/fi";
 
 function AdminHome() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [notice, setnotice] = useState([]);
   function delet(noticeId) {
     Swal.fire({
@@ -46,6 +50,9 @@ function AdminHome() {
       }
     });
   }
+  const filteredNotices = notice.filter((data) =>
+    data.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     getnotice();
@@ -53,7 +60,7 @@ function AdminHome() {
 
   const [totalclass, settotalclass] = useState(0);
   const [totalteacher, settotalteacher] = useState(0);
-
+  const [totalstudents, settotalstudentes] = useState(0);
   useEffect(() => {
     const gettotals = async () => {
       const response = await axios.get(
@@ -62,6 +69,7 @@ function AdminHome() {
       console.log(response.data);
       settotalclass(response.data.totalclass);
       settotalteacher(response.data.totalteachers);
+      settotalstudentes(response.data.totalstudentes);
     };
     gettotals();
   }, []);
@@ -71,12 +79,11 @@ function AdminHome() {
     const [count, setCount] = useState(0);
     useEffect(() => {
       let start = 0;
-      const end = parseInt(value);
+      const end = Number(value) || 0; // Default to 0 if NaN
+
       if (start === end) return;
 
-      let totalDuration = speed; // Dynamic speed
-      let step = Math.ceil(end / (speed / 20)); // Bigger steps for faster counting
-
+      let step = Math.ceil(end / (speed / 20));
       let timer = setInterval(() => {
         start += step;
         if (start >= end) {
@@ -84,7 +91,7 @@ function AdminHome() {
           clearInterval(timer);
         }
         setCount(start);
-      }, 20); // Updates every 20ms
+      }, 20);
 
       return () => clearInterval(timer);
     }, [value, speed]);
@@ -145,14 +152,14 @@ function AdminHome() {
     },
     {
       id: 3,
-      title: "Total Fees Collection",
-      value: 50000,
-      icon: <FaRupeeSign className="text-4xl text-white" />,
+      title: "Total Students",
+      value: totalstudents,
+      // icon: <FaRupeeSign className="text-4xl text-white" />,
+      icon: <FaUsers className="text-4xl text-white" />,
       bg: "bg-purple-500",
       speed: 5000,
     }, // 5 sec speed
   ];
-
   return (
     <>
       <div className="flex flex-col bg-[#454649] min-h-screen">
@@ -190,7 +197,24 @@ function AdminHome() {
 
             {/* Notes Section */}
             <div>
-              <h1 className="text-xl font-bold text-white mb-4">Notes</h1>
+              <h1 className="text-xl font-bold text-white mb-4">Notice</h1>
+              <div className="px-4 py-3 text-left text-yellow-500">
+                <div className="relative w-64 sm:w-auto mb-4">
+                  {" "}
+                  {/* Width kam kar di */}
+                  <FiSearch
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-400"
+                    size={18}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Search Notice Title"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-64 pl-10 p-2 border border-gray-300 rounded-md text-yellow-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-yellow-600" // Width yahan bhi kam ki
+                  />
+                </div>
+              </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full bg-[#454649] border border-gray-300 rounded-lg shadow-md">
@@ -211,8 +235,8 @@ function AdminHome() {
                     </tr>
                   </thead>
                   <tbody>
-                    {notice &&
-                      notice.map((data, index) => (
+                    {filteredNotices &&
+                      filteredNotices.map((data, index) => (
                         <tr
                           key={index}
                           className="even:bg-[#454649] odd:bg-[#454649] text-white"
@@ -223,21 +247,17 @@ function AdminHome() {
                           </td>
                           <td className="px-4 py-3 text-white">{data.role}</td>
                           <td className="px-4 py-3 flex gap-2">
-                            {/* Show Button */}
                             <Link to={`/adminhome/viewnotes/${data._id}`}>
                               <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 shadow-md">
                                 <AiOutlineEye className="text-lg" />
                                 <span>View</span>
                               </button>
                             </Link>
-
-                            {/* Update Button */}
                             <Link to={`/adminhome/updatenotice/${data._id}`}>
                               <button className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 shadow-md">
                                 <AiOutlineEdit className="text-lg" /> Edit
                               </button>
                             </Link>
-                            {/* Delete Button */}
                             <button
                               onClick={() => delet(data._id)}
                               className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300 shadow-md"

@@ -8,7 +8,7 @@ const signup = async (req, res) => {
     
     try {
         const { filename } = req.file
-        const { fname,mname,lname,dob,mobileNumber,email,password } = req.body;
+        const { fname,mname,lname,dob,mobileNumber,email,password,country,city,address,pinCode} = req.body;
         console.log("Your request body is: ", req.body);
 
         // Check if the user already exists
@@ -30,6 +30,10 @@ const signup = async (req, res) => {
             email,
             password:hashedPassword,
             mobileNumber,
+            country,
+            city,
+            address,
+            pinCode,
             img:filename
         });
         console.log("New users: ", newUser)

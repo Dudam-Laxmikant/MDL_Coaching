@@ -73,7 +73,18 @@ const getnotice = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
+const getnoticeInstudent = async (req, res) => {
 
+    try {
+        const notice = await NoticeModel.find({ role: { $in: ["Student", "Both"] } });[]
+
+        return res.status(200)
+            .json({ message: "Notice Founded", success: true, data: notice })
+    } catch (error) {
+        return res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
 const deleteById = async (req, res) => {
     try {
         const { id } = req.params
@@ -113,5 +124,6 @@ module.exports = {
     getnotice,
     deleteById,
     FindByIdNotice,
-    updateNotice
+    updateNotice,
+    getnoticeInstudent
 }

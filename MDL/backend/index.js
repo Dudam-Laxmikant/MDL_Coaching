@@ -24,6 +24,8 @@ const { TeacherNotes, getallnotes } = require("./Controllers/TeacherNotesControl
 const ClassModel = require("./Models/class.js");
 const TeacherModel = require("./Models/teacher.js");
 const Teacherclassroute = require("./Routes/TeacherclassRoute.js");
+const Studentfeedbackroute = require("./Routes/Studentfeedbackroute.js");
+const StudentModel = require("./Models/student.js");
 require("dotenv").config()
 
 require("./Models/db")
@@ -64,9 +66,11 @@ app.post("/Updatestudentdetails/:id", upload.single("passphoto"), updatestudentd
 app.get("/TotalAdminDashboards", async (req, res) => {
     const totalclass = await ClassModel.countDocuments()
     const totalteachers = await TeacherModel.countDocuments()
-    res.json({ totalclass, totalteachers, success: true })
+    const totalstudentes = await StudentModel.countDocuments()
+    res.json({ totalclass, totalteachers,totalstudentes, success: true })
 })
 app.use("/teacherclass",Teacherclassroute)
+app.use("/feedback",Studentfeedbackroute)
 app.get("/", (req, res) => {
     res.send("welcome users")
 })

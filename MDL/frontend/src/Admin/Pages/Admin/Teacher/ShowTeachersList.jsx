@@ -50,7 +50,7 @@ function ShowTeachersList() {
       });
 
       if (result.isConfirmed) {
-        const response = await axios.delete(
+        const response = await axios.get(
           `http://localhost:8080/teacherclass/deleteteachercls/${teacherId}`
         );
         if (response.data.success) {

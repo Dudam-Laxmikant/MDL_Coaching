@@ -36,14 +36,14 @@ function UpdateStudentDetails() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const [preview, setPreview] = useState(null);
+  // const [preview, setPreview] = useState(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setPreview(URL.createObjectURL(file));
+  //   }
+  // };
 
   const handleReset = () => {
     setFormData({
@@ -98,10 +98,10 @@ function UpdateStudentDetails() {
           <h2 className="text-3xl font-bold mb-6 text-center text-yellow-400">
             Update Student Details
           </h2>
-          <div className="flex flex-col items-center">
-            {/* Profile Image Container */}
+          {/* <div className="flex flex-col items-center">
+            
             <div className="flex flex-col items-center">
-              {/* Profile Image Container */}
+             
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md overflow-hidden flex items-center justify-center border-2 border-green-500">
                 {preview ? (
                   <img
@@ -115,7 +115,7 @@ function UpdateStudentDetails() {
                   </span>
                 )}
 
-                {/* Camera Icon Button */}
+                
                 <label
                   htmlFor="fileInput"
                   className="absolute bottom-1 right-1 bg-gray-800 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border border-white cursor-pointer shadow"
@@ -124,7 +124,7 @@ function UpdateStudentDetails() {
                 </label>
               </div>
 
-              {/* Hidden File Input */}
+              
               <input
                 type="file"
                 id="fileInput"
@@ -133,7 +133,7 @@ function UpdateStudentDetails() {
                 onChange={handleFileChange}
               />
             </div>
-          </div>
+          </div> */}
 
           <form
             onSubmit={updateStudentDetails}
@@ -228,12 +228,12 @@ function UpdateStudentDetails() {
               </div>
             ))}
 
-            <input
+            {/* <input
               id="fileInput"
               type="file"
               onChange={handleFileChange}
               className="hidden"
-            />
+            /> */}
 
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
               <button

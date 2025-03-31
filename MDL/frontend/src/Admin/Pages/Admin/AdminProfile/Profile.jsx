@@ -46,10 +46,12 @@ function Profile() {
             {[
               { label: "Name", value: admin.mname },
               { label: "Date of Birth", value: admin.dob },
-              { label: "Age", value: "28" },
               { label: "Location", value: admin.address },
               { label: "Email", value: admin.email },
-              { label: "Mobile Number", value: admin.mobileNumber },
+              // { label: "Address", value: admin.address },
+              { label: "Country", value: admin.country },
+              { label: "city", value: admin.city },
+              { label: "Pincode", value: admin.pinCode },
             ].map((item, index) => (
               <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <span className="text-indigo-600 font-semibold">{item.label}:</span>
@@ -57,13 +59,6 @@ function Profile() {
               </div>
             ))}
           </div>
-
-          {/* Edit Profile Button */}
-          {/* <div className="mt-10 flex justify-center">
-            <button className="px-6 py-2 sm:px-8 sm:py-3 text-lg font-semibold text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 transition-all">
-              Edit Profile
-            </button>
-          </div> */}
         </div>
       </div>
 

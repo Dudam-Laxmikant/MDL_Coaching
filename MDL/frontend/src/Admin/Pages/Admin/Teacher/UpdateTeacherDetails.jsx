@@ -107,13 +107,13 @@ function UpdateTeacherDetails() {
       <FiCamera className="absolute left-1 top-10 w-5 h-5 transform  text-yellow-400" />
     ),
   };
-  const [preview, setPreview] = useState(null);
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+  // const [preview, setPreview] = useState(null);
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setPreview(URL.createObjectURL(file));
+  //   }
+  // };
  
   useEffect(() => {
     fetchdata();
@@ -155,16 +155,59 @@ function UpdateTeacherDetails() {
 
 
   //update
+  // const updateTeachertDetails = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const url = `http://localhost:8080/teacher/UpdateTeacherdetails/${teacherid}`;
+
+  //     const response = await axios.post(url, formData, {
+  //       headers: { "Content-Type": "application/json" },
+  //     });
+  //   } catch (error) {
+  //     console.log("Error for update:", error);
+  //   }
+  // };
   const updateTeachertDetails = async (e) => {
     e.preventDefault();
-    try {
-      const url = `http://localhost:8080/teacher/UpdateTeacherdetails/${teacherid}`;
-
-      const response = await axios.post(url, formData, {
-        headers: { "Content-Type": "application/json" },
+  
+    // SweetAlert Confirm Box
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to update the teacher details?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Update Data",
+      cancelButtonText: "Cancel",
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const url = `http://localhost:8080/teacher/UpdateTeacherdetails/${teacherid}`;
+  
+        const response = await axios.post(url, formData, {
+          headers: { "Content-Type": "application/json" },
+        });
+  
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Teacher details updated successfully!",
+        });
+      } catch (error) {
+        console.log("Error for update:", error);
+  
+        Swal.fire({
+          icon: "error",
+          title: "Update Failed",
+          text: "Something went wrong! Please try again.",
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: "info",
+        title: "Cancelled",
+        text: "Update operation was cancelled.",
       });
-    } catch (error) {
-      console.log("Error for update:", error);
     }
   };
   return (
@@ -176,7 +219,7 @@ function UpdateTeacherDetails() {
             Update Teacher Details
           </h1>
 
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <div className="flex flex-col items-center">
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full shadow-md overflow-hidden flex items-center justify-center border-2 border-green-500">
                 {preview ? (
@@ -197,7 +240,7 @@ function UpdateTeacherDetails() {
                   <FaCamera className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
                 </label>
               </div>
-              {/* Hidden File Input */}
+             
               <input
                 type="file"
                 id="fileInput"
@@ -206,7 +249,7 @@ function UpdateTeacherDetails() {
                 onChange={handleFileChange}
               />
             </div>
-          </div>
+          </div> */}
           <form className="space-y-5">
             {/* Teacher ID */}
             <div className="flex flex-col sm:flex-row justify-center items-center bg-gray-700 px-4 py-3 rounded-lg">
@@ -294,7 +337,7 @@ function UpdateTeacherDetails() {
               </div>
 
               {/* Photo Upload */}
-              <div className="relative col-span-1 sm:col-span-2">
+              {/* <div className="relative col-span-1 sm:col-span-2">
                 <label className="text-gray-300 block mb-1">Photo</label>
                 <div className="absolute inset-y-0 left-3 flex items-center">
                   {icons.photo}
@@ -305,7 +348,7 @@ function UpdateTeacherDetails() {
                   onChange={handleFileChange}
                   className="w-full pl-12 p-3 border border-gray-500 rounded-lg bg-[#454649] text-white focus:ring-2 focus:ring-blue-400 transition duration-200"
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* Buttons */}

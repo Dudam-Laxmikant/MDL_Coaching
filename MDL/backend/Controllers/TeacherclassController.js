@@ -52,4 +52,21 @@ const updatesubject = async (req, res) => {
         res.status(500).json({ success: false, message: "Server Error" });
     }
 }
-module.exports = { Teacherclass, displayteacherclasses, updatesubject };
+const DeleteTeacher = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id)
+        // Delete teacher from the class
+        const result = await TeacherClassModel.findOneAndDelete({ id });
+
+        if (!result) {
+            return res.status(404).json({ success: false, message: "Teacher not found in any class" });
+        }
+
+        res.json({ success: true, message: "Teacher removed from class successfully" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error", error: error.message });
+    }
+};
+
+module.exports = { Teacherclass, displayteacherclasses, updatesubject, DeleteTeacher };

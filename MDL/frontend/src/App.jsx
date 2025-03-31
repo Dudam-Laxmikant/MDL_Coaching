@@ -72,6 +72,7 @@ import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
 import TeacherUpdateAttendence from "./Teacher/Pages/TeacherUpdateAttendence";
 import StudentNotice from "./Student/Pages/StudentNotice";
 import { Showsubjects } from "./Admin/Pages/Admin/Subjects/Showsubjects";
+import StudentAdminMeassages from "./Student/Pages/StudentAdminMeassages";
 
 const App = () => {
   return (
@@ -253,6 +254,7 @@ const App = () => {
             path="/studentMenu/studentDigitalI_Card"
             element={<StudentDigitalICard />}
           />
+          <Route path="/studentMenu/studentDashboard/StudentAdminMeassages" element={<StudentAdminMeassages/>}/>
         </Routes>
       </BrowserRouter>
     </>

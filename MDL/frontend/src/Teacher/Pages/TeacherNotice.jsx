@@ -193,39 +193,7 @@ const TeacherNotice = () => {
             </button>
           </div>
           {/* Notice List */}
-          {/* <div className="space-y-4">
-            {notices.map((notice, index) => (
-              <div
-                key={index}
-                className={`p-4 rounded-md shadow-md flex justify-between items-center border-gray-300 border`}
-              >
-                <div>
-                  <p className="text-lg">{notice.title}</p>
-                  <p className="text-gray-500 text-sm">
-                    {notice.noticedescription}
-                  </p>
-                  <p className="text-gray-500 text-sm">{notice.date}</p>
-                  <span className="text-gray-700 text-sm">
-                    {notice.selectedclass}
-                  </span>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    className="bg-blue-500 text-white px-3 py-1 rounded-md"
-                    onClick={() => updateNotice(notice.id)}
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-3 py-1 rounded-md"
-                    onClick={() => delet(notice._id)}
-                  >
-                    <FaTrash />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div> */}
+          
          <div className="space-y-4">
       {notices.map((notice, index) => {
         // Only show first 5 words in list
