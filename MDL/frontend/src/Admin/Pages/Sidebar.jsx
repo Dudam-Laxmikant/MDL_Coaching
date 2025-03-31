@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         { title: "Timetables", href: "/timetable", icon: <FiCalendar /> },
         { title: "Notice", href: "/adminhome/addNotice", icon: <FiBell /> },
         { title: "Feedback", href: "/feedback", icon: <FiInbox /> },
-        { title: "Add Admin", href: "/addadmin", icon: <FiPlus /> },
+        // { title: "Add Admin", href: "/addadmin", icon: <FiPlus /> },
         { title: "Profile", href: "/profile", gap: true, icon: <FiUser /> },
         { title: "Logout", href: "/adminlogout", icon: <FiLogOut /> },
     ];

@@ -67,7 +67,7 @@ import LogOut from "./Admin/Pages/Admin/AdminLogOut/LogOut";
 import Profile from "./Admin/Pages/Admin/AdminProfile/Profile";
 import RoleSelection from "./RoleSelection";
 import { Timetable } from "./Admin/Pages/Admin/Timetables/Timetable";
-import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
+// import { AddAdmin } from "./Admin/Pages/Admin/AddAdmin/AddAdmin";
 import { AddClassTeacher } from "./Admin/Pages/Admin/Teacher/AddClassTeacher";
 import TeacherUpdateAttendence from "./Teacher/Pages/TeacherUpdateAttendence";
 import StudentNotice from "./Student/Pages/StudentNotice";
@@ -87,7 +87,7 @@ const App = () => {
           {/* <Route path="/login" element={<Login />}></Route>
             <Route path="/registration" element={<Registration />}></Route>
             <Route path="/categoryHome" element={<CategoryHome/>}></Route> */}
-          <Route path="/addadmin" element={<AddAdmin />} />
+          {/* <Route path="/addadmin" element={<AddAdmin />} /> */}
           <Route path="/adminhome" element={<AdminHome />}></Route>
           <Route path="/AdminLogin" element={<AdminLogin />}></Route>
           <Route

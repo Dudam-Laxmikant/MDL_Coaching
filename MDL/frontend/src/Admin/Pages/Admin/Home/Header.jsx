@@ -37,7 +37,7 @@ function Header() {
         '/profile': 'Profile',
         '/adminlogout': 'Logout',
         '/timetable':"Time tables",
-        '/addadmin':"Add Admin"
+        // '/addadmin':"Add Admin"
     };
 
     return (
