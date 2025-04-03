@@ -18,8 +18,7 @@ function StudentDetails() {
   const { classId } = useParams();
   const [students, setStudents] = useState([]);
 
-  // const { classId } = useParams();
-  // const [students, setStudents] = useState([]);
+  
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [studentIdFilter, setStudentIdFilter] = useState("");
   const [studentNameFilter, setStudentNameFilter] = useState("");
@@ -138,7 +137,7 @@ function StudentDetails() {
               />
             </div>
           </form>
-          {/* <div className="overflow-x-auto">
+          <div className="overflow-x-auto">
             <table className="w-full border border-gray-700 shadow-md rounded-lg">
               <thead className="bg-indigo-600 text-white">
                 <tr className="text-center">
@@ -210,8 +209,8 @@ function StudentDetails() {
               </tbody>
               
             </table>
-          </div> */}
-          <div className="p-4">
+          </div>
+          {/* <div className="p-4">
             {filteredStudents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredStudents.map((student, index) => (
@@ -272,7 +271,7 @@ function StudentDetails() {
                 </p>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
       <Link

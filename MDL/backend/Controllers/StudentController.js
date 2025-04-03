@@ -200,10 +200,9 @@ const Deletestudent = async (req, res) => {
         const notice = await StudentModel.findByIdAndDelete(id)
 
         if (!notice) {
-            return res.status(200)
+            return res.status(402)
                 .json({ message: "Student Deleting Canceled", success: false })
         }
-
         return res.status(200)
             .json({ message: "Student Deleted SuccessFully", success: true })
     } catch (error) {
