@@ -69,10 +69,10 @@ const TeacherDashboard = () => {
     <div className="flex flex-col">
       {/* Header */}
       <Header />
-      <div className="flex flex-1 h-screen relative">
+      <div className="flex flex-1 h-screen">
         {/* Main Content */}
-        <div className={`flex-1 p-6 bg-gray-50 transition-all duration-300`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
+        <div className={`flex-1 p-6  bg-gray-50 transition-all duration-300`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-6 text-center">
             {[
               {
                 label: "Total tests taken",
@@ -107,7 +107,7 @@ const TeacherDashboard = () => {
       </div>
 
       {/* News & Announcements */}
-      <div className="p-6 bg-gray-100">
+      <div className="p-6 bg-gray-100 min-h-screen">
         <h3 className="text-2xl font-bold text-gray-800 mb-4">
           News & Announcements
         </h3>

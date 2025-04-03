@@ -191,11 +191,11 @@ function Home() {
                   Courses
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/contact" className="hover:text-gray-200">
                   Contact
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -203,13 +203,13 @@ function Home() {
           <div>
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <p className="flex items-center justify-center md:justify-start space-x-2 text-gray-400">
-              <FaMapMarkerAlt /> <span>123 Learning Street, City, Country</span>
+              <FaMapMarkerAlt /> <span>100, Sapphire apartments, Godadara, Surat, India</span>
             </p>
             <p className="flex items-center justify-center md:justify-start space-x-2 text-gray-400 mt-2">
-              <FaPhoneAlt /> <span>+123 456 7890</span>
+              <FaPhoneAlt /> <span>+91 9898565650</span>
             </p>
             <p className="flex items-center justify-center md:justify-start space-x-2 text-gray-400 mt-2">
-              <FaEnvelope /> <span>support@mdlcoaching.com</span>
+              <FaEnvelope /> <span>mdlcoaching@gmail.com</span>
             </p>
           </div>
         </div>

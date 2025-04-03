@@ -1,6 +1,6 @@
 // const { Addsubject, getSubjects, DeleteSubject } = require("../Controllers/SubjectController")
 
-const { Teacherclass, displayteacherclasses, updatesubject, DeleteTeacher } = require("../Controllers/TeacherclassController")
+const { Teacherclass, displayteacherclasses, updatesubject, DeleteTeacher} = require("../Controllers/TeacherclassController")
 
 const router = require("express").Router()
 

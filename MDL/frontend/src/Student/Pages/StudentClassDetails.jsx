@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-
+import axios from "axios";
 const StudentClassDetails = () => {
+
+
   return (
     <div className="flex flex-col h-screen">
       {/* Fixed Header */}

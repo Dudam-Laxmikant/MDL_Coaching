@@ -106,7 +106,7 @@ const StudentAdminMessages = () => {
 
       {/* Scrollable Main Content */}
       <div className="flex-grow overflow-auto p-10 bg-gray-100 min-h-screen mt-10">
-        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">📩 Latest Meassages</h1>
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">📩 Latest Messages</h1>
 
         <div className="p-6 bg-gray-100">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">News & Announcements</h3>

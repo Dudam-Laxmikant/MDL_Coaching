@@ -282,3 +282,140 @@ function AdminHome() {
 }
 
 export default AdminHome;
+
+// import React, { useEffect, useState } from "react";
+// import Swal from "sweetalert2";
+// import Header from "./Header";
+// import Footer from "./Footer";
+// import { AiOutlineDelete, AiOutlineEye, AiOutlineEdit } from "react-icons/ai";
+// import { motion } from "framer-motion";
+// import { FaChalkboardTeacher, FaUserGraduate, FaUsers } from "react-icons/fa";
+// import { Link } from "react-router-dom";
+// import axios from "axios";
+// import { FiSearch } from "react-icons/fi";
+
+// function AdminHome() {
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [notice, setNotice] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [totalClass, setTotalClass] = useState(0);
+//   const [totalTeacher, setTotalTeacher] = useState(0);
+//   const [totalStudents, setTotalStudents] = useState(0);
+
+//   useEffect(() => {
+//     getNotice();
+//     getTotals();
+//   }, []);
+
+//   const getNotice = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:8080/notice/getnotice");
+//       setNotice(response.data.data);
+//     } catch (error) {
+//       console.error("Notice fetch error:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const getTotals = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:8080/TotalAdminDashboards");
+//       setTotalClass(response.data.totalclass);
+//       setTotalTeacher(response.data.totalteachers);
+//       setTotalStudents(response.data.totalstudentes);
+//     } catch (error) {
+//       console.error("Dashboard data fetch error:", error);
+//     }
+//   };
+
+//   const deleteNotice = (noticeId) => {
+//     Swal.fire({
+//       title: "Are you sure?",
+//       text: "You won't be able to revert this!",
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonColor: "#3085d6",
+//       cancelButtonColor: "#d33",
+//       confirmButtonText: "Yes, delete it!",
+//     }).then(async (result) => {
+//       if (result.isConfirmed) {
+//         try {
+//           await axios.get(`http://localhost:8080/notice/delete/${noticeId}`);
+//           Swal.fire("Deleted!", "Your file has been deleted.", "success");
+//           getNotice();
+//         } catch (error) {
+//           Swal.fire("Error!", "Could not delete notice.", "error");
+//         }
+//       }
+//     });
+//   };
+
+//   const filteredNotices = notice.filter((data) =>
+//     data.title.toLowerCase().includes(searchQuery.toLowerCase())
+//   );
+
+//   return (
+//     <div className="flex flex-col bg-[#454649] min-h-screen">
+//       <Header />
+//       <div className="flex flex-1 p-6 bg-[#454649] min-h-screen">
+//         <div className="w-full bg-transparent p-6 mt-10">
+//           <h1 className="text-xl font-bold text-white mb-4">Dashboard</h1>
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+//             {[{ title: "Total Classes", value: totalClass, icon: FaChalkboardTeacher, bg: "bg-blue-500" },
+//               { title: "Total Teachers", value: totalTeacher, icon: FaUserGraduate, bg: "bg-green-500" },
+//               { title: "Total Students", value: totalStudents, icon: FaUsers, bg: "bg-purple-500" }]
+//               .map((item, index) => (
+//                 <div key={index} className={`${item.bg} p-6 rounded-lg shadow-md text-center text-white`}>
+//                   <item.icon className="text-4xl mx-auto mb-3" />
+//                   <h2 className="text-xl font-semibold">{item.title}</h2>
+//                   <p className="text-2xl font-bold mt-2">{item.value}</p>
+//                 </div>
+//               ))}
+//           </div>
+
+//           <h1 className="text-xl font-bold text-white mb-4">Notice Board</h1>
+//           <div className="relative w-64 mb-4">
+//             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-400" size={18} />
+//             <input type="text" placeholder="Search Notice" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+//               className="w-64 pl-10 p-2 border border-gray-300 rounded-md text-yellow-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-yellow-600" />
+//           </div>
+
+//           {loading ? (
+//             <div className="text-center text-white text-xl">Loading...</div>
+//           ) : filteredNotices.length === 0 ? (
+//             <div className="text-center text-gray-400">No notices found.</div>
+//           ) : (
+//             <table className="w-full bg-[#454649] border border-gray-300 rounded-lg shadow-md">
+//               <thead className="bg-gray-200">
+//                 <tr className="bg-[#252629] text-white">
+//                   <th className="px-4 py-3">Title</th>
+//                   <th className="px-4 py-3">Date</th>
+//                   <th className="px-4 py-3">Role</th>
+//                   <th className="px-4 py-3">Actions</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {filteredNotices.map((data, index) => (
+//                   <tr key={index} className="even:bg-[#454649] odd:bg-[#3b3c3f] text-white">
+//                     <td className="px-4 py-3">{data.title}</td>
+//                     <td className="px-4 py-3">{new Date(data.date).toLocaleDateString()}</td>
+//                     <td className="px-4 py-3">{data.role}</td>
+//                     <td className="px-4 py-3 flex gap-2">
+//                       <Link to={`/adminhome/viewnotes/${data._id}`} className="text-blue-400">View</Link>
+//                       <Link to={`/adminhome/updatenotice/${data._id}`} className="text-green-400">Edit</Link>
+//                       <button onClick={() => deleteNotice(data._id)} className="text-red-400">Delete</button>
+//                     </td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           )}
+//         </div>
+//       </div>
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// export default AdminHome;

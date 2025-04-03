@@ -69,4 +69,5 @@ const DeleteTeacher = async (req, res) => {
     }
 };
 
-module.exports = { Teacherclass, displayteacherclasses, updatesubject, DeleteTeacher };
+
+module.exports = { Teacherclass, displayteacherclasses, updatesubject, DeleteTeacher};

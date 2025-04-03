@@ -16,7 +16,7 @@ const routeTitles = {
   "/studentMenu/studentDashboard/studentPracticeTest": "Practice Test",
   "/studentMenu/studentDashboard/studentFeedback": "Feedback",
   "/studentMenu/studentDashboard/studentNotice": "Notice",
-  "/studentMenu/studentDashboard/StudentAdminMeassages": "Meassages"
+  "/studentMenu/studentDashboard/StudentAdminMeassages": "Messages"
 };
 
 const Header = ({ profileImage }) => {
