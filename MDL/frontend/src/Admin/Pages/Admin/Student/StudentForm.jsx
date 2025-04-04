@@ -84,8 +84,47 @@ function StudentForm() {
     });
   };
 
+  const validateForm = () => {
+    const nameRegex = /^[A-Za-z]+$/;
+    const numberRegex = /^[0-9]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const aadharRegex = /^\d{12}$/;
+    const mobileRegex = /^\d{10}$/;
+
+    if (!numberRegex.test(formData.s_id)) {
+      toast.error("Student ID must be only numbers");
+      return false;
+    }
+    if (!nameRegex.test(formData.fname) || !nameRegex.test(formData.mname) || !nameRegex.test(formData.lname)) {
+      toast.error("Name fields must contain only letters");
+      return false;
+    }
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Invalid email format");
+      return false;
+    }
+    if (!aadharRegex.test(formData.adharnumber)) {
+      toast.error("Aadhar Number must be 12 digits"); 
+      return false;
+    }
+    if (!nameRegex.test(formData.city) || !nameRegex.test(formData.country)) {
+      toast.error("City and Country must contain only letters");
+      return false;
+    }
+    if (!mobileRegex.test(formData.mobilenumber)) {
+      toast.error("Mobile number must be 10 digits");
+      return false;
+    }
+    if (!numberRegex.test(formData.fee)) {
+      toast.error("Fee must be a number");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     console.log(formData);
     if (formData.s_class === "") {
       toast.error("Please select a class", {
