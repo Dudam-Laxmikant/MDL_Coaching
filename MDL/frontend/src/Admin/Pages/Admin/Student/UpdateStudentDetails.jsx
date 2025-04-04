@@ -251,12 +251,12 @@ function UpdateStudentDetails() {
               </button>
             </div>
           </form>
-          <Link
+          {/* <Link
             to={"/addstudents"}
             className="block text-center mt-4 text-blue-400 hover:underline"
           >
             Go Back
-          </Link>
+          </Link> */}
         </div>
       </div>
       <Link

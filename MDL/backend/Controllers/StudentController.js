@@ -193,21 +193,44 @@ const updatestudentdetails = async (req, res) => {
     }
 };
 
+// const Deletestudent = async (req, res) => {
+//     try {
+//         const { id } = req.params
+//         // const ok = StudentModel.findByIdAndDelete(id)
+//         // console.log(ok);
+//         console.log(id)
+//         const notice = await StudentModel.findByIdAndDelete(id)
+//             // console.log(notice)
+//         if (!notice) {
+//             return res.status()
+//                 .json({ message: "Student Deleting Canceled", success: false })
+//         }
+//         return res.status(201)
+//             .json({ message: "Student Deleted SuccessFully", success: true })
+//     } catch (error) {
+//         return res.status(408)
+//             .json({ message: "Server error" + error, success: false })
+//     }
+// }
 const Deletestudent = async (req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params
-        console.log(id)
-        const notice = await StudentModel.findByIdAndDelete(id)
-
-        if (!notice) {
-            return res.status(402)
-                .json({ message: "Student Deleting Canceled", success: false })
+        const teacher = await StudentModel.findByIdAndDelete(id);
+        if (!teacher) {
+            return res.status(404).json({
+                message: "Student not found",
+                success: false,
+            });
         }
-        return res.status(200)
-            .json({ message: "Student Deleted SuccessFully", success: true })
+        res.status(200).json({
+            message: "Student deleted successfully",
+            success: true,
+        });
     } catch (error) {
-        return res.status(408)
-            .json({ message: "Server error" + error, success: false })
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
     }
 }
 

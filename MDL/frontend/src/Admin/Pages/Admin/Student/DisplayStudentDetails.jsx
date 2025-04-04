@@ -199,7 +199,7 @@ function DisplayStudentDetails() {
               <div className="text-gray-900">
                 {studentDetails?.mobilenumber}
               </div>
-              
+
 
             </div>
           </div>
@@ -207,14 +207,18 @@ function DisplayStudentDetails() {
       </div>
 
       <Link
-        to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem(
-          "studentclass"
-        )}`}
+        to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem("studentclass")}`}
+        // to={`/addstudents/showstudentdetails/studentdetails/${studentDetails.s_class}`}
+
         className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300"
       >
         <AiOutlineArrowLeft size={24} />
       </Link>
-
+      {/* <Link to={`/addstudents/showstudentdetails/studentdetails/${localStorage.getItem(
+        "studentclass"
+      )}`} className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300">
+        <AiOutlineArrowLeft size={24} />
+      </Link> */}
       {/* Footer */}
       <Footer />
     </div>

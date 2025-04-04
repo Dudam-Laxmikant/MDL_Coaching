@@ -63,37 +63,38 @@ function StudentDetails() {
     }
   };
 
-  function delet(studetId) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
+  async function handleDelete(sid) {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
       if (result.isConfirmed) {
-        try {
-          const url = `http://localhost:8080/student/deletestudent/${studetId}`;
-
-          const response = await axios.get(url);
-
-          Swal.fire({
-            title: response.data.message,
-            text: "Your file has been deleted.",
-            icon: "success",
-          });
-          getStudents();
-        } catch (error) {
+        const response = await axios.get(
+          `http://localhost:8080/student/deleteteacher/${sid}`
+        );
+        if (response.data.success) {
           Swal.fire({
             title: "Deleted!",
-            text: "Your file has been deleted.",
+            text: "The teacher has been removed from the class.",
             icon: "success",
           });
         }
+        getStudents();
       }
-    });
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete teacher.",
+        icon: "error",
+      });
+    }
   }
   return (
     <div className="flex flex-col min-h-screen">
@@ -186,8 +187,7 @@ function StudentDetails() {
                     </td>
                     <td className="p-3 border border-gray-700">
                       <button
-                        onClick={() => delet(student._id)}
-                        
+                        onClick={() => handleDelete(student._id)}
                         className="text-red-500 hover:text-red-600 transition"
                       >
                         <AiOutlineDelete className="text-2xl" />
