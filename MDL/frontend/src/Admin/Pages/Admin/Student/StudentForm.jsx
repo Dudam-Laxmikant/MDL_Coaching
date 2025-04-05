@@ -73,9 +73,7 @@ function StudentForm() {
     }
   };
 
-  // const handleFileChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.files[0] });
-  // };
+  
   const handleFileChange = (e) => {
     const { name, value, type, files } = e.target;
     setFormData({
@@ -427,18 +425,7 @@ function StudentForm() {
           </form>
         </div>
       </div>
-      {/* <div className="flex flex-col">
-        <label className="text-gray-300 font-medium mb-1">Mobile Number</label>
-        <input
-          type="number"
-          name="mobilenumber"
-          value={formData.mobilenumber}
-          onChange={handleChange}
-          placeholder="Enter Mobile Number"
-          className="w-full pl-12 p-4 border border-gray-600 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          required
-        ></input>
-      </div> */}
+      
 
       <button
         type="submit"

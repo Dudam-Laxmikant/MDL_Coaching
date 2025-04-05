@@ -98,11 +98,10 @@ function AdminLogin() {
           <label
             htmlFor="email"
             className={`absolute left-4 px-1 bg-gray-700 text-gray-400 transition-all duration-300 ease-in-out
-                            ${
-                              formData.email
-                                ? "-top-4 text-blue-400 bg-gray-800 scale-90"
-                                : "top-2 peer-focus:-top-4 peer-focus:text-blue-400 peer-focus:bg-gray-800 peer-focus:scale-90"
-                            } 
+                            ${formData.email
+                ? "-top-4 text-blue-400 bg-gray-800 scale-90"
+                : "top-2 peer-focus:-top-4 peer-focus:text-blue-400 peer-focus:bg-gray-800 peer-focus:scale-90"
+              } 
                         text-sm`}
           >
             Email
@@ -122,11 +121,10 @@ function AdminLogin() {
           <label
             htmlFor="password"
             className={`absolute left-4 px-1 bg-gray-700 text-gray-400 transition-all duration-300 ease-in-out
-                            ${
-                              formData.password
-                                ? "-top-4 text-pink-400 bg-gray-800 scale-90"
-                                : "top-2 peer-focus:-top-4 peer-focus:text-pink-400 peer-focus:bg-gray-800 peer-focus:scale-90"
-                            } 
+                            ${formData.password
+                ? "-top-4 text-pink-400 bg-gray-800 scale-90"
+                : "top-2 peer-focus:-top-4 peer-focus:text-pink-400 peer-focus:bg-gray-800 peer-focus:scale-90"
+              } 
                         text-sm`}
           >
             Password
