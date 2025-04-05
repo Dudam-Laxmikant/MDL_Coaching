@@ -426,14 +426,6 @@ function StudentForm() {
         </div>
       </div>
       
-
-      <button
-        type="submit"
-        className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition flex items-center gap-2"
-      >
-        <FaPlus className="w-5 h-5" />
-        Add Student
-      </button>
       <Link
         to="/addstudents"
         className="fixed bottom-6 left-4 text-white bg-green-600 p-3 rounded-full hover:bg-green-700 transition duration-300"
