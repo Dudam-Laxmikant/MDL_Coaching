@@ -1,11 +1,10 @@
-// import { useState } from "react";
-// import { Link } from "react-router-dom";
-import Footer from "../Footer";
-import Header from "../Header";
-// import Sidebar from "../Sidebar";
+
+// import { useEffect, useState } from "react";
+// import { toast } from "react-toastify";
+// import Footer from "../Footer";
+// import Header from "../Header";
 // import Swal from "sweetalert2";
 // import axios from "axios";
-// import { toast } from "react-toastify";
 
 // const TeacherNotes = () => {
 //   const [formData, setFormData] = useState({
@@ -18,22 +17,43 @@ import Header from "../Header";
 //     setFormData({
 //       classname: "",
 //       subject: "",
-//       notesfile: "",
+//       notesfille: "",
 //     });
 
 //     document.getElementById("notesForm").reset();
 //   }
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
+//   const getsubject = async () => {
+//     try {
+//       const res = await axios.get("http://localhost:8080/subject/getsubjects");
+//       console.log(res.data);
+//       setSubjects(res.data.data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   const handleSubmit = async () => {
 //     const formDataToSend = new FormData();
+//     if (formDataToSend.classname === "") {
+//       toast.error("Please select a class", {
+//         position: "top-center",
+//         autoClose: 2000,
+//       });
+//       return;
+//     }
+//     if (formDataToSend.subject === "") {
+//       toast.error("Please select a subject", {
+//         position: "top-center",
+//         autoClose: 2000,
+//       });
+//       return;
+//     }
 //     formDataToSend.append("classname", formData.classname);
 //     formDataToSend.append("subject", formData.subject);
-//     formDataToSend.append("notesfille", formData.notesfille); // Use correct field name
+//     formDataToSend.append("subject_Id", formData.subject_Id);
+//     formDataToSend.append("notesfille", formData.notesfille);
 
 //     try {
-//       const url = "http://localhost:8080/notes/sendnotes";
+//       const url = "http://localhost:8080/notes";
 
 //       const response = await axios.post(url, formDataToSend, {
 //         headers: {
@@ -42,8 +62,7 @@ import Header from "../Header";
 //       });
 
 //       console.log(response);
-//       // console.log("this is the response data::: " + response.data);
-//       const { message, success, error } = await response.data;
+//       const { message, success, error } = response.data;
 
 //       if (success) {
 //         toast.success(message, {
@@ -51,19 +70,9 @@ import Header from "../Header";
 //           autoClose: 2000,
 //         });
 
-//         // setTimeout(() => {
-//         //   navigate("/addstudents");
-//         // }, 1000);
 //         resetForm();
-//       } else if (error) {
-//         console.log(error);
-//         const details = error?.details[0].message;
-//         toast.error(details, {
-//           position: "top-center",
-//           autoClose: 2000,
-//         });
 //       } else {
-//         toast.error(message, {
+//         toast.error(error || message, {
 //           position: "top-center",
 //           autoClose: 2000,
 //         });
@@ -77,116 +86,147 @@ import Header from "../Header";
 //     }
 //   };
 
-//   const handleFileChange = (e) => {
-//     const { name, value, type, files } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: type === "file" ? files[0] : value,
+//   const confirmUpload = (e) => {
+//     e.preventDefault();
+
+//     Swal.fire({
+//       title: "Are you sure?",
+//       text: "Do you want to upload these notes?",
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonText: "Upload Notes",
+//       cancelButtonText: "Cancel",
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         handleSubmit();
+//         Swal.fire("Uploaded!", "Your notes have been uploaded.", "success");
+//       }
 //     });
 //   };
+  
+//   const [classes, setClasses] = useState([]);
+//   const [subjects, setSubjects] = useState([]);
+//   const getclasses = async () => {
+//     try {
+//       const res = await axios.get("http://localhost:8080/class/getclasses");
+//       console.log(res.data);
+//       setClasses(res.data.data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   useEffect(() => {
+//     getclasses();
+//     getsubject();
+//   }, []);
+//   const handleClassChange = (event) => {
+//     const selectedValue = JSON.parse(event.target.value);
+//     setFormData({
+//       ...formData,
+//       classname: selectedValue.name,
+//       s_classId: selectedValue.id,
+//     });
+//   };
+
+//   const handleFileChange = (e) => {
+//     const { name, type, files } = e.target;
+//     setFormData({
+//       ...formData,
+//       [name]: type === "file" ? files[0] : e.target.value,
+//     });
+//   };
+//   const handlesubjectChange = (event) => {
+//     const selectedValue = JSON.parse(event.target.value);
+//     setFormData({
+//       ...formData,
+//       subject: selectedValue.name,
+//       subject_Id: selectedValue.id,
+//     });
+//   };
+
 //   return (
-//     <div className="flex flex-col ">
-//       {/* Header */}
+//     <div className="flex flex-col">
 //       <Header />
-
-//       <div className="flex flex-1 ">
-//         {/* <Sidebar /> */}
-
-//         {/* Main Content */}
+//       <div className="flex flex-1">
 //         <div className="flex-1 h-screen bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 p-10 overflow-auto">
-//           <div className="flex items-center justify-center">
+//           <div className="flex mt-20 items-center justify-center">
 //             <form
 //               id="notesForm"
 //               className="bg-white/30 backdrop-blur-lg shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-5 transition-transform duration-300 hover:scale-105 border border-white/30"
-//               onSubmit={handleSubmit}
+//               onSubmit={confirmUpload}
 //             >
 //               <h2 className="text-3xl font-bold text-center text-black drop-shadow-md">
 //                 📚 Upload Notes
 //               </h2>
 
 //               {/* Class Selection */}
-//               <label
-//                 htmlFor="class"
-//                 className="block font-medium text-black text-lg"
-//               >
+//               <label htmlFor="class" className="block font-medium text-black text-lg">
 //                 Class :
 //               </label>
 //               <select
 //                 name="classname"
-//                 id="class"
+//                 onChange={handleClassChange}
+//                  className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
 //                 required
-//                 value={formData.classname}
-//                 onChange={(e) =>
-//                   setFormData({ ...formData, classname: e.target.value })
-//                 }
-//                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-200 text-gray-900"
 //               >
-//                 <option value="" disabled>
-//                   -- Select Class --
-//                 </option>
-//                 <option value="first">First</option>
-//                 <option value="second">Second</option>
-//                 <option value="third">Third</option>
+//                 <option value="">-- Select Class --</option>
+//                 {classes.map((cls, index) => (
+//                   <option
+//                     value={JSON.stringify({
+//                       id: cls._id,
+//                       name: cls.classname,
+//                     })}
+//                     key={index}
+//                   >
+//                     {cls.classname}
+//                   </option>
+//                 ))}
 //               </select>
 
 //               {/* Subject Selection */}
-//               <label
-//                 htmlFor="sub"
-//                 className="block font-medium text-black text-lg"
-//               >
+//               <label htmlFor="sub" className="block font-medium text-black text-lg">
 //                 Subject :
 //               </label>
 //               <select
 //                 name="subject"
-//                 id="sub"
+//                 onChange={handlesubjectChange}
+//                  className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
 //                 required
-//                 value={formData.subject}
-//                 onChange={(e) =>
-//                   setFormData({ ...formData, subject: e.target.value })
-//                 }
-//                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
 //               >
-//                 <option value="" disabled>
-//                   -- Select Subject --
-//                 </option>
-//                 <option value="science">Science</option>
-//                 <option value="maths">Maths</option>
-//                 <option value="english">English</option>
+//                 <option value="">-- Select Class --</option>
+//                 {subjects.map((sub, index) => (
+//                   <option
+//                     value={JSON.stringify({
+//                       id: sub._id,
+//                       name: sub.subjectName,
+//                     })}
+//                     key={index}
+//                   >
+//                     {sub.subjectName}
+//                   </option>
+//                 ))}
 //               </select>
+              
 
 //               {/* File Input */}
-//               <label
-//                 htmlFor="notes"
-//                 className="block font-medium text-black text-lg"
-//               >
+//               <label htmlFor="notes" className="block font-medium text-black text-lg">
 //                 Notes :
 //               </label>
-
 //               <input
 //                 type="file"
-//                 name="notesfille" // ✅ Now it matches the backend
+//                 name="notesfille"
 //                 id="notes"
 //                 accept="image/*"
 //                 onChange={handleFileChange}
 //                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md file:bg-blue-600 file:text-white file:rounded-md file:px-4 file:py-2 file:border-none file:cursor-pointer hover:file:bg-blue-700 transition-all duration-200 text-gray-900"
 //                 required
 //               />
-//               {/* <input
-//                 type="file"
-//                 name="notesfile"
-//                 id="notes"
-//                 accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif"
-//                 onChange={handleFileChange}
-//                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md file:bg-blue-600 file:text-white file:rounded-md file:px-4 file:py-2 file:border-none file:cursor-pointer hover:file:bg-blue-700 transition-all duration-200 text-gray-900"
-//                 required
-//               /> */}
 
 //               {/* Buttons */}
 //               <div className="flex space-x-4">
 //                 <button
 //                   type="submit"
 //                   className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-300 flex items-center justify-center space-x-2"
-//                   // onClick={handleSubmit}
 //                 >
 //                   🚀 <span>Upload</span>
 //                 </button>
@@ -203,8 +243,6 @@ import Header from "../Header";
 //           </div>
 //         </div>
 //       </div>
-
-//       {/* Footer */}
 //       <Footer />
 //     </div>
 //   );
@@ -213,6 +251,8 @@ import Header from "../Header";
 // export default TeacherNotes;
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import Footer from "../Footer";
+import Header from "../Header";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -223,40 +263,50 @@ const TeacherNotes = () => {
     notesfille: "",
   });
 
+  const [classes, setClasses] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true); // 🌟 Loading state
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [classRes, subjectRes] = await Promise.all([
+          axios.get("http://localhost:8080/class/getclasses"),
+          axios.get("http://localhost:8080/subject/getsubjects"),
+        ]);
+        setClasses(classRes.data.data);
+        setSubjects(subjectRes.data.data);
+        setLoading(false); // ✅ Set loading to false after data is fetched
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   function resetForm() {
     setFormData({
       classname: "",
       subject: "",
       notesfille: "",
     });
-
     document.getElementById("notesForm").reset();
   }
-  const getsubject = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/subject/getsubjects");
-      console.log(res.data);
-      setSubjects(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
-    if (formDataToSend.classname === "") {
-      toast.error("Please select a class", {
-        position: "top-center",
-        autoClose: 2000,
-      });
+
+    if (formData.classname === "") {
+      toast.error("Please select a class", { position: "top-center", autoClose: 2000 });
       return;
     }
-    if (formDataToSend.subject === "") {
-      toast.error("Please select a subject", {
-        position: "top-center",
-        autoClose: 2000,
-      });
+    if (formData.subject === "") {
+      toast.error("Please select a subject", { position: "top-center", autoClose: 2000 });
       return;
     }
+
     formDataToSend.append("classname", formData.classname);
     formDataToSend.append("subject", formData.subject);
     formDataToSend.append("subject_Id", formData.subject_Id);
@@ -264,41 +314,25 @@ const TeacherNotes = () => {
 
     try {
       const url = "http://localhost:8080/notes";
-
       const response = await axios.post(url, formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log(response);
       const { message, success, error } = response.data;
-
       if (success) {
-        toast.success(message, {
-          position: "top-center",
-          autoClose: 2000,
-        });
-
+        toast.success(message, { position: "top-center", autoClose: 2000 });
         resetForm();
       } else {
-        toast.error(error || message, {
-          position: "top-center",
-          autoClose: 2000,
-        });
+        toast.error(error || message, { position: "top-center", autoClose: 2000 });
       }
     } catch (error) {
       console.error(error);
-      toast.error("Failed to upload file", {
-        position: "top-center",
-        autoClose: 2000,
-      });
+      toast.error("Failed to upload file", { position: "top-center", autoClose: 2000 });
     }
   };
 
   const confirmUpload = (e) => {
     e.preventDefault();
-
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to upload these notes?",
@@ -313,28 +347,22 @@ const TeacherNotes = () => {
       }
     });
   };
-  
-  const [classes, setClasses] = useState([]);
-  const [subjects, setSubjects] = useState([]);
-  const getclasses = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
-      console.log(res.data);
-      setClasses(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getclasses();
-    getsubject();
-  }, []);
+
   const handleClassChange = (event) => {
     const selectedValue = JSON.parse(event.target.value);
     setFormData({
       ...formData,
       classname: selectedValue.name,
       s_classId: selectedValue.id,
+    });
+  };
+
+  const handlesubjectChange = (event) => {
+    const selectedValue = JSON.parse(event.target.value);
+    setFormData({
+      ...formData,
+      subject: selectedValue.name,
+      subject_Id: selectedValue.id,
     });
   };
 
@@ -345,112 +373,105 @@ const TeacherNotes = () => {
       [name]: type === "file" ? files[0] : e.target.value,
     });
   };
-  const handlesubjectChange = (event) => {
-    const selectedValue = JSON.parse(event.target.value);
-    setFormData({
-      ...formData,
-      subject: selectedValue.name,
-      subject_Id: selectedValue.id,
-    });
-  };
 
   return (
     <div className="flex flex-col">
       <Header />
       <div className="flex flex-1">
         <div className="flex-1 h-screen bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 p-10 overflow-auto">
-          <div className="flex items-center justify-center">
-            <form
-              id="notesForm"
-              className="bg-white/30 backdrop-blur-lg shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-5 transition-transform duration-300 hover:scale-105 border border-white/30"
-              onSubmit={confirmUpload}
-            >
-              <h2 className="text-3xl font-bold text-center text-black drop-shadow-md">
-                📚 Upload Notes
-              </h2>
-
-              {/* Class Selection */}
-              <label htmlFor="class" className="block font-medium text-black text-lg">
-                Class :
-              </label>
-              <select
-                name="classname"
-                onChange={handleClassChange}
-                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
-                required
+          {loading ? (
+            // 🔄 Loading Spinner
+            <div className="flex items-center justify-center h-full">
+              <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-600" />
+            </div>
+          ) : (
+            // ✅ Main Form (only shows when loading is false)
+            <div className="flex mt-20 items-center justify-center transition-opacity duration-500 opacity-100">
+              <form
+                id="notesForm"
+                className="bg-white/30 backdrop-blur-lg shadow-2xl rounded-2xl p-8 max-w-md w-full space-y-5 transition-transform duration-300 hover:scale-105 border border-white/30"
+                onSubmit={confirmUpload}
               >
-                <option value="">-- Select Class --</option>
-                {classes.map((cls, index) => (
-                  <option
-                    value={JSON.stringify({
-                      id: cls._id,
-                      name: cls.classname,
-                    })}
-                    key={index}
-                  >
-                    {cls.classname}
-                  </option>
-                ))}
-              </select>
+                <h2 className="text-3xl font-bold text-center text-black drop-shadow-md">
+                  📚 Upload Notes
+                </h2>
 
-              {/* Subject Selection */}
-              <label htmlFor="sub" className="block font-medium text-black text-lg">
-                Subject :
-              </label>
-              <select
-                name="subject"
-                onChange={handlesubjectChange}
-                 className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
-                required
-              >
-                <option value="">-- Select Class --</option>
-                {subjects.map((sub, index) => (
-                  <option
-                    value={JSON.stringify({
-                      id: sub._id,
-                      name: sub.subjectName,
-                    })}
-                    key={index}
-                  >
-                    {sub.subjectName}
-                  </option>
-                ))}
-              </select>
-              
-
-              {/* File Input */}
-              <label htmlFor="notes" className="block font-medium text-black text-lg">
-                Notes :
-              </label>
-              <input
-                type="file"
-                name="notesfille"
-                id="notes"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md file:bg-blue-600 file:text-white file:rounded-md file:px-4 file:py-2 file:border-none file:cursor-pointer hover:file:bg-blue-700 transition-all duration-200 text-gray-900"
-                required
-              />
-
-              {/* Buttons */}
-              <div className="flex space-x-4">
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-300 flex items-center justify-center space-x-2"
+                {/* Class Dropdown */}
+                <label htmlFor="class" className="block font-medium text-black text-lg">
+                  Class :
+                </label>
+                <select
+                  name="classname"
+                  onChange={handleClassChange}
+                  className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
+                  required
                 >
-                  🚀 <span>Upload</span>
-                </button>
+                  <option value="">-- Select Class --</option>
+                  {classes.map((cls, index) => (
+                    <option
+                      value={JSON.stringify({ id: cls._id, name: cls.classname })}
+                      key={index}
+                    >
+                      {cls.classname}
+                    </option>
+                  ))}
+                </select>
 
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="w-full bg-gray-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-300"
+                {/* Subject Dropdown */}
+                <label htmlFor="sub" className="block font-medium text-black text-lg">
+                  Subject :
+                </label>
+                <select
+                  name="subject"
+                  onChange={handlesubjectChange}
+                  className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md focus:ring-2 focus:ring-purple-400 focus:outline-none transition-all duration-200 text-gray-900"
+                  required
                 >
-                  🔄 Reset
-                </button>
-              </div>
-            </form>
-          </div>
+                  <option value="">-- Select Subject --</option>
+                  {subjects.map((sub, index) => (
+                    <option
+                      value={JSON.stringify({ id: sub._id, name: sub.subjectName })}
+                      key={index}
+                    >
+                      {sub.subjectName}
+                    </option>
+                  ))}
+                </select>
+
+                {/* File Upload */}
+                <label htmlFor="notes" className="block font-medium text-black text-lg">
+                  Notes :
+                </label>
+                <input
+                  type="file"
+                  name="notesfille"
+                  id="notes"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="w-full p-3 border border-white/30 rounded-lg bg-white/30 backdrop-blur-md file:bg-blue-600 file:text-white file:rounded-md file:px-4 file:py-2 file:border-none file:cursor-pointer hover:file:bg-blue-700 transition-all duration-200 text-gray-900"
+                  required
+                />
+
+                {/* Buttons */}
+                <div className="flex space-x-4">
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-300 flex items-center justify-center space-x-2"
+                  >
+                    🚀 <span>Upload</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="w-full bg-gray-500 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl hover:scale-110 transition-transform duration-300"
+                  >
+                    🔄 Reset
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </div>
       <Footer />

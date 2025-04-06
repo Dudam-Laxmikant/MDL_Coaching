@@ -247,6 +247,7 @@
 // }
 
 // export default ShowTeachersList;
+
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Pencil, Trash2, X } from "lucide-react";
@@ -368,7 +369,6 @@ function ShowTeachersList() {
 
         <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-20 min-h-screen">
           <div className="max-w-4xl mx-auto bg-gray-700 p-6 rounded-lg shadow-md w-full">
-
             {loading ? (
               <div className="flex justify-center items-center h-96 w-full">
                 <div className="flex space-x-2">
@@ -408,9 +408,11 @@ function ShowTeachersList() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
                           >
-                            <td className="p-3 border-b border-gray-600">{teacher.TeacherId.t_id}</td>
                             <td className="p-3 border-b border-gray-600">
-                              {`${teacher.TeacherId.s_name} ${teacher.TeacherId.name} ${teacher.TeacherId.lname}`}
+                              {teacher.TeacherId?.t_id || "N/A"}
+                            </td>
+                            <td className="p-3 border-b border-gray-600">
+                              {`${teacher.TeacherId?.s_name || ""} ${teacher.TeacherId?.name || ""} ${teacher.TeacherId?.lname || ""}`}
                             </td>
                             <td className="p-3 border-b border-gray-600">
                               {teacher.SubjectName || "Not Assigned"}
@@ -469,7 +471,7 @@ function ShowTeachersList() {
               <p className="mb-3">
                 Teacher:{" "}
                 <span className="font-medium">
-                  {`${selectedTeacher?.TeacherId.s_name} ${selectedTeacher?.TeacherId.name} ${selectedTeacher?.TeacherId.lname}`}
+                  {`${selectedTeacher?.TeacherId?.s_name || ""} ${selectedTeacher?.TeacherId?.name || ""} ${selectedTeacher?.TeacherId?.lname || ""}`}
                 </span>
               </p>
               <label className="block font-medium mb-2">Select Subject:</label>
@@ -487,7 +489,6 @@ function ShowTeachersList() {
                 ))}
               </select>
 
-              {/* Buttons */}
               <div className="flex justify-end gap-3 mt-5">
                 <button
                   className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500"
@@ -509,4 +510,5 @@ function ShowTeachersList() {
     </>
   );
 }
+
 export default ShowTeachersList;
