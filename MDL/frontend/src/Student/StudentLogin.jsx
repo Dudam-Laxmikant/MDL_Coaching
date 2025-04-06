@@ -161,10 +161,7 @@ function StudentLogin() {
           </motion.button>
           {/* </Link> */}
           <p className="text-center text-gray-600">
-            Don't have an account?{" "}
-            <Link to="" className="text-purple-600 hover:underline">
-              Register
-            </Link>
+          First time here? Explore MDL Coaching (offline) and unlock your potential today!
           </p>
           <ToastContainer />
         </form>

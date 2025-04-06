@@ -129,10 +129,10 @@ const TeacherLogin = () => {
           </button>
         </form>
         <p className="text-sm text-center text-gray-700 mt-4">
-          Don't have an account?{" "}
-          <Link to="" className="text-pink-500 font-semibold hover:underline">
+        First time here? Explore MDL Coaching (offline) and unlock your potential today!
+          {/* <Link to="" className="text-pink-500 font-semibold hover:underline">
             Sign up
-          </Link>
+          </Link> */}
         </p>
       </div>
       <ToastContainer />
