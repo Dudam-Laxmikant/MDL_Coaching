@@ -73,6 +73,7 @@ import TeacherUpdateAttendence from "./Teacher/Pages/TeacherUpdateAttendence";
 import StudentNotice from "./Student/Pages/StudentNotice";
 import { Showsubjects } from "./Admin/Pages/Admin/Subjects/Showsubjects";
 import StudentAdminMeassages from "./Student/Pages/StudentAdminMeassages";
+import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
   return (
@@ -88,173 +89,192 @@ const App = () => {
             <Route path="/registration" element={<Registration />}></Route>
             <Route path="/categoryHome" element={<CategoryHome/>}></Route> */}
           {/* <Route path="/addadmin" element={<AddAdmin />} /> */}
-          <Route path="/adminhome" element={<AdminHome />}></Route>
+          <Route path="/adminhome" element={
+            <ProtectedRoute allowedRoles={"AdminId"} >
+              <AdminHome />
+            </ProtectedRoute>
+          }></Route>
           <Route path="/AdminLogin" element={<AdminLogin />}></Route>
           <Route
             path="/adminregistration"
             element={<AdminRegistration />}
           ></Route>
           {/* class */}
-          <Route path="/addclasses" element={<AddClasses />} />
-          <Route path="/addclasses/class" element={<Classes />} />
-          <Route path="/addclasses/showclasses" element={<ShowClasses />} />
+          <Route path="/addclasses" element={
+            <ProtectedRoute allowedRoles={"AdminId"} >
+              <AddClasses />
+            </ProtectedRoute>
+          } />
+          <Route path="/addclasses/class" element={
+            <ProtectedRoute allowedRoles={"AdminId"} >
+              <Classes />
+            </ProtectedRoute>} />
+          <Route path="/addclasses/showclasses" element={
+            <ProtectedRoute allowedRoles={"AdminId"} >
+              <ShowClasses />
+            </ProtectedRoute>
+          } />
           <Route
             path="/showclassTeacher/addclassteacher/:classid"
-            element={<AddClassTeacher />}
+            element={
+              <ProtectedRoute allowedRoles={"AdminId"} >
+                <AddClassTeacher />
+              </ProtectedRoute>
+            }
           />
 
           {/* student */}
 
-          <Route path="/addstudents" element={<AddStudents />} />
-          <Route path="/addstudents/studentform" element={<StudentForm />} />
+          <Route path="/addstudents" element={<ProtectedRoute allowedRoles={"AdminId"} ><AddStudents /></ProtectedRoute>} />
+          <Route path="/addstudents/studentform" element={<ProtectedRoute allowedRoles={"AdminId"} ><StudentForm /></ProtectedRoute>} />
           <Route
             path="/addstudents/showstudentdetails"
-            element={<ShowStudentDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><ShowStudentDetails /></ProtectedRoute>}
           />
           <Route
             path="/addstudents/showstudentdetails/studentdetails/:classId"
-            element={<StudentDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><StudentDetails /></ProtectedRoute>}
           />
           <Route
             path="/addstudents/showstudentdetails/studentdetails/feedetails/:id"
-            element={<FeeDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><FeeDetails /></ProtectedRoute>}
           />
           <Route
             path="/addstudents/showstudentdetails/studentdetails/updatestudentdetails/:studentId"
-            element={<UpdateStudentDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><UpdateStudentDetails /></ProtectedRoute>}
           />
           <Route
             path="/addstudents/showstudentdetails/studentdetails/displaystudentdetails/:studentId"
-            element={<DisplayStudentDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><DisplayStudentDetails /></ProtectedRoute>}
           />
 
           {/* Teacher */}
-          <Route path="/showclassTeacher" element={<ShowClassTeacher />} />
+          <Route path="/showclassTeacher" element={<ProtectedRoute allowedRoles={"AdminId"} ><ShowClassTeacher /></ProtectedRoute>} />
           <Route
             path="/showclassTeacher/showallteacherlist"
-            element={<ShowAllTeachersList />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><ShowAllTeachersList /></ProtectedRoute>}
           />
           <Route
             path="/showclassTeacher/showallteacherlist/updatetecherdetails/:teacherid"
-            element={<UpdateTeacherDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><UpdateTeacherDetails /></ProtectedRoute>}
           />
           <Route
             path="/showclassTeacher/showallteacherlist/showprofile/:teacherId"
-            element={<ShowProfile />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><ShowProfile /></ProtectedRoute>}
           />
           <Route
             path="/showclassTeacher/showallteacherlist/salarydetails/:teacherid"
-            element={<SalaryDetails />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><SalaryDetails /></ProtectedRoute>}
           />
           <Route path="/showclassTeacher/addteacher" element={<AddTeacher />} />
           <Route
             path="/showclassTeacher/showteacherslist/:classname"
-            element={<ShowTeachersList />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><ShowTeachersList /></ProtectedRoute>}
           />
 
           <Route
             path="/adminhome/viewnotes/:NoticeId"
-            element={<ViewNotes />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><ViewNotes /></ProtectedRoute>}
           />
           <Route
             path="/adminhome/updatenotice/:NoticeId"
-            element={<UpdateNotice />}
+            element={<ProtectedRoute allowedRoles={"AdminId"} ><UpdateNotice /></ProtectedRoute>}
           />
-          <Route path="/adminhome/addNotice" element={<AddNotice />} />
-          <Route path="/timetable" element={<Timetable />} />
+          <Route path="/adminhome/addNotice" element={<ProtectedRoute allowedRoles={"AdminId"} ><AddNotice /></ProtectedRoute>} />
+          <Route path="/timetable" element={<ProtectedRoute allowedRoles={"AdminId"} ><Timetable /></ProtectedRoute>} />
 
           {/* <Route path="/notes" element={<Notes />} /> */}
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/adminlogout" element={<LogOut />} />
-          <Route path="/addsubjects" element={<AddSubjects />} />
-          <Route path="/addsubjects/showsubjects" element={<Showsubjects/>}/>
-          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/profile" element={<ProtectedRoute allowedRoles={"AdminId"} ><Profile /></ProtectedRoute>} />
+          <Route path="/adminlogout" element={<ProtectedRoute allowedRoles={"AdminId"} ><LogOut /></ProtectedRoute>} />
+          <Route path="/addsubjects" element={<ProtectedRoute allowedRoles={"AdminId"} ><AddSubjects /></ProtectedRoute>} />
+          <Route path="/addsubjects/showsubjects" element={<ProtectedRoute allowedRoles={"AdminId"} ><Showsubjects /></ProtectedRoute>} />
+          <Route path="/feedback" element={<ProtectedRoute allowedRoles={"AdminId"} ><Feedback /></ProtectedRoute>} />
 
           {/* teacher */}
           <Route path="/teacherLogin" element={<TeacherLogin />} />
           {/* <Route path="/teacherRegistration" element={<TeacherRegistration />}/> */}
-          <Route path="/teacherDashboard" element={<TeacherDashboard />} />
-          <Route path="/teacherClass" element={<TeacherClass />} />
-          <Route path="/teacherNotes" element={<TeacherNotes />} />
-          <Route path="/teacherAssignment" element={<TeacherAssignment />} />
-          <Route path="/teacherAttendence" element={<TeacherAttendance />} />
+          <Route path="/teacherDashboard" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherDashboard /></ProtectedRoute>} />
+          <Route path="/teacherClass" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherClass /></ProtectedRoute>} />
+          <Route path="/teacherNotes" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherNotes /></ProtectedRoute>} />
+          <Route path="/teacherAssignment" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherAssignment /></ProtectedRoute>} />
+          <Route path="/teacherAttendence" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherAttendance /></ProtectedRoute>} />
           <Route
             path="/teacherTimeSchedule"
-            element={<TeacherTimeSchedule />}
+            element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherTimeSchedule /></ProtectedRoute>}
           />
-          <Route path="/teacherProfile" element={<TeacherProfile />} />
-          <Route path="/teacherNotice" element={<TeacherNotice />} />
-          <Route path="/teacherSalary" element={<TeacherSalary />} />
+          <Route path="/teacherProfile" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherProfile /></ProtectedRoute>} />
+          <Route path="/teacherNotice" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherNotice /></ProtectedRoute>} />
+          <Route path="/teacherSalary" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherSalary /></ProtectedRoute>} />
           <Route
             path="/techerUpdateAttendence"
-            element={<TeacherUpdateAttendence />}
+            element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherUpdateAttendence /></ProtectedRoute>}
           />
 
           {/* student */}
           <Route
             path="/studentMenu/studentDashboard"
-            element={<StudentDashboard />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentDashboard /></ProtectedRoute>}
           />
           <Route path="/studentLogin" element={<StudentLogin />} />
-          <Route path="/studentMenu" element={<StudentMenu />} />
+          <Route path="/studentMenu" element={<ProtectedRoute allowedRoles={"studentid"} ><StudentMenu /></ProtectedRoute>} />
           {/* <Route path="/studentRegistration" element={<StudentRegistration />} /> */}
           <Route
             path="/studentMenu/studentPayment"
-            element={<StudentPayment />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentPayment /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentGeneralRegister"
-            element={<StudentGeneralRegister />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentGeneralRegister /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentClassDetails"
-            element={<StudentClassDetails />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentClassDetails /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentNotice"
-            element={<StudentNotice />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentNotice /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentTimetable"
-            element={<StudentTimetable />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentTimetable /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentFees"
-            element={<StudentFees />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentFees /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentAttendance"
-            element={<StudentAttendance />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentAttendance /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentHoliday"
-            element={<StudentHoliday />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentHoliday /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentLearningMaterial"
-            element={<StudentLearningMaterial />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentLearningMaterial /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentResult"
-            element={<StudentResult />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentResult /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentPracticeTest"
-            element={<StudentPracticeTest />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentPracticeTest /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDashboard/studentFeedback"
-            element={<StudentFeedback />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentFeedback /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentProfile"
-            element={<StudentProfile />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentProfile /></ProtectedRoute>}
           />
           <Route
             path="/studentMenu/studentDigitalI_Card"
-            element={<StudentDigitalICard />}
+            element={<ProtectedRoute allowedRoles={"studentid"} ><StudentDigitalICard /></ProtectedRoute>}
           />
-          <Route path="/studentMenu/studentDashboard/StudentAdminMeassages" element={<StudentAdminMeassages/>}/>
+          <Route path="/studentMenu/studentDashboard/StudentAdminMeassages" element={<ProtectedRoute allowedRoles={"studentid"} ><StudentAdminMeassages /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </>

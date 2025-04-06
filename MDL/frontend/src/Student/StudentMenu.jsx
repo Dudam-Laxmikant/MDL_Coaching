@@ -25,6 +25,11 @@ export const StudentMenu = ({ profileImage }) => {
       cancelButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.removeItem("email")
+        localStorage.removeItem("token")
+        localStorage.removeItem("name")
+        localStorage.removeItem("studentid")
+        localStorage.removeItem("studentclass")
         navigate("/"); // Redirect to home after logout
       }
     });

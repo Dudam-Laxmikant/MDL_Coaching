@@ -46,6 +46,11 @@ const Header = ({ profileImage }) => {
       confirmButtonText: "Yes, Logout",
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.removeItem("email")
+        localStorage.removeItem("token")
+        localStorage.removeItem("name")
+        localStorage.removeItem("t_id")
+        localStorage.removeItem("photo")
         Swal.fire({
           title: "Logged out",
           text: "You logged out successfully",

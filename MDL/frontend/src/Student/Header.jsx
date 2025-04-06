@@ -48,7 +48,11 @@ const Header = ({ profileImage }) => {
       cancelButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/"); // Redirect to home after logout
+        localStorage.removeItem("email")
+        localStorage.removeItem("token")
+        localStorage.removeItem("name")
+        localStorage.removeItem("studentid")
+        localStorage.removeItem("studentclass")
       }
     });
   };

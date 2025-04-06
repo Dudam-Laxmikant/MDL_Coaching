@@ -9,6 +9,10 @@ function LogOut() {
     const handleLogout = () => {
         // Logic for logging out (e.g., clearing tokens, redirecting)
         console.log("User logged out");
+        localStorage.removeItem("email")
+        localStorage.removeItem("token")
+        localStorage.removeItem("name")
+        localStorage.removeItem("AdminId")
         navigate("/"); // Redirect to login page
     };
 
