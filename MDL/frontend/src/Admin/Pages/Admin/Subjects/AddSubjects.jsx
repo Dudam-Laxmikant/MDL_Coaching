@@ -182,7 +182,7 @@ export const AddSubjects = () => {
           </button>
         </div>
       </div>
-      <div className="fixed bottom-6 right-6">
+      <div className="fixed top-64 right-0">
         <button
           onClick={handleSave}
           className="bg-green-600 text-white py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-green-700 transition"
