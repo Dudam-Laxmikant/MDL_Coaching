@@ -64,7 +64,7 @@ const updateNotice = async (req, res) => {
 const getnotice = async (req, res) => {
 
     try {
-        const notice = await NoticeModel.find({ role: { $in: ["Teacher", "Both"] } });[]
+        const notice = await NoticeModel.find({ role: { $in: ["Teacher","Both"] } });
 
         return res.status(200)
             .json({ message: "Notice Founded", success: true, data: notice })
@@ -76,7 +76,7 @@ const getnotice = async (req, res) => {
 const getnoticeInstudent = async (req, res) => {
 
     try {
-        const notice = await NoticeModel.find({ role: { $in: ["Student", "Both"] } });[]
+        const notice = await NoticeModel.find({ role: { $in: ["Student", "Both"] } });
 
         return res.status(200)
             .json({ message: "Notice Founded", success: true, data: notice })
@@ -118,6 +118,18 @@ const FindByIdNotice = async (req, res) => {
             .json({ message: "Server error" + error, success: false })
     }
 }
+const AllNoticeDesplayInHome = async (req, res) => {
+
+    try {
+        const notice = await NoticeModel.find({})
+
+        return res.status(200)
+            .json({ message: "Notice Founded", success: false, data: notice })
+    } catch (error) {
+        return res.status(408)
+            .json({ message: "Server error" + error, success: false })
+    }
+}
 
 module.exports = {
     addnotice,
@@ -125,5 +137,6 @@ module.exports = {
     deleteById,
     FindByIdNotice,
     updateNotice,
-    getnoticeInstudent
+    getnoticeInstudent,
+    AllNoticeDesplayInHome   
 }
