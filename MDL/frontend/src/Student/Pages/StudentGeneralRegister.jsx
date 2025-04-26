@@ -154,7 +154,7 @@ const StudentGeneralRegister = () => {
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><Phone className="mr-2" /> Mobile Number</td>
-                  <td className="p-3 border border-gray-300"></td>
+                  <td className="p-3 border border-gray-300">{students.mobilenumber}</td>
                 </tr>
                 <tr className="even:bg-gray-100 odd:bg-white">
                   <td className="p-3 font-medium border border-gray-300 flex items-center"><Calendar className="mr-2" /> Date of Birth</td>

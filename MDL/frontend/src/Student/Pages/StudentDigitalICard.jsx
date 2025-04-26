@@ -181,7 +181,7 @@ function StudentDigitalICard({ profileImage }) {
               {students.adress}
             </p>
             <p className="text-gray-700 text-lg">
-              <strong>📞 Mobile:</strong> +91{" "}
+              <strong>📞 Mobile:</strong> +91 {students.mobilenumber}
             </p>
             <p className="text-gray-700 text-lg">
               <strong>🏫 Coaching Name:</strong> MDl Coching
