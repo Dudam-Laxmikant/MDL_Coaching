@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const AdminModel =require("../Models/admin.js")
 const signup = async (req, res) => {
