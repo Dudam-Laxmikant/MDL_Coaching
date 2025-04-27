@@ -13,7 +13,7 @@
 //       const fetchNotice= async () => {
 //         try {
 //           const response = await axios.get(
-//             "http://localhost:8080/notice/getnoticestudent"
+//             "https://mdl-coaching.onrender.com/notice/getnoticestudent"
 //           );
 //           setnotice(response.data.data); // Store fetched teachers in state
 //         } catch (error) {
@@ -92,7 +92,7 @@ const StudentAdminMessages = () => {
 
   const fetchNotice = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/notice/getnoticestudent");
+      const response = await axios.get("https://mdl-coaching.onrender.com/notice/getnoticestudent");
       setNotice(response.data.data);
     } catch (error) {
       console.error("Error fetching notices:", error);

@@ -12,7 +12,7 @@ function Profile() {
   const adminprofile = async () => {
     try {
       const AdminId = localStorage.getItem("AdminId")
-      const res = await axios.get(`http://localhost:8080/admin/getdetails/${AdminId}`)
+      const res = await axios.get(`https://mdl-coaching.onrender.com/admin/getdetails/${AdminId}`)
       console.log(res.data)
       setAdmin(res.data.data)
     } catch (error) {
@@ -31,7 +31,7 @@ function Profile() {
           {/* Profile Header */}
           <div className="flex flex-col items-center text-center">
             <img
-              src={`http://localhost:8080/images/${admin.img}`}
+              src={`https://mdl-coaching.onrender.com/images/${admin.img}`}
               alt="Admin Profile"
               className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-indigo-500 shadow-md transition-transform transform hover:scale-110"
             />

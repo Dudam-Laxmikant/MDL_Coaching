@@ -13,7 +13,7 @@
 //     try {
 //       const studentid = localStorage.getItem("studentid");
 //       const res = await axios.get(
-//         `http://localhost:8080/student/showprofile/${studentid}`
+//         `https://mdl-coaching.onrender.com/student/showprofile/${studentid}`
 //       );
 //       console.log(res.data);
 //       setStudentDetails(res.data.data);
@@ -36,7 +36,7 @@
 //           {/* Student Avatar */}
 //           {/* <div className="flex justify-center mb-6">
 //             <img
-//               src={`http://localhost:8080/images/${studentDetails.passphoto}`}
+//               src={`https://mdl-coaching.onrender.com/images/${studentDetails.passphoto}`}
 //               alt="Student Avatar"
 //               className="w-32 h-32 rounded-full border-4 border-gray-300 bg-gray-200"
 //             />
@@ -114,7 +114,7 @@ function DisplayStudentDetails() {
   const profile = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/student/showprofile/${studentId}`
+        `https://mdl-coaching.onrender.com/student/showprofile/${studentId}`
       );
       console.log(res.data.data);
       setStudentDetails(res.data.data); // Ensure it's an array
@@ -140,7 +140,7 @@ function DisplayStudentDetails() {
           <div className="flex justify-center mt-4">
             <div className="relative w-24 h-24 sm:w-28 sm:h-28">
               <img
-                src={`http://localhost:8080/images/${studentDetails.passphoto}`}
+                src={`https://mdl-coaching.onrender.com/images/${studentDetails.passphoto}`}
                 alt="Student"
                 className="w-full h-full rounded-full border-4 border-indigo-500 shadow-md  transition-transform transform hover:scale-110"
               />

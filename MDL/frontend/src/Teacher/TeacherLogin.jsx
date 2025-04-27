@@ -19,7 +19,7 @@
 //     const { t_id, email, password } = formData;
 
 //     try {
-//       const url = "http://localhost:8080/teacher/login";
+//       const url = "https://mdl-coaching.onrender.com/teacher/login";
 //       const response = await fetch(url, {
 //         method: "POST",
 //         headers: {
@@ -172,7 +172,7 @@ const TeacherLogin = () => {
     const { t_id, email, password } = formData;
 
     try {
-      const url = "http://localhost:8080/teacher/login";
+      const url = "https://mdl-coaching.onrender.com/teacher/login";
       const response = await fetch(url, {
         method: "POST",
         headers: {

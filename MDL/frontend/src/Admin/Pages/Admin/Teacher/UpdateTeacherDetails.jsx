@@ -115,7 +115,7 @@
 //   const fetchdata = async () => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:8080/teacher/displaydata/${teacherid}`
+//         `https://mdl-coaching.onrender.com/teacher/displaydata/${teacherid}`
 //       );
 //       console.log("Teacher by id :: ", response.data.data);
 //       setFormData(response.data.data);
@@ -138,7 +138,7 @@
 
 //   const getsubject = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/subject/getsubjects");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
 //       console.log(res.data);
 //       setSubjects(res.data.data);
 //     } catch (error) {
@@ -160,7 +160,7 @@
   
 //     if (result.isConfirmed) {
 //       try {
-//         const url = `http://localhost:8080/teacher/UpdateTeacherdetails/${teacherid}`;
+//         const url = `https://mdl-coaching.onrender.com/teacher/UpdateTeacherdetails/${teacherid}`;
   
 //         const response = await axios.post(url, formData, {
 //           headers: { "Content-Type": "application/json" },
@@ -389,9 +389,9 @@ function UpdateTeacherDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const teacherRes = await axios.get(`http://localhost:8080/teacher/displaydata/${teacherid}`);
+        const teacherRes = await axios.get(`https://mdl-coaching.onrender.com/teacher/displaydata/${teacherid}`);
         setFormData(teacherRes.data.data);
-        const subjectRes = await axios.get("http://localhost:8080/subject/getsubjects");
+        const subjectRes = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
         setSubjects(subjectRes.data.data);
         setTimeout(() => setLoading(false), 1000); // Simulate loading
       } catch (error) {
@@ -448,7 +448,7 @@ function UpdateTeacherDetails() {
     if (result.isConfirmed) {
       try {
         await axios.post(
-          `http://localhost:8080/teacher/UpdateTeacherdetails/${teacherid}`,
+          `https://mdl-coaching.onrender.com/teacher/UpdateTeacherdetails/${teacherid}`,
           formData,
           {
             headers: { "Content-Type": "application/json" },

@@ -43,7 +43,7 @@ export const StudentMenu = ({ profileImage }) => {
     try {
       const studentid = localStorage.getItem("studentid");
       const res = await axios.get(
-        `http://localhost:8080/student/getstudentdetails/${studentid}`
+        `https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`
       );
       console.log(res.data);
       setstudents(res.data.data);
@@ -111,7 +111,7 @@ export const StudentMenu = ({ profileImage }) => {
             <div className="flex justify-center mb-4">
               <img
                 // src={img}
-                src={`http://localhost:8080/images/${students.passphoto}`}
+                src={`https://mdl-coaching.onrender.com/images/${students.passphoto}`}
                 alt="profile"
                 className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover transition duration-500 transform hover:scale-110"
               />

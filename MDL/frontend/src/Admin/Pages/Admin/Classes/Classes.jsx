@@ -25,7 +25,7 @@ function Classes() {
     }
 
     try {
-      const url = "http://localhost:8080/class/addclass";
+      const url = "https://mdl-coaching.onrender.com/class/addclass";
       const response = await axios.post(
         url,
         { className: inputValue },

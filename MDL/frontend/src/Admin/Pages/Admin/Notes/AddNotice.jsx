@@ -61,7 +61,7 @@ export const AddNotice = () => {
         formdata.append("name", fordata.name);
         formdata.append("role", result.value);
         try {
-          const url = "http://localhost:8080/notice/addnotice";
+          const url = "https://mdl-coaching.onrender.com/notice/addnotice";
 
           const response = await axios.post(url, formdata, {
             headers: { "Content-Type": "application/json" },

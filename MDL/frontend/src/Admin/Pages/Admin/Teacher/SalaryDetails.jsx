@@ -49,7 +49,7 @@
 //   const fetchdata = async () => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:8080/teacher/displaydata/${teacherid}`
+//         `https://mdl-coaching.onrender.com/teacher/displaydata/${teacherid}`
 //       );
 //       console.log("Teacher by id :: ", response.data.data);
 //       setteacher(response.data.data);
@@ -158,7 +158,7 @@ function SalaryDetails() {
 
   const fetchdata = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/teacher/displaydata/${teacherid}`);
+      const response = await axios.get(`https://mdl-coaching.onrender.com/teacher/displaydata/${teacherid}`);
       setteacher(response.data.data);
       setTimeout(() => setLoading(false), 1000); // delay to show animation
     } catch (error) {

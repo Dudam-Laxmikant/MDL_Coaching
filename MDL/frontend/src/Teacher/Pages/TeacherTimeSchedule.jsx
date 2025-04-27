@@ -55,7 +55,7 @@ const TeacherTimeSchedule = () => {
 
   const getlatestTimetable = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/timetable/latest")
+      const response = await axios.get("https://mdl-coaching.onrender.com/timetable/latest")
       settable(response.data.data.filename)
     } catch (error) {
       console.log("error for latest time table found", error)
@@ -79,7 +79,7 @@ const TeacherTimeSchedule = () => {
           <div className="p-4 sm:p-6 flex flex-col items-center w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl h-auto">
             <h1 className="text-black text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 animate-bounce">Timetable</h1>
             <div className="w-full">
-              <img src={table ? `http://localhost:8080/images/${table}` : "https://www.shutterstock.com/image-vector/timetable-error-color-line-icon-600w-1923052244.jpg"} alt="" />
+              <img src={table ? `https://mdl-coaching.onrender.com/images/${table}` : "https://www.shutterstock.com/image-vector/timetable-error-color-line-icon-600w-1923052244.jpg"} alt="" />
             </div>
             {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
               {Object.keys(timetable).map((day) => (

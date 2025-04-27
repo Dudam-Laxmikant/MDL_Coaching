@@ -34,7 +34,7 @@ function StudentLogin() {
     const { s_id, email, password } = formData;
 
     try {
-      const url = "http://localhost:8080/student/login";
+      const url = "https://mdl-coaching.onrender.com/student/login";
       const response = await fetch(url, {
         method: "POST",
         headers: {

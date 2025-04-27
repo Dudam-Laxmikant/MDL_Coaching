@@ -60,7 +60,7 @@ const StudentProfile = ({ profileImage }) => {
   const profile = async () => {
     try {
       const studentid = localStorage.getItem("studentid")
-      const res = await axios.get(`http://localhost:8080/student/getstudentdetails/${studentid}`)
+      const res = await axios.get(`https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`)
       console.log(res.data)
       setstudents(res.data.data)
     } catch (error) {
@@ -115,8 +115,8 @@ const StudentProfile = ({ profileImage }) => {
       <div className="flex-grow flex items-center justify-center pt-20 px-6 m-3">
         <div className="bg-white text-gray-900 shadow-xl rounded-2xl w-full max-w-4xl p-10 border-4 border-indigo-500 text-center">
           <div className="relative w-36 h-36 mx-auto border-4 border-indigo-500 rounded-lg overflow-hidden shadow-lg cursor-pointer">
-            <img className="w-full h-full object-cover" src={`http://localhost:8080/images/${students.passphoto}`} alt="Student" />
-            {/* {`http://localhost:8080/images/${student.passphoto}`} */}
+            <img className="w-full h-full object-cover" src={`https://mdl-coaching.onrender.com/images/${students.passphoto}`} alt="Student" />
+            {/* {`https://mdl-coaching.onrender.com/images/${student.passphoto}`} */}
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 transition space-x-3">
               <FaEye
                 className="text-white text-2xl cursor-pointer"

@@ -13,7 +13,7 @@
 
 //   const getclasses = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/class/getclasses");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
 //       console.log(res.data);
 //       setClasses(res.data.data);
 //     } catch (error) {
@@ -69,7 +69,7 @@ const TeacherClass = () => {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       console.log("API Response: ", res.data); // Check the API response in the console
       setClasses(res.data.data);
       setLoading(false); // Set loading to false after data is fetched

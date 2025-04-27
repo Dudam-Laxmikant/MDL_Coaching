@@ -12,7 +12,7 @@ export const ViewNotes = () => {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/notice/findByidNotice/${NoticeId}`
+          `https://mdl-coaching.onrender.com/notice/findByidNotice/${NoticeId}`
         );
         console.log("Notice by id :: ", response.data.data);
         setnotice(response.data.data);

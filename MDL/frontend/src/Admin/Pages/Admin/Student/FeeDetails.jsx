@@ -36,7 +36,7 @@ const { id } = useParams();
   const Feedetail = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/student/showprofile/${id}`
+        `https://mdl-coaching.onrender.com/student/showprofile/${id}`
       );
       console.log(res.data.data);
       setStudentDetails(res.data.data); // Ensure it's an array

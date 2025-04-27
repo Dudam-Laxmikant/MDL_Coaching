@@ -26,7 +26,7 @@ const TeacherDashboard = () => {
   useEffect(() => {
     const gettotals = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/TotalAdminDashboards");
+        const response = await axios.get("https://mdl-coaching.onrender.com/TotalAdminDashboards");
         console.log(response.data);
         settotalclass(response.data.totalclass);
         settotalteacher(response.data.totalteachers);
@@ -37,7 +37,7 @@ const TeacherDashboard = () => {
 
     const fetchNotice = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/notice/getnotice");
+        const response = await axios.get("https://mdl-coaching.onrender.com/notice/getnotice");
         setnotice(response.data.data); 
       } catch (error) {
         console.error("Error fetching notices:", error);

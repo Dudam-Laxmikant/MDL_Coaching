@@ -27,7 +27,7 @@
 //     try {
 //       const studentid = localStorage.getItem("studentid");
 //       const res = await axios.get(
-//         `http://localhost:8080/student/getstudentdetails/${studentid}`
+//         `https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`
 //       );
 //       console.log(res.data);
 //       setfeedback(res.data.data);
@@ -49,7 +49,7 @@
 //     formdata.append("s_id", feedback.s_id);
 //     formdata.append("s_class", feedback.s_class);
 //     try {
-//       const url = "http://localhost:8080/feedback/studentfeedback";
+//       const url = "https://mdl-coaching.onrender.com/feedback/studentfeedback";
 
 //       const response = await axios.post(url, formdata, {
 //         headers: { "Content-Type": "application/json" },
@@ -173,7 +173,7 @@ const StudentFeedback = () => {
     try {
       const studentid = localStorage.getItem("studentid");
       const res = await axios.get(
-        `http://localhost:8080/student/getstudentdetails/${studentid}`
+        `https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`
       );
 
       if (res.data && res.data.data) {
@@ -207,7 +207,7 @@ const StudentFeedback = () => {
     };
 
     try {
-      const url = "http://localhost:8080/feedback/studentfeedback";
+      const url = "https://mdl-coaching.onrender.com/feedback/studentfeedback";
       const response = await axios.post(url, formData, {
         headers: { "Content-Type": "application/json" },
       });

@@ -75,7 +75,7 @@ const AdminRegistration = () => {
     });
 
     try {
-      const response = await axios.post("http://localhost:8080/admin/signup", formdata, {
+      const response = await axios.post("https://mdl-coaching.onrender.com/admin/signup", formdata, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       const { message, success, error } = response.data;

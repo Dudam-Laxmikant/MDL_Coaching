@@ -21,7 +21,7 @@
 //   const handleAddClick = async () => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:8080/teacherclass/getteachercls/${classname}`
+//         `https://mdl-coaching.onrender.com/teacherclass/getteachercls/${classname}`
 //       );
 //       setTeachers(response.data.data);
 //     } catch (error) {
@@ -49,7 +49,7 @@
 
 //       if (result.isConfirmed) {
 //         const response = await axios.get(
-//           `http://localhost:8080/teacherclass/deleteteachercls/${teacherId}`
+//           `https://mdl-coaching.onrender.com/teacherclass/deleteteachercls/${teacherId}`
 //         );
 //         if (response.data.success) {
 //           Swal.fire({
@@ -72,7 +72,7 @@
 //   async function handleSubmit() {
 //     try {
 //       const response = await axios.post(
-//         `http://localhost:8080/teacherclass/updateteachercls/${selectedTeacher._id}`,
+//         `https://mdl-coaching.onrender.com/teacherclass/updateteachercls/${selectedTeacher._id}`,
 //         {
 //           SubjectName: selectedSubject,
 //         }
@@ -101,7 +101,7 @@
 //   }, []);
 //   const getsubject = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/subject/getsubjects");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
 //       console.log(res.data);
 //       setSubjects(res.data.data);
 //     } catch (error) {
@@ -276,7 +276,7 @@ function ShowTeachersList() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8080/teacherclass/getteachercls/${classname}`
+        `https://mdl-coaching.onrender.com/teacherclass/getteachercls/${classname}`
       );
       setTeachers(response.data.data);
     } catch (error) {
@@ -288,7 +288,7 @@ function ShowTeachersList() {
 
   const getsubject = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/subject/getsubjects");
+      const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
       setSubjects(res.data.data);
     } catch (error) {
       console.log(error);
@@ -315,7 +315,7 @@ function ShowTeachersList() {
 
       if (result.isConfirmed) {
         const response = await axios.get(
-          `http://localhost:8080/teacherclass/deleteteachercls/${teacherId}`
+          `https://mdl-coaching.onrender.com/teacherclass/deleteteachercls/${teacherId}`
         );
         if (response.data.success) {
           Swal.fire({
@@ -338,7 +338,7 @@ function ShowTeachersList() {
   async function handleSubmit() {
     try {
       const response = await axios.post(
-        `http://localhost:8080/teacherclass/updateteachercls/${selectedTeacher._id}`,
+        `https://mdl-coaching.onrender.com/teacherclass/updateteachercls/${selectedTeacher._id}`,
         {
           SubjectName: selectedSubject,
         }

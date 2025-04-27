@@ -15,7 +15,7 @@
 
 //   const profile = async () => {
 //     try {
-//       const res = await axios.get(`http://localhost:8080/feedback/getfeedback`);
+//       const res = await axios.get(`https://mdl-coaching.onrender.com/feedback/getfeedback`);
 //       console.log(res.data.data);
 //       setFeedback(res.data.data.reverse()); // Ensure it's an array
 //     } catch (error) {
@@ -70,7 +70,7 @@ function Feedback() {
 
   const profile = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/feedback/getfeedback");
+      const res = await axios.get("https://mdl-coaching.onrender.com/feedback/getfeedback");
       setFeedback(res.data.data.reverse());
       setTimeout(() => setLoading(false), 1500); // Simulate loading
     } catch (error) {

@@ -19,7 +19,7 @@
 
 //     const gettables = async () => {
 //         try {
-//             const response = await axios.get("http://localhost:8080/timetable/getTimetable")
+//             const response = await axios.get("https://mdl-coaching.onrender.com/timetable/getTimetable")
 //             setUploadedFiles(response.data.data)
 
 //         } catch (error) {
@@ -37,7 +37,7 @@
 //             });
 //         }
 //         try {
-//             const url = "http://localhost:8080/timetable/addTimetable";
+//             const url = "https://mdl-coaching.onrender.com/timetable/addTimetable";
 
 //             const response = await axios.post(url, {
 //                 "table": file
@@ -79,7 +79,7 @@
 
 //     const handleDelete = async (id) => {
 //         try {
-//             const response = await axios.get(`http://localhost:8080/timetable/delete/${id}`)
+//             const response = await axios.get(`https://mdl-coaching.onrender.com/timetable/delete/${id}`)
 //             if (response.data.success) {
 //                 toast.success(response.data.message, {
 //                     position: "top-center",
@@ -192,7 +192,7 @@
 
 //     const gettables = async () => {
 //         try {
-//             const response = await axios.get("http://localhost:8080/timetable/getTimetable");
+//             const response = await axios.get("https://mdl-coaching.onrender.com/timetable/getTimetable");
 //             setUploadedFiles(response.data.data);
 //         } catch (error) {
 //             console.log("Error for Gettable", error);
@@ -212,7 +212,7 @@
 //             const formData = new FormData();
 //             formData.append("table", file);
 
-//             const url = "http://localhost:8080/timetable/addTimetable";
+//             const url = "https://mdl-coaching.onrender.com/timetable/addTimetable";
 
 //             const response = await axios.post(url, formData, {
 //                 headers: {
@@ -244,7 +244,7 @@
 
 //     const handleDelete = async (id) => {
 //         try {
-//             const response = await axios.get(`http://localhost:8080/timetable/delete/${id}`);
+//             const response = await axios.get(`https://mdl-coaching.onrender.com/timetable/delete/${id}`);
 //             if (response.data.success) {
 //                 toast.success(response.data.message, {
 //                     position: "top-center",
@@ -412,7 +412,7 @@ export const Timetable = () => {
 
     const gettables = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/timetable/getTimetable");
+            const response = await axios.get("https://mdl-coaching.onrender.com/timetable/getTimetable");
             setUploadedFiles(response.data.data);
         } catch (error) {
             console.log("Error for Gettable", error);
@@ -432,7 +432,7 @@ export const Timetable = () => {
             const formData = new FormData();
             formData.append("table", file);
 
-            const url = "http://localhost:8080/timetable/addTimetable";
+            const url = "https://mdl-coaching.onrender.com/timetable/addTimetable";
 
             const response = await axios.post(url, formData, {
                 headers: {
@@ -464,7 +464,7 @@ export const Timetable = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/timetable/delete/${id}`);
+            const response = await axios.get(`https://mdl-coaching.onrender.com/timetable/delete/${id}`);
             if (response.data.success) {
                 toast.success(response.data.message, {
                     position: "top-center",

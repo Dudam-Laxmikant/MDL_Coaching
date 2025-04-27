@@ -65,7 +65,7 @@ function StudentForm() {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       console.log(res.data);
       setClasses(res.data.data);
     } catch (error) {
@@ -132,7 +132,7 @@ function StudentForm() {
       return;
     }
     try {
-      const url = "http://localhost:8080/student/signup";
+      const url = "https://mdl-coaching.onrender.com/student/signup";
 
       const response = await axios.post(url, formData, {
         headers: {

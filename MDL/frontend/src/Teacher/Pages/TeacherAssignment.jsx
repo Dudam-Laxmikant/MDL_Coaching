@@ -34,7 +34,7 @@ const TeacherAssignment = () => {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       setClasses(res.data.data);
     } catch (error) {
       console.log(error);
@@ -43,7 +43,7 @@ const TeacherAssignment = () => {
 
   const getsubject = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/subject/getsubjects");
+      const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
       setSubjects(res.data.data);
     } catch (error) {
       console.log(error);
@@ -79,7 +79,7 @@ const TeacherAssignment = () => {
 
     try {
       setSubmitting(true);
-      const url = "http://localhost:8080/notes";
+      const url = "https://mdl-coaching.onrender.com/notes";
       const response = await axios.post(url, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",

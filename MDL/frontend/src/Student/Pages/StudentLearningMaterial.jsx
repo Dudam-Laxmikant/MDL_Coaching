@@ -92,7 +92,7 @@
 //   const getallnotice = async () => {
 //     try {
 //       const res = await axios.get(
-//         "http://localhost:8080/notes/sendnotes"
+//         "https://mdl-coaching.onrender.com/notes/sendnotes"
 //       );
 //       console.log(res.data);
 //       setSubjects(res.data.data);
@@ -160,7 +160,7 @@ const StudentLearningMaterial = () => {
 
   const handleDownload = async (fileUrl) => {
     try {
-      const response = await axios.get(`http://localhost:8080/images/${fileUrl}`, { responseType: "blob" });
+      const response = await axios.get(`https://mdl-coaching.onrender.com/images/${fileUrl}`, { responseType: "blob" });
       const blob = new Blob([response.data], {
         type: response.headers["content-type"],
       });
@@ -182,7 +182,7 @@ const StudentLearningMaterial = () => {
 
   const getAllNotes = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/notes/sendnotes/${localStorage.getItem("studentclass")}`);
+      const res = await axios.get(`https://mdl-coaching.onrender.com/notes/sendnotes/${localStorage.getItem("studentclass")}`);
       console.log(res.data);
       setSubjects(res.data.data); // API response se data set karo
     } catch (error) {

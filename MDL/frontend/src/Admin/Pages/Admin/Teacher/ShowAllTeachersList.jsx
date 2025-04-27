@@ -30,7 +30,7 @@
 //   const fetchAllTeachers = async () => {
 //     try {
 //       const response = await axios.get(
-//         "http://localhost:8080/teacher/getallteacher"
+//         "https://mdl-coaching.onrender.com/teacher/getallteacher"
 //       );
 //       setTeachers(response.data.data);
 //       setFilteredTeachers(response.data.data);
@@ -66,7 +66,7 @@
 //       confirmButtonText: "Yes, delete it!",
 //     }).then(async (result) => {
 //       if (result.isConfirmed) {
-//         await axios.get(`http://localhost:8080/teacher/deleteteacher/${tid}`);
+//         await axios.get(`https://mdl-coaching.onrender.com/teacher/deleteteacher/${tid}`);
 //         Swal.fire(
 //           "Deleted!",
 //           "The teacher's record has been deleted.",
@@ -235,7 +235,7 @@ function ShowAllTeachersList() {
     setLoading(true);
     setShowContent(false);
     try {
-      const response = await axios.get("http://localhost:8080/teacher/getallteacher");
+      const response = await axios.get("https://mdl-coaching.onrender.com/teacher/getallteacher");
       setTeachers(response.data.data);
       setFilteredTeachers(response.data.data);
     } catch (error) {
@@ -269,7 +269,7 @@ function ShowAllTeachersList() {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.get(`http://localhost:8080/teacher/deleteteacher/${tid}`);
+        await axios.get(`https://mdl-coaching.onrender.com/teacher/deleteteacher/${tid}`);
         Swal.fire("Deleted!", "The teacher's record has been deleted.", "success");
         fetchAllTeachers();
       }

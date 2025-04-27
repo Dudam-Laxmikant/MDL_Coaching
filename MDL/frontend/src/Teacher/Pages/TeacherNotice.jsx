@@ -24,7 +24,7 @@ const TeacherNotice = () => {
     e.preventDefault();
     console.log(newNotice, title, selectedclass, date);
     try {
-      const url = "http://localhost:8080/t_notice/teachernotice";
+      const url = "https://mdl-coaching.onrender.com/t_notice/teachernotice";
 
       const response = await axios.post(
         url,
@@ -80,7 +80,7 @@ const TeacherNotice = () => {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       console.log(res.data);
       setClasses(res.data.data);
     } catch (error) {
@@ -90,7 +90,7 @@ const TeacherNotice = () => {
   const getallnotice = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/t_notice/teachernotice/getallnotice"
+        "https://mdl-coaching.onrender.com/t_notice/teachernotice/getallnotice"
       );
       console.log(res.data);
       setNotices(res.data.data);
@@ -111,7 +111,7 @@ const TeacherNotice = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const url = `http://localhost:8080/t_notice/teachernotice/delete/${noticeId}`;
+          const url = `https://mdl-coaching.onrender.com/t_notice/teachernotice/delete/${noticeId}`;
 
           const response = await axios.get(url);
 

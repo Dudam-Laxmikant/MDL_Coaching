@@ -19,7 +19,7 @@
 //   const fetchAllTeachers = async () => {
 //     try {
 //       const response = await axios.get(
-//         "http://localhost:8080/teacher/displayallteachers"
+//         "https://mdl-coaching.onrender.com/teacher/displayallteachers"
 //       );
 //       setTeachers(response.data.data); // Store fetched teachers in state
 //     } catch (error) {
@@ -30,7 +30,7 @@
 //   const handleAddClick = async (teacherid) => {
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:8080/teacherclass/teachercls",
+//         "https://mdl-coaching.onrender.com/teacherclass/teachercls",
 //         {
 //           TeacherId: teacherid,
 //           className: classid,
@@ -171,7 +171,7 @@ export const AddClassTeacher = () => {
 
   const fetchAllTeachers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/teacher/displayallteachers");
+      const response = await axios.get("https://mdl-coaching.onrender.com/teacher/displayallteachers");
       setTeachers(response.data.data);
     } catch (error) {
       console.error("Error fetching teachers:", error);
@@ -185,7 +185,7 @@ export const AddClassTeacher = () => {
   const handleAddClick = async (teacherid) => {
     try {
       await axios.post(
-        "http://localhost:8080/teacherclass/teachercls",
+        "https://mdl-coaching.onrender.com/teacherclass/teachercls",
         {
           TeacherId: teacherid,
           className: classid,

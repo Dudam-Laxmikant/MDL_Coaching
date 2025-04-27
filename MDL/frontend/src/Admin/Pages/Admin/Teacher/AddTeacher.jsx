@@ -83,7 +83,7 @@
 //     e.preventDefault();
 //     if (!validateForm()) return;
 //     try {
-//       const url = "http://localhost:8080/teacher/addteacher";
+//       const url = "https://mdl-coaching.onrender.com/teacher/addteacher";
 
 //       const response = await axios.post(url,formData, {
 //         headers: {
@@ -449,7 +449,7 @@ function AddTeacher() {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      const url = "http://localhost:8080/teacher/addteacher";
+      const url = "https://mdl-coaching.onrender.com/teacher/addteacher";
 
       const response = await axios.post(url, formData, {
         headers: {

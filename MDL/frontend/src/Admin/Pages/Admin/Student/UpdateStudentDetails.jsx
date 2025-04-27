@@ -63,7 +63,7 @@ function UpdateStudentDetails() {
   const updateStudentDetails = async (e) => {
     e.preventDefault();
     try {
-      const url = `http://localhost:8080/student/Updatestudentdetails/${studentId}`;
+      const url = `https://mdl-coaching.onrender.com/student/Updatestudentdetails/${studentId}`;
 
       const response = await axios.post(url, formData, {
         headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ function UpdateStudentDetails() {
   const fetchdata = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/student/showprofile/${studentId}`
+        `https://mdl-coaching.onrender.com/student/showprofile/${studentId}`
       );
       console.log("Notice by id :: ", response.data.data);
       setFormData(response.data.data);
@@ -314,12 +314,12 @@ export default UpdateStudentDetails;
 //   const fetchdata = async () => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:8080/student/showprofile/${studentId}`
+//         `https://mdl-coaching.onrender.com/student/showprofile/${studentId}`
 //       );
 //       setFormData(response.data.data);
 //       // Set initial preview from server image
 //       if (response.data.data.passphoto) {
-//         setPreview(`http://localhost:8080/images/${response.data.data.passphoto}`);
+//         setPreview(`https://mdl-coaching.onrender.com/images/${response.data.data.passphoto}`);
 //       }
 //     } catch (error) {
 //       console.log("Not Found Error", error);
@@ -353,7 +353,7 @@ export default UpdateStudentDetails;
 //   const updateStudentDetails = async (e) => {
 //     e.preventDefault();
 //     try {
-//       const url = `http://localhost:8080/student/Updatestudentdetails/${studentId}`;
+//       const url = `https://mdl-coaching.onrender.com/student/Updatestudentdetails/${studentId}`;
 //       const formDataToSend = new FormData();
       
 //       Object.keys(formData).forEach((key) => {

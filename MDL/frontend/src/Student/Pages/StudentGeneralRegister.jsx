@@ -107,7 +107,7 @@ const StudentGeneralRegister = () => {
   const profile = async () => {
     try {
       const studentid = localStorage.getItem("studentid")
-      const res = await axios.get(`http://localhost:8080/student/getstudentdetails/${studentid}`)
+      const res = await axios.get(`https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`)
       console.log(res.data)
       setstudents(res.data.data)
     } catch (error) {

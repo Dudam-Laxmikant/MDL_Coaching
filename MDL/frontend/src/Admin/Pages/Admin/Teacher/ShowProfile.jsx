@@ -12,7 +12,7 @@
 //   useEffect(() => {
 //     const fetchTeacher = async () => {
 //       const response = await axios.get(
-//         `http://localhost:8080/teacher/findByid/${teacherId}`
+//         `https://mdl-coaching.onrender.com/teacher/findByid/${teacherId}`
 //       );
 //       console.log(response.data.data);
 //       setTeacher(response.data.data);
@@ -62,7 +62,7 @@
 //               <div className="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
 //                 <div className="flex items-center gap-6">
 //                   <img
-//                     src={`http://localhost:8080/images/${teacher.photo}`}
+//                     src={`https://mdl-coaching.onrender.com/images/${teacher.photo}`}
 //                     // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1rNuFRQJ0m9EkNrwaJtyxCSEfY7Rz35rC_g&s
 //                     alt="Profile"
 //                     className="w-32 h-32 rounded-full border-2 border-gray-300"
@@ -140,7 +140,7 @@ function ShowProfile() {
     const fetchTeacher = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/teacher/findByid/${teacherId}`
+          `https://mdl-coaching.onrender.com/teacher/findByid/${teacherId}`
         );
         setTeacher(response.data.data);
         setTimeout(() => {
@@ -188,7 +188,7 @@ function ShowProfile() {
               <div className="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
                 <div className="flex items-center gap-6">
                   <img
-                    src={`http://localhost:8080/images/${teacher.photo}`}
+                    src={`https://mdl-coaching.onrender.com/images/${teacher.photo}`}
                     alt="Profile"
                     className="w-32 h-32 rounded-full border-2 border-gray-300"
                   />

@@ -42,7 +42,7 @@ const StudentAttendencedisplay = () => {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       console.log(res.data);
       classes(res.data.data);
     } catch (error) {
@@ -52,7 +52,7 @@ const StudentAttendencedisplay = () => {
   const [attedence,setAttendance] = useState([]);
   const getattedence = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/attendance/getattendence");
+      const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
 
       console.log(res.data);
       setAttendance(res.data.data);

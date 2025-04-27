@@ -18,7 +18,7 @@
 //     }).then(async (result) => {
 //       if (result.isConfirmed) {
 //         try {
-//           const url = `http://localhost:8080/class/deleteclass/${classid}`;
+//           const url = `https://mdl-coaching.onrender.com/class/deleteclass/${classid}`;
 
 //           const response = await axios.get(url);
 
@@ -46,7 +46,7 @@
 
 //   const getclasses = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/class/classBystudent");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/class/classBystudent");
 //       console.log(res.data);
 //       setClasses(res.data.data);
 //     } catch (error) {
@@ -141,7 +141,7 @@ function ShowClasses() {
   const getclasses = async () => {
     setLoading(true); // 🆕 start loading
     try {
-      const res = await axios.get("http://localhost:8080/class/classBystudent");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/classBystudent");
       setClasses(res.data.data);
     } catch (error) {
       console.error(error);
@@ -162,7 +162,7 @@ function ShowClasses() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const url = `http://localhost:8080/class/deleteclass/${classid}`;
+          const url = `https://mdl-coaching.onrender.com/class/deleteclass/${classid}`;
           const response = await axios.get(url);
 
           Swal.fire({

@@ -16,7 +16,7 @@ const StudentClassDetails = () => {
   const fetchClassDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/teacherclass/getteachercls/${localStorage.getItem(
+        `https://mdl-coaching.onrender.com/teacherclass/getteachercls/${localStorage.getItem(
           "studentclass"
         )}`
       );
@@ -30,7 +30,7 @@ const StudentClassDetails = () => {
   const fetchStudentProfile = async () => {
     try {
       const studentId = localStorage.getItem("studentid");
-      const res = await axios.get(`http://localhost:8080/student/getstudentdetails/${studentId}`);
+      const res = await axios.get(`https://mdl-coaching.onrender.com/student/getstudentdetails/${studentId}`);
       console.log("Student details response:", res.data);
       setStudent(res.data.data); // assuming res.data.data is an object
     } catch (error) {

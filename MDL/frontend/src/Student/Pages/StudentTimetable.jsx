@@ -19,7 +19,7 @@ const StudentTimetable = () => {
   ];
   const getlatestTimetable = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/timetable/latest")
+      const response = await axios.get("https://mdl-coaching.onrender.com/timetable/latest")
       settable(response.data.data.filename)
     } catch (error) {
       console.log("error for latest time table found", error)
@@ -79,7 +79,7 @@ const StudentTimetable = () => {
               </tbody>
             </motion.table> */}
             <motion.img
-              src={table ? `http://localhost:8080/images/${table}` : "https://www.shutterstock.com/image-vector/timetable-error-color-line-icon-600w-1923052244.jpg"}
+              src={table ? `https://mdl-coaching.onrender.com/images/${table}` : "https://www.shutterstock.com/image-vector/timetable-error-color-line-icon-600w-1923052244.jpg"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}

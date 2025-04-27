@@ -38,7 +38,7 @@
 //       const getstudentsbyclass = async () => {
 //         try {
 //           const res = await axios.get(
-//             `http://localhost:8080/student/getstudentsbyclass/${selectedClass}`
+//             `https://mdl-coaching.onrender.com/student/getstudentsbyclass/${selectedClass}`
 //           );
 //           console.log(res.data.data);
 
@@ -68,7 +68,7 @@
 
 //   const getclasses = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/class/getclasses");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
 //       console.log(res.data);
 //       setClasses(res.data.data);
 //     } catch (error) {
@@ -78,7 +78,7 @@
 
 //   const getsubject = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8080/subject/getsubjects");
+//       const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
 //       console.log(res.data);
 //       setsubjects(res.data.data);
 //     } catch (error) {
@@ -125,7 +125,7 @@
 
 //     try {
 //       const res = await axios.post(
-//         "http://localhost:8080/attendance/addattendance",
+//         "https://mdl-coaching.onrender.com/attendance/addattendance",
 //         {
 //           classname: selectedClass,
 //           subject: selectedSubject,
@@ -318,7 +318,7 @@ const TeacherAttendance = () => {
         setLoading(true); // Set loading to true while fetching data
         try {
           const res = await axios.get(
-            `http://localhost:8080/student/getstudentsbyclass/${selectedClass}`
+            `https://mdl-coaching.onrender.com/student/getstudentsbyclass/${selectedClass}`
           );
           console.log(res.data.data);
           setStudents(res.data.data);
@@ -350,7 +350,7 @@ const TeacherAttendance = () => {
   const getclasses = async () => {
     setLoading(true); // Set loading to true while fetching data
     try {
-      const res = await axios.get("http://localhost:8080/class/getclasses");
+      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
       console.log(res.data);
       setClasses(res.data.data);
     } catch (error) {
@@ -363,7 +363,7 @@ const TeacherAttendance = () => {
   const getsubject = async () => {
     setLoading(true); // Set loading to true while fetching data
     try {
-      const res = await axios.get("http://localhost:8080/subject/getsubjects");
+      const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
       console.log(res.data);
       setsubjects(res.data.data);
     } catch (error) {
@@ -412,7 +412,7 @@ const TeacherAttendance = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/attendance/addattendance",
+        "https://mdl-coaching.onrender.com/attendance/addattendance",
         {
           classname: selectedClass,
           subject: selectedSubject,

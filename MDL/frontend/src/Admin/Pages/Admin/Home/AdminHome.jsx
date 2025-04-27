@@ -30,7 +30,7 @@ function AdminHome() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const url = `http://localhost:8080/notice/delete/${noticeId}`;
+          const url = `https://mdl-coaching.onrender.com/notice/delete/${noticeId}`;
           const response = await axios.get(url);
 
           Swal.fire({
@@ -64,7 +64,7 @@ function AdminHome() {
 
   useEffect(() => {
     const gettotals = async () => {
-      const response = await axios.get("http://localhost:8080/TotalAdminDashboards");
+      const response = await axios.get("https://mdl-coaching.onrender.com/TotalAdminDashboards");
       settotalclass(response.data.totalclass);
       settotalteacher(response.data.totalteachers);
       settotalstudentes(response.data.totalstudentes);
@@ -107,7 +107,7 @@ function AdminHome() {
   const getnotice = async () => {
     try {
       setNoticeLoading(true);
-      const url = "http://localhost:8080/notice/notice";
+      const url = "https://mdl-coaching.onrender.com/notice/notice";
       const response = await axios.get(url);
       setnotice(response.data.data);
     } catch (error) {

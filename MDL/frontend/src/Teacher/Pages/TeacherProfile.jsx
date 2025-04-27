@@ -21,7 +21,7 @@ import axios from "axios";
 
 const TeacherProfile = () => {
   const [profileImage, setProfileImage] = useState(
-    `http://localhost:8080/images/${localStorage.getItem("photo")}` ||
+    `https://mdl-coaching.onrender.com/images/${localStorage.getItem("photo")}` ||
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1DIpd1kz9a3U1oAhsaqV9SSWCEuBl67kTfw&s"
   );
   const [showIcons, setShowIcons] = useState(false);
@@ -31,7 +31,7 @@ const TeacherProfile = () => {
   useEffect(() => {
     const fetchTeacher = async () => {
       const response = await axios.get(
-        `http://localhost:8080/teacher/findByid/${teacherId}`
+        `https://mdl-coaching.onrender.com/teacher/findByid/${teacherId}`
       );
       console.log(response.data.data);
       setTeacher(response.data.data);

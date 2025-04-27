@@ -24,7 +24,7 @@ export const UpdateNotice = () => {
   const fetchdata = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/notice/findByidNotice/${NoticeId}`
+        `https://mdl-coaching.onrender.com/notice/findByidNotice/${NoticeId}`
       );
       console.log("Notice by id :: ", response.data.data);
       setnotice(response.data.data);
@@ -60,7 +60,7 @@ export const UpdateNotice = () => {
     //       formdata.append("name", notice.name);
     //       formdata.append("role", result.value);
     //       try {
-    //         const url = `http://localhost:8080/notice/UpdateByidNotice/${NoticeId}`;
+    //         const url = `https://mdl-coaching.onrender.com/notice/UpdateByidNotice/${NoticeId}`;
 
     //         const response = await axios.post(url, formdata, {
     //           headers: { "Content-Type": "application/json" },
@@ -102,7 +102,7 @@ export const UpdateNotice = () => {
           formdata.append("role", result.value);
     
           try {
-            const url = `http://localhost:8080/notice/UpdateByidNotice/${NoticeId}`;
+            const url = `https://mdl-coaching.onrender.com/notice/UpdateByidNotice/${NoticeId}`;
     
             const response = await axios.post(url, formdata, {
               headers: { "Content-Type": "application/json" },
