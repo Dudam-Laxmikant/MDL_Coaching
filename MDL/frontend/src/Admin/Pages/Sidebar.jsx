@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 `}
             </style>
 
-            <div className={` custom-scrollbar fixed left-0 top-0 h-screen w-72 bg-black text-white shadow-lg transition-transform duration-300 
+            <div className={` custom-scrollbar fixed left-0 top-0 h-screen w-72 bg-gray-600 text-white shadow-lg transition-transform duration-300 
                             ${isOpen ? "translate-x-0" : "-translate-x-full"} z-50`}>
                 {/* Close Button */}
                 <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-gray-300 text-2xl hover:text-white">
