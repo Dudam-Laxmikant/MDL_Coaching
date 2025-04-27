@@ -60,6 +60,7 @@ const StudentAttendencedisplay = () => {
       console.log(error);
     }
   };
+  const [activeclass,setactiveclass] = useState();
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
