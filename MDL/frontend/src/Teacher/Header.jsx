@@ -13,6 +13,7 @@ const routeTitles = {
   "/teacherAssignment": "Assignment",
   "/teacherProfile": "Profile",
   "/teacherSalary": "Salary",
+  "/teacherAttendencedisplay":"Attendence"
 };
 
 const Header = ({ profileImage }) => {

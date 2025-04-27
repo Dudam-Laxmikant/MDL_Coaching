@@ -74,6 +74,7 @@ import StudentNotice from "./Student/Pages/StudentNotice";
 import { Showsubjects } from "./Admin/Pages/Admin/Subjects/Showsubjects";
 import StudentAdminMeassages from "./Student/Pages/StudentAdminMeassages";
 import ProtectedRoute from "./ProtectedRoute";
+import StudentAttendencedisplay from "./Teacher/Pages/StudentAttendencedisplay";
 
 const App = () => {
   return (
@@ -198,6 +199,7 @@ const App = () => {
           <Route path="/teacherNotes" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherNotes /></ProtectedRoute>} />
           <Route path="/teacherAssignment" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherAssignment /></ProtectedRoute>} />
           <Route path="/teacherAttendence" element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherAttendance /></ProtectedRoute>} />
+          <Route path="/teacherAttendencedisplay"element={<ProtectedRoute allowedRoles={"t_id"} ><StudentAttendencedisplay/></ProtectedRoute>}/>
           <Route
             path="/teacherTimeSchedule"
             element={<ProtectedRoute allowedRoles={"t_id"} ><TeacherTimeSchedule /></ProtectedRoute>}

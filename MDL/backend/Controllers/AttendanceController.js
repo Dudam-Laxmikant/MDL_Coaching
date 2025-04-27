@@ -55,4 +55,21 @@ const updateAttendance = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
-module.exports = { markAttendance, getAttendance, updateAttendance }
+async function getattendence(req, res) {
+    try {
+        // const { sid } = req.body;
+        const student = await AttendanceModel.find();
+        res.status(200).json({
+            message: "data fetched successfully",
+            success: true,
+            data: student
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error: " + error.message,
+            success: false,
+        });
+    }
+}
+module.exports = { markAttendance, getAttendance, updateAttendance ,getattendence}

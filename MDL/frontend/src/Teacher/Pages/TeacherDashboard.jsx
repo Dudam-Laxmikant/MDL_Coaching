@@ -34,7 +34,7 @@ const TeacherDashboard = () => {
         console.error("Error fetching dashboard totals:", error);
       }
     };
-    
+
     const fetchNotice = async () => {
       try {
         const response = await axios.get("http://localhost:8080/notice/getnotice");
@@ -91,7 +91,7 @@ const TeacherDashboard = () => {
       {/* Header */}
       <Header />
       <div className="flex flex-1">
-        {/* Main Content */}
+        
         <div className="flex-1 p-6 bg-gray-50 transition-all duration-300">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
             {[
@@ -175,3 +175,4 @@ const TeacherDashboard = () => {
 };
 
 export default TeacherDashboard;
+
