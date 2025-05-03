@@ -119,10 +119,11 @@ export const AddSubjects = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#454649]">
       <Header />
-      <div className="flex flex-1 bg-[#454649] p-6 sm:p-10 md:p-24 min-h-screen">
+      <div className="flex flex-1 justify-center bg-[#454649] p-6 m-12 sm:p-10 md:p-24 min-h-screen">
         <div className="w-full max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+        {/* <div className="p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-4xl mx-auto w-full bg-white"> */}
           <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">
             Manage Subjects
           </h2>
@@ -182,7 +183,7 @@ export const AddSubjects = () => {
           </button>
         </div>
       </div>
-      <div className="fixed top-64 right-0">
+      <div className="fixed bottom-64 right-8 translate-x-1/2">
         <button
           onClick={handleSave}
           className="bg-green-600 text-white py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-green-700 transition"

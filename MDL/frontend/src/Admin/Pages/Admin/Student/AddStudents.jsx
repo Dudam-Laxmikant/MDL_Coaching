@@ -27,12 +27,12 @@ function AddStudents() {
 
     return (
         <>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen bg-[#454649]">
                 {/* Header */}
                 <Header />
 
                 {/* Main Content */}
-                <div className="flex flex-1 items-center justify-center bg-[#454649] p-5 sm:p-7 md:p-10 mt-8 min-h-screen">
+                <div className="flex flex-1 items-center justify-center bg-[#454649] p-5 sm:p-7 md:p-10 min-h-screen">
                     <div className="w-full max-w-xl bg-black p-5 sm:p-6 rounded-lg shadow-2xl text-center">
                         <h1 className="text-2xl font-bold text-yellow-400 mb-4">Add Students</h1>
 

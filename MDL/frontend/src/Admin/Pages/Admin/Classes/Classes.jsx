@@ -63,7 +63,7 @@ function Classes() {
     <>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-14 justify-center items-center mt-10 min-h-screen">
+        <div className="flex flex-1 bg-[#454649] p-5 sm:p-7 md:p-14 justify-center items-center min-h-screen">
           <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-3xl">
             <h1 className="text-3xl font-bold text-gray-700 mb-6 text-center">Add a New Class</h1>
             
