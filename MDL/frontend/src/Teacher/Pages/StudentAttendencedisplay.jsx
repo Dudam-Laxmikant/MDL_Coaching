@@ -1,122 +1,244 @@
+
+// import React, { useEffect, useState } from 'react';
+// import Header from '../Header';
+// import Footer from '../Footer';
+// import axios from 'axios';
+
+// const StudentAttendencedisplay = () => {
+//   const [classes, setClasses] = useState([]);
+
+//   useEffect(() => {
+//     getClasses();
+//     attedence();
+//   }, []);
+
+//   const getClasses = async () => {
+//     try {
+//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+//       setClasses(res.data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   const [attendanceData, setAttendanceData] = useState([]);
+//   const attedence = async () => {
+//     try {
+//       const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+//       setAttendanceData(res.data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-col min-h-screen bg-gray-50">
+//       <Header />
+
+//       <div className="flex flex-col mt-32 flex-1 items-center justify-start p-4">
+//         {/* Class list section */}
+//         <div className="flex overflow-x-auto space-x-4 w-full max-w-5xl p-4">
+//           {classes.map((classItem, index) => (
+//             <div
+//               key={index}
+//               className="min-w-[200px] bg-white p-6 rounded-xl shadow-md cursor-pointer hover:bg-blue-100 transition"
+//             >
+//               <h2 className="text-xl font-bold text-center">{classItem.classname}</h2>
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="w-full max-w-5xl mt-10 bg-white rounded-xl shadow-lg p-6">
+//           <h1 className="text-2xl font-semibold mb-4 text-gray-700">Attendance</h1>
+//           <div className="space-y-4">
+//             {attendanceData.map((item) => (
+//               <div key={item._id} className="space-y-2">
+//                 <div
+//                   className={`${item.bgColor} bg-green-100 p-4 rounded-lg shadow-sm`}
+//                 >
+//                   {item.date}
+//                 </div>
+//                 <div className="ml-6 space-y-2">
+//                   <div className="flex flex-wrap gap-4">
+//                     <div className="bg-gray-100 p-2 rounded-md w-max hover:bg-blue-200 transition-all duration-300">
+//                       {item.subject}
+//                     </div>
+//                   </div>
+//                 </div>
+//                 <div className="overflow-x-auto bg-white p-6 rounded-xl shadow-lg">
+//                   <table className="min-w-full table-auto">
+//                     <thead>
+//                       <tr className="bg-gray-100 text-left text-gray-700">
+//                         <th className="py-2 px-4 border-b">Roll No</th>
+//                         <th className="py-2 px-4 border-b">Name</th>
+//                         <th className="py-2 px-4 border-b">Attendance</th>
+//                       </tr>
+//                     </thead>
+//                     <tbody>
+//                       {item.records.map((record) => (
+//                         <tr key={record.studentId}>
+//                           <td className="py-2 px-4 border-b">{record.studentId}</td>
+//                           <td className="py-2 px-4 border-b">
+//                             {/* Assuming you want to display the studentId here, you can modify it to show the student's name if available */}
+//                             {record.studentId}
+//                           </td>
+//                           <td className="py-2 px-4 border-b">
+//                             {record.status === 'Absent' ? 'Absent' : 'Present'}
+//                           </td>
+//                         </tr>
+//                       ))}
+//                     </tbody>
+//                   </table>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+
+//         </div>
+//       </div>
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default StudentAttendencedisplay;
 import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
-// Dummy data
-// const classes = [
-//   {
-//     className: 'Class 1',
-//     attendance: [
-//       { date: '2025-04-25', students: [{ name: 'John Doe', status: 'Present' }, { name: 'Jane Smith', status: 'Absent' }] },
-//       { date: '2025-04-26', students: [{ name: 'John Doe', status: 'Absent' }, { name: 'Jane Smith', status: 'Present' }] },
-//     ],
-//   },
-//   {
-//     className: 'Class 2',
-//     attendance: [
-//       { date: '2025-04-25', students: [{ name: 'Alice Johnson', status: 'Present' }, { name: 'Bob Brown', status: 'Present' }] },
-//       { date: '2025-04-26', students: [{ name: 'Alice Johnson', status: 'Absent' }, { name: 'Bob Brown', status: 'Absent' }] },
-//     ],
-//   },
-// ];
 
 const StudentAttendencedisplay = () => {
-  const [activeClass, setActiveClass] = useState(null);
-  const [activeDateIndex, setActiveDateIndex] = useState(null);
-  const [cls,classes] = useState([]);
-  const handleClassClick = (index) => {
-    setActiveClass(prevState => (prevState === index ? null : index));
-    setActiveDateIndex(null); // reset date selection when class is toggled
-  };
+  const [classes, setClasses] = useState([]);
+  const [attendanceData, setAttendanceData] = useState([]);
 
-  const handleDateClick = (index) => {
-    setActiveDateIndex(prevState => (prevState === index ? null : index));
-  };
-  // const id = useParams();
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedSubject, setSelectedSubject] = useState(null);
+
   useEffect(() => {
-    getclasses();
-    getattedence();
+    getClasses();
+    fetchAttendance();
   }, []);
 
-  const getclasses = async () => {
+  const getClasses = async () => {
     try {
       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
-      console.log(res.data);
-      classes(res.data.data);
+      setClasses(res.data.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
-  const [attedence,setAttendance] = useState([]);
-  const getattedence = async () => {
+
+  const fetchAttendance = async () => {
     try {
       const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
-
-      console.log(res.data);
-      setAttendance(res.data.data);
+      setAttendanceData(res.data.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
-  const [activeclass,setactiveclass] = useState();
+
+  // Filtered data based on selected class
+  const filteredDates = selectedClass
+    ? attendanceData.filter(item => item.classname === selectedClass)
+    : [];
+
+  const filteredSubjects = selectedDate
+    ? filteredDates.filter(item => item.date === selectedDate)
+    : [];
+
+  const filteredRecords = selectedSubject
+    ? filteredSubjects.find(item => item.subject === selectedSubject)
+    : null;
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
 
       <div className="flex flex-col mt-32 flex-1 items-center justify-start p-4">
-        {/* Classes Horizontal */}
+        {/* Classes */}
         <div className="flex overflow-x-auto space-x-4 w-full max-w-5xl p-4">
-          {cls.map((classItem, index) => (
+          {classes.map((classItem, index) => (
             <div
               key={index}
-              className="min-w-[200px] bg-white p-6 rounded-xl shadow-md cursor-pointer hover:bg-blue-100 transition"
-              onClick={() => handleClassClick(index)}
+              onClick={() => {
+                setSelectedClass(classItem.classname);
+                setSelectedDate(null);
+                setSelectedSubject(null);
+              }}
+              className={`min-w-[200px] bg-white p-6 rounded-xl shadow-md cursor-pointer hover:bg-blue-100 transition ${
+                selectedClass === classItem.classname ? 'bg-blue-200' : ''
+              }`}
             >
               <h2 className="text-xl font-bold text-center">{classItem.classname}</h2>
             </div>
           ))}
         </div>
 
-        {/* Dates List */}
-        {activeClass !== null && (
-          <div className="w-full max-w-5xl mt-8 p-6 bg-white rounded-xl shadow-lg">
-            {/* <h2 className="text-2xl font-bold mb-4 text-center">{classes[activeClass].classname} - Dates</h2> */}
+        {/* Dates */}
+        {selectedClass && (
+          <div className="flex flex-wrap gap-4 mt-6 max-w-5xl w-full justify-center">
+            {[...new Set(filteredDates.map(item => item.date))].map((date, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  setSelectedDate(date);
+                  setSelectedSubject(null);
+                }}
+                className={`bg-white px-6 py-3 rounded-lg shadow-md cursor-pointer hover:bg-green-100 transition ${
+                  selectedDate === date ? 'bg-green-200' : ''
+                }`}
+              >
+                {date}
+              </div>
+            ))}
+          </div>
+        )}
 
-            <div className="flex flex-col space-y-4">
-              {attedence[activeClass].records.map((day, idx) => (
-                <div key={idx}>
-                  <div
-                    className="bg-gray-100 p-4 rounded-md shadow cursor-pointer hover:bg-gray-200"
-                    onClick={() => handleDateClick(idx)}
-                  >
-                    <h3 className="text-lg font-semibold">{day.date}</h3>
-                  </div>
+        {/* Subjects */}
+        {selectedDate && (
+          <div className="flex flex-wrap gap-4 mt-6 max-w-5xl w-full justify-center">
+            {[...new Set(filteredSubjects.map(item => item.subject))].map((subject, index) => (
+              <div
+                key={index}
+                onClick={() => setSelectedSubject(subject)}
+                className={`bg-gray-100 px-4 py-2 rounded-md cursor-pointer hover:bg-blue-200 transition ${
+                  selectedSubject === subject ? 'bg-blue-300' : ''
+                }`}
+              >
+                {subject}
+              </div>
+            ))}
+          </div>
+        )}
 
-                  {/* Students Attendance under the date */}
-                  {activeDateIndex === idx && (
-                    <div className="mt-2 bg-white p-4 rounded-md shadow">
-                      <table className="w-full table-auto">
-                        <thead>
-                          <tr>
-                            <th className="border px-4 py-2">Student Name</th>
-                            <th className="border px-4 py-2">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {day.students.map((student, studentIdx) => (
-                            <tr key={studentIdx}>
-                              <td className="border px-4 py-2">{student.data.classname}</td>
-                              <td className="border px-4 py-2">{student.status}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  )}
-                </div>
-              ))}
+        {/* Attendance Table */}
+        {filteredRecords && (
+          <div className="w-full max-w-5xl mt-10 bg-white rounded-xl shadow-lg p-6">
+            <h1 className="text-2xl font-semibold mb-4 text-gray-700">
+              Attendance - {selectedSubject} ({selectedDate})
+            </h1>
+            <div className="overflow-x-auto">
+              <table className="min-w-full table-auto">
+                <thead>
+                  <tr className="bg-gray-100 text-left text-gray-700">
+                    <th className="py-2 px-4 border-b">Roll No</th>
+                    <th className="py-2 px-4 border-b">Name</th>
+                    <th className="py-2 px-4 border-b">Attendance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredRecords.records.map((record) => (
+                    <tr key={record.studentId}>
+                      <td className="py-2 px-4 border-b">{record.studentId}</td>
+                      <td className="py-2 px-4 border-b">{record.studentId}</td>
+                      <td className="py-2 px-4 border-b">
+                        {record.status === 'Absent' ? 'Absent' : 'Present'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
