@@ -1,188 +1,228 @@
 
-// import Header from '../Header';
-// import Footer from '../Footer';
-// import React, { useState } from "react";
-// import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay, subMonths, addMonths } from "date-fns";
-
-// export const StudentAttendance = () => {
-//     const [currentMonth, setCurrentMonth] = useState(new Date());
-
-//     const attendanceRecords = {
-//         "2025-02-01": "Present",
-//         "2025-02-05": "Present",
-//         "2025-02-07": "Absent",
-//         "2025-02-10": "Late",
-//         "2025-02-14": "Present",
-//         "2025-02-18": "Absent",
-//         "2025-02-22": "Late",
-//         "2025-02-25": "Present",
-//     };
-
-//     const monthStart = startOfMonth(currentMonth);
-//     const monthEnd = endOfMonth(monthStart);
-//     const weekStart = startOfWeek(monthStart);
-//     const weekEnd = endOfWeek(monthEnd);
-
-//     const days = [];
-//     let day = weekStart;
-//     while (day <= weekEnd) {
-//         days.push(day);
-//         day = addDays(day, 1);
-//     }
-
-//     const getStatusColor = (date) => {
-//         const formattedDate = format(date, "yyyy-MM-dd");
-//         if (attendanceRecords[formattedDate] === "Present") return "bg-green-500 text-white";
-//         if (attendanceRecords[formattedDate] === "Absent") return "bg-red-500 text-white";
-//         if (attendanceRecords[formattedDate] === "Late") return "bg-yellow-500 text-black";
-//         return "bg-gray-200 text-gray-800";
-//     };
-
-//     return (
-//         <div className="flex flex-col min-h-screen">
-//             {/* Header */}
-//             <Header />
-
-//             {/* Main Content */}
-//             <div className="flex-grow overflow-auto">
-//                 <div className="max-w-3xl mx-auto p-4 sm:p-6">
-//                     <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4">📅 Attendance Calendar</h2>
-
-//                     {/* Navigation Buttons */}
-//                     <div className="flex items-center justify-between max-w-xs mx-auto mb-4 space-x-2">
-//                         <button
-//                             onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-//                             className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition"
-//                         >
-//                             ⬅️ Prev
-//                         </button>
-//                         <h3 className="text-lg sm:text-xl font-bold">{format(currentMonth, "MMMM yyyy")}</h3>
-//                         <button
-//                             onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-//                             className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition"
-//                         >
-//                             Next ➡️
-//                         </button>
-//                     </div>
-
-//                     {/* Calendar Grid */}
-//                     <div className="grid grid-cols-3 sm:grid-cols-7 gap-2 sm:gap-4">
-//                         {/* Weekday Headers */}
-//                         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-//                             <div key={day} className="text-center font-extrabold text-md sm:text-lg">{day}</div>
-//                         ))}
-//                         {/* Days */}
-//                         {days.map((date, index) => (
-//                             <div
-//                                 key={index}
-//                                 className={`w-12 sm:w-16 h-12 sm:h-14 flex items-center justify-center rounded-full font-semibold 
-//                                 ${getStatusColor(date)} 
-//                                 ${!isSameMonth(date, monthStart) ? "opacity-30" : ""}
-//                                 ${isSameDay(date, new Date()) ? "ring-2 ring-white" : ""}`}
-//                             >
-//                                 {format(date, "d")}
-//                             </div>
-//                         ))}
-//                     </div>
-//                 </div>
-//             </div>
-
-//             {/* Footer (Stays at the bottom) */}
-//             <Footer />
-//         </div>
-//     );
-// };
-
-
 import Header from '../Header';
 import Footer from '../Footer';
-import React, { useState } from "react";
-import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, isSameMonth, isSameDay, subMonths, addMonths } from "date-fns";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export const StudentAttendance = () => {
-    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [attendanceData, setAttendanceData] = useState([]);
+    const [showTable, setShowTable] = useState({});
+    const [user, setUser] = useState(null);
 
-    const attendanceRecords = {
-        "2025-02-01": "Present",
-        "2025-02-05": "Present",
-        "2025-02-07": "Absent",
-        "2025-02-10": "Present",
-        "2025-02-14": "Present",
-        "2025-02-18": "Absent",
-        "2025-02-22": "Present",
-        "2025-02-25": "Present",
+    useEffect(() => {
+        fetchAttendance();
+        // Simulate logged-in user
+        setUser({ _id: localStorage.getItem('studentid') }); // Example user
+    }, []);
+
+    const fetchAttendance = async () => {
+        try {
+            const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+            groupDataByDate(res.data.data);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    const monthStart = startOfMonth(currentMonth);
-    const monthEnd = endOfMonth(monthStart);
-    const weekStart = startOfWeek(monthStart);
-    const weekEnd = endOfWeek(monthEnd);
+    const groupDataByDate = (data) => {
+        const groupedData = data.reduce((acc, record) => {
+            if (!acc[record.date]) {
+                acc[record.date] = [];
+            }
+            acc[record.date].push(record);
+            return acc;
+        }, {});
 
-    const days = [];
-    let day = weekStart;
-    while (day <= weekEnd) {
-        days.push(day);
-        day = addDays(day, 1);
-    }
+        const formatted = Object.entries(groupedData).map(([date, records]) => ({
+            date,
+            records
+        }));
 
-    const getStatusColor = (date) => {
-        const formattedDate = format(date, "yyyy-MM-dd");
-        if (attendanceRecords[formattedDate] === "Present") return "bg-green-500 text-white";
-        if (attendanceRecords[formattedDate] === "Absent") return "bg-red-500 text-white";
-        return "bg-gray-200 text-gray-800";
+        setAttendanceData(formatted);
+    };
+
+    const toggleTableVisibility = (date) => {
+        setShowTable(prev => ({
+            ...prev,
+            [date]: !prev[date],
+        }));
     };
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Header */}
             <Header />
 
-            {/* Main Content */}
-            <div className="flex-grow min-h-screen mt-16">
-                <div className="max-w-3xl mx-auto p-4 sm:p-6">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">📅 Attendance</h2>
+            <div className="flex-grow mt-16 p-4 w-full">
+                <h1 className="text-3xl font-bold mb-6">📋 Attendance</h1>
 
-                    {/* Navigation Buttons */}
-                    <div className="flex items-center justify-between max-w-xs mx-auto mb-4 space-x-2">
-                        <button
-                            onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-                            className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition"
-                        >
-                            ⬅️ Prev
-                        </button>
-                        <h3 className="text-lg sm:text-xl font-bold">{format(currentMonth, "MMMM yyyy")}</h3>
-                        <button
-                            onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-                            className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700 transition"
-                        >
-                            Next ➡️
-                        </button>
-                    </div>
+                <div className="space-y-6">
+                    {attendanceData.map(({ date, records }) => {
+                        // Filter the records to only those for the logged-in user
+                        const userRecords = records.filter(record => 
+                            record.records.some(r => r.studentId === user?._id)
+                        );
 
-                    {/* Calendar Grid */}
-                    <div className="grid grid-cols-3 sm:grid-cols-7 gap-2 sm:gap-4">
-                        {/* Weekday Headers */}
-                        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                            <div key={day} className="text-center font-extrabold text-md sm:text-lg">{day}</div>
-                        ))}
-                        {/* Days */}
-                        {days.map((date, index) => (
-                            <div
-                                key={index}
-                                className={`w-12 sm:w-16 h-12 sm:h-14 flex items-center justify-center rounded-full font-semibold 
-                                ${getStatusColor(date)} 
-                                ${!isSameMonth(date, monthStart) ? "opacity-30" : ""}
-                                ${isSameDay(date, new Date()) ? "ring-2 ring-white" : ""}`}
-                            >
-                                {format(date, "d")}
-                            </div>
-                        ))}
-                    </div>
+                        if (userRecords.length === 0) return null;
+
+                        return (
+                            <React.Fragment key={date}>
+                                <div 
+                                    className="text-lg font-semibold bg-green-200 text-gray-800 px-4 py-2 rounded shadow-sm cursor-pointer"
+                                    onClick={() => toggleTableVisibility(date)}
+                                >
+                                    {date}
+                                </div>
+
+                                {showTable[date] && (
+                                    <div className="overflow-x-auto">
+                                        <table className="min-w-full table-auto border border-gray-300 rounded-lg">
+                                            <thead className="bg-gray-100">
+                                                <tr>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 border-b">Subject</th>
+                                                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 border-b">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {userRecords.map((record, index) => {
+                                                    const userRecord = record.records.find(r => r.studentId === user?._id);
+                                                    return (
+                                                        <tr key={index} className="hover:bg-gray-50">
+                                                            <td className="px-6 py-4 text-gray-800 border-b">{record.subject}</td>
+                                                            <td className={`px-6 py-4 font-semibold border-b ${userRecord.status === 'Present' ? 'text-green-600' : 'text-red-600'}`}>
+                                                                {userRecord.status}
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Footer (Stays at the bottom) */}
             <Footer />
         </div>
     );
 };
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import Header from "../Header";
+// import Footer from "../Footer";
+
+// export const StudentAttendance = () => {
+//     const [attendanceData, setAttendanceData] = useState([]);
+//     const [showTable, setShowTable] = useState({});
+//     const [user, setUser] = useState(null);
+
+//     useEffect(() => {
+//         // ✅ Step 1: Get logged-in user from localStorage
+//         const storedUser = JSON.parse(localStorage.getItem("_id"));
+//         if (storedUser && storedUser._id) {
+//             setUser(storedUser);
+//         }
+
+//         // ✅ Step 2: Fetch attendance
+//         fetchAttendance();
+//     }, []);
+
+//     const fetchAttendance = async () => {
+//         try {
+//             const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+//             groupDataByDate(res.data.data);
+//         } catch (error) {
+//             console.error("Error fetching attendance:", error);
+//         }
+//     };
+
+//     const groupDataByDate = (data) => {
+//         const groupedData = data.reduce((acc, record) => {
+//             if (!acc[record.date]) acc[record.date] = [];
+//             acc[record.date].push(record);
+//             return acc;
+//         }, {});
+
+//         const formatted = Object.entries(groupedData).map(([date, records]) => ({
+//             date,
+//             records
+//         }));
+
+//         setAttendanceData(formatted);
+//     };
+
+//     const toggleTableVisibility = (date) => {
+//         setShowTable(prev => ({
+//             ...prev,
+//             [date]: !prev[date],
+//         }));
+//     };
+
+//     return (
+//         <div className="flex flex-col min-h-screen">
+//             <Header />
+
+//             <div className="flex-grow mt-16 p-4 w-full">
+//                 <h1 className="text-3xl font-bold mb-6">📋 Attendance</h1>
+
+//                 {/* ✅ Display User ID */}
+//                 {user && (
+//                     <div className="mb-4 text-sm text-gray-600">
+//                         Logged in Student ID: <span className="font-semibold text-blue-600">{user._id}</span>
+//                     </div>
+//                 )}
+
+//                 <div className="space-y-6">
+//                     {attendanceData.map(({ date, records }) => {
+//                         const userRecords = records.filter(record =>
+//                             record.records.some(r => r.studentId === user?._id)
+//                         );
+
+//                         if (userRecords.length === 0) return null;
+
+//                         return (
+//                             <React.Fragment key={date}>
+//                                 <div
+//                                     className="text-lg font-semibold bg-green-200 text-gray-800 px-4 py-2 rounded shadow-sm cursor-pointer"
+//                                     onClick={() => toggleTableVisibility(date)}
+//                                 >
+//                                     {date}
+//                                 </div>
+
+//                                 {showTable[date] && (
+//                                     <div className="overflow-x-auto">
+//                                         <table className="min-w-full table-auto border border-gray-300 rounded-lg">
+//                                             <thead className="bg-gray-100">
+//                                                 <tr>
+//                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 border-b">Subject</th>
+//                                                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700 border-b">Status</th>
+//                                                 </tr>
+//                                             </thead>
+//                                             <tbody>
+//                                                 {userRecords.map((record, index) => {
+//                                                     const userRecord = record.records.find(r => r.studentId === user?._id);
+//                                                     return (
+//                                                         <tr key={index} className="hover:bg-gray-50">
+//                                                             <td className="px-6 py-4 text-gray-800 border-b">{record.subject}</td>
+//                                                             <td className={`px-6 py-4 font-semibold border-b ${userRecord.status === 'Present' ? 'text-green-600' : 'text-red-600'}`}>
+//                                                                 {userRecord.status}
+//                                                             </td>
+//                                                         </tr>
+//                                                     );
+//                                                 })}
+//                                             </tbody>
+//                                         </table>
+//                                     </div>
+//                                 )}
+//                             </React.Fragment>
+//                         );
+//                     })}
+//                 </div>
+//             </div>
+
+//             <Footer />
+//         </div>
+//     );
+// };

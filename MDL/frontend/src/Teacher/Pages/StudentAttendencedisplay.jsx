@@ -155,7 +155,7 @@ const StudentAttendencedisplay = () => {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
 
-      <div className="flex flex-col mt-32 flex-1 items-center justify-start p-4">
+      <div className="flex flex-col mt-32 flex-1 items-center justify-start p-4 min-h-screen">
         {/* Classes */}
         <div className="flex overflow-x-auto space-x-4 w-full max-w-5xl p-4">
           {classes.map((classItem, index) => (
