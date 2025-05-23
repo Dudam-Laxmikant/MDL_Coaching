@@ -6,7 +6,7 @@
 
 ## 🌐 Live Preview
 
-🔗 [Click here to view live](https://mdlcoaching.netlify.app/)
+🔗 [Click here to view live](https://mdl-coaching.netlify.app/)
 
 ## ✨ Key Features
 
