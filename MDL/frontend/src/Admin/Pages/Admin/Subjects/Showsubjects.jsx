@@ -18,7 +18,7 @@
 //   const getsubject = async () => {
 //     setLoading(true);
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/subject/getsubjects");
 //       setSubjects(res.data.data);
 //     } catch (error) {
 //       console.error("Error fetching subjects:", error);
@@ -39,7 +39,7 @@
 //     }).then(async (result) => {
 //       if (result.isConfirmed) {
 //         try {
-//           const url = `https://mdl-coaching.onrender.com/subject/dletesubject/${subjectid}`;
+//           const url = `https://mdl-coaching-hpjt.onrender.com/subject/dletesubject/${subjectid}`;
 //           const response = await axios.get(url);
 
 //           Swal.fire({
@@ -154,7 +154,7 @@ export const Showsubjects = () => {
   const getsubject = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/subject/getsubjects");
       setSubjects(res.data.data);
     } catch (error) {
       console.error("Error fetching subjects:", error);
@@ -175,7 +175,7 @@ export const Showsubjects = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const url = `https://mdl-coaching.onrender.com/subject/dletesubject/${subjectid}`;
+          const url = `https://mdl-coaching-hpjt.onrender.com/subject/dletesubject/${subjectid}`;
           const response = await axios.get(url);
           Swal.fire("Deleted!", response.data.message, "success");
           getsubject();

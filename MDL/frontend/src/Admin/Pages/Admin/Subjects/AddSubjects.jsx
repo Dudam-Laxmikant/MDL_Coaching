@@ -79,7 +79,7 @@ export const AddSubjects = () => {
     }
     
     try {
-      const url = "https://mdl-coaching.onrender.com/subject/addsubject";
+      const url = "https://mdl-coaching-hpjt.onrender.com/subject/addsubject";
       const response = await axios.post(url, subjectEntries, {
         headers: {
           "Content-Type": "application/json",

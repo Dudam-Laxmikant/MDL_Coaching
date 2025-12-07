@@ -51,7 +51,7 @@ function StudentDetails() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://mdl-coaching.onrender.com/student/getstudents/${classId}`
+        `https://mdl-coaching-hpjt.onrender.com/student/getstudents/${classId}`
       );
       setStudents(res.data?.students || []);
     } catch (error) {
@@ -76,7 +76,7 @@ function StudentDetails() {
 
       if (result.isConfirmed) {
         const response = await axios.get(
-          `https://mdl-coaching.onrender.com/student/deleteteacher/${sid}`
+          `https://mdl-coaching-hpjt.onrender.com/student/deleteteacher/${sid}`
         );
         if (response.data.success) {
           Swal.fire({

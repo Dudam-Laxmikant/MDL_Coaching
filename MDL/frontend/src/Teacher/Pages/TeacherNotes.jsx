@@ -24,7 +24,7 @@
 //   }
 //   const getsubject = async () => {
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/subject/getsubjects");
 //       console.log(res.data);
 //       setSubjects(res.data.data);
 //     } catch (error) {
@@ -53,7 +53,7 @@
 //     formDataToSend.append("notesfille", formData.notesfille);
 
 //     try {
-//       const url = "https://mdl-coaching.onrender.com/notes";
+//       const url = "https://mdl-coaching-hpjt.onrender.com/notes";
 
 //       const response = await axios.post(url, formDataToSend, {
 //         headers: {
@@ -108,7 +108,7 @@
 //   const [subjects, setSubjects] = useState([]);
 //   const getclasses = async () => {
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
 //       console.log(res.data);
 //       setClasses(res.data.data);
 //     } catch (error) {
@@ -271,8 +271,8 @@ const TeacherNotes = () => {
     const fetchData = async () => {
       try {
         const [classRes, subjectRes] = await Promise.all([
-          axios.get("https://mdl-coaching.onrender.com/class/getclasses"),
-          axios.get("https://mdl-coaching.onrender.com/subject/getsubjects"),
+          axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses"),
+          axios.get("https://mdl-coaching-hpjt.onrender.com/subject/getsubjects"),
         ]);
         setClasses(classRes.data.data);
         setSubjects(subjectRes.data.data);
@@ -313,7 +313,7 @@ const TeacherNotes = () => {
     formDataToSend.append("notesfille", formData.notesfille);
 
     try {
-      const url = "https://mdl-coaching.onrender.com/notes";
+      const url = "https://mdl-coaching-hpjt.onrender.com/notes";
       const response = await axios.post(url, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });

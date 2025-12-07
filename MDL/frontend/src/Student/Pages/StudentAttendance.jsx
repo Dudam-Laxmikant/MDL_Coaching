@@ -17,7 +17,7 @@ export const StudentAttendance = () => {
 
     const fetchAttendance = async () => {
         try {
-            const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+            const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/attendance/getattendence");
             groupDataByDate(res.data.data);
         } catch (error) {
             console.error(error);
@@ -131,7 +131,7 @@ export const StudentAttendance = () => {
 
 //     const fetchAttendance = async () => {
 //         try {
-//             const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+//             const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/attendance/getattendence");
 //             groupDataByDate(res.data.data);
 //         } catch (error) {
 //             console.error("Error fetching attendance:", error);

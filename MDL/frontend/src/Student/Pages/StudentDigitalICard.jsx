@@ -59,7 +59,7 @@ function StudentDigitalICard({ profileImage }) {
     try {
       const studentid = localStorage.getItem("studentid");
       const res = await axios.get(
-        `https://mdl-coaching.onrender.com/student/getstudentdetails/${studentid}`
+        `https://mdl-coaching-hpjt.onrender.com/student/getstudentdetails/${studentid}`
       );
       console.log(res.data);
       setstudents(res.data.data);
@@ -132,7 +132,7 @@ function StudentDigitalICard({ profileImage }) {
             >
               <img
                 className="w-full h-full object-cover"
-                src={`https://mdl-coaching.onrender.com/images/${students.passphoto}`}
+                src={`https://mdl-coaching-hpjt.onrender.com/images/${students.passphoto}`}
                 alt="Student"
               />
               {showOptions && (

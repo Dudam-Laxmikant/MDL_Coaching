@@ -31,7 +31,7 @@ const TeacherUpdateAttendance = () => {
   // Fetch all classes from backend
   const getClasses = async () => {
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
       setClasses(res.data.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -41,7 +41,7 @@ const TeacherUpdateAttendance = () => {
   // Fetch all subjects from backend
   const getSubjects = async () => {
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/subject/getsubjects");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/subject/getsubjects");
       setSubjects(res.data.data);
     } catch (error) {
       console.error("Error fetching subjects:", error);
@@ -56,7 +56,7 @@ const TeacherUpdateAttendance = () => {
       }
 
       const res = await axios.get(
-        `https://mdl-coaching.onrender.com/attendance/getattendance/${formData.selectedClass}/${formData.selectedSubject}/${formData.selectedDate}`
+        `https://mdl-coaching-hpjt.onrender.com/attendance/getattendance/${formData.selectedClass}/${formData.selectedSubject}/${formData.selectedDate}`
       );
 
       if (res.data && res.data.data) {
@@ -117,7 +117,7 @@ const TeacherUpdateAttendance = () => {
       }));
 
       const res = await axios.put(
-        "https://mdl-coaching.onrender.com/attendance/updateattendance",
+        "https://mdl-coaching-hpjt.onrender.com/attendance/updateattendance",
         {
           _id: attendanceId,
           classname: formData.selectedClass,

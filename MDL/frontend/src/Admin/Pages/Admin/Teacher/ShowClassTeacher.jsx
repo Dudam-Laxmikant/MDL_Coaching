@@ -16,7 +16,7 @@
 
 //   const getclasses = async () => {
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
 //       setClasses(res.data.data);
 //     } catch (error) {
 //       console.log(error);
@@ -132,7 +132,7 @@ function ShowClassTeacher() {
 
   const getclasses = async () => {
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
       setClasses(res.data.data);
     } catch (error) {
       console.log(error);

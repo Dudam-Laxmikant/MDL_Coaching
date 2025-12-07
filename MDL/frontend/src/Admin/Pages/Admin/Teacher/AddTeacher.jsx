@@ -83,7 +83,7 @@
 //     e.preventDefault();
 //     if (!validateForm()) return;
 //     try {
-//       const url = "https://mdl-coaching.onrender.com/teacher/addteacher";
+//       const url = "https://mdl-coaching-hpjt.onrender.com/teacher/addteacher";
 
 //       const response = await axios.post(url,formData, {
 //         headers: {
@@ -449,7 +449,7 @@ function AddTeacher() {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      const url = "https://mdl-coaching.onrender.com/teacher/addteacher";
+      const url = "https://mdl-coaching-hpjt.onrender.com/teacher/addteacher";
 
       const response = await axios.post(url, formData, {
         headers: {

@@ -14,7 +14,7 @@ const StudentNotice = () => {
   const fetchNotices = async () => {
     try {
       const response = await axios.get(
-        `https://mdl-coaching.onrender.com/t_notice/teachernotice/selectedclass/${localStorage.getItem("studentclass")}`
+        `https://mdl-coaching-hpjt.onrender.com/t_notice/teachernotice/selectedclass/${localStorage.getItem("studentclass")}`
       );
       setNewNotice(response.data.data);
     } catch (error) {

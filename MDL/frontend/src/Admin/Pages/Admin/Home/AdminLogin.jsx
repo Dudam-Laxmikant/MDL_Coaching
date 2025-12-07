@@ -30,7 +30,7 @@ function AdminLogin() {
     const { email, password } = formData;
 
     try {
-      const url = "https://mdl-coaching.onrender.com/admin/login";
+      const url = "https://mdl-coaching-hpjt.onrender.com/admin/login";
       const response = await fetch(url, {
         method: "POST",
         headers: {

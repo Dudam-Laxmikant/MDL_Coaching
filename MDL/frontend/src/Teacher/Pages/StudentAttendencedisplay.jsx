@@ -14,7 +14,7 @@
 
 //   const getClasses = async () => {
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
 //       setClasses(res.data.data);
 //     } catch (error) {
 //       console.error(error);
@@ -24,7 +24,7 @@
 //   const [attendanceData, setAttendanceData] = useState([]);
 //   const attedence = async () => {
 //     try {
-//       const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+//       const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/attendance/getattendence");
 //       setAttendanceData(res.data.data);
 //     } catch (error) {
 //       console.error(error);
@@ -122,7 +122,7 @@ const StudentAttendencedisplay = () => {
 
   const getClasses = async () => {
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/class/getclasses");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/class/getclasses");
       setClasses(res.data.data);
     } catch (error) {
       console.error(error);
@@ -131,7 +131,7 @@ const StudentAttendencedisplay = () => {
 
   const fetchAttendance = async () => {
     try {
-      const res = await axios.get("https://mdl-coaching.onrender.com/attendance/getattendence");
+      const res = await axios.get("https://mdl-coaching-hpjt.onrender.com/attendance/getattendence");
       setAttendanceData(res.data.data);
     } catch (error) {
       console.error(error);
